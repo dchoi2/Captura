@@ -1,0 +1,186 @@
+body {
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+}
+
+/* Modals (Reveal) */
+.reveal {
+	max-width: 350px;
+	border-radius: 5px;
+	border: 0;
+}
+	.reveal-overlay {
+		background-color: rgba(10, 10, 10, 0.65);
+	}
+
+/* Buttons*/
+.button {
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: 0.05rem;
+	border-radius: 5px;
+}
+
+.primary.button {
+	color: #fff;
+	padding: 0.85em 3em;
+}
+
+.hollow.button {
+/*	border-color: #fff;
+	color: #fff;*/
+	border-radius: 5px;
+}
+
+.button.facebook {
+	background-color: #3b5998;
+	margin-bottom: 10px;
+}
+	.button.facebook:hover {
+		background-color: #2b4477;
+	}
+
+.button.google {
+	background-color: #DC4E41;
+}
+	.button.google:hover {
+		background-color: #b23b30;
+	}
+
+/* Hero */
+.hero {
+  background: url("../img/hero-2.jpg") no-repeat bottom center;
+  background-size: cover;
+  height: 65vh;
+  min-height: 300px;
+  margin: 0;
+  border: 0;
+  text-align: center;
+}
+	.hero h1{
+		padding-top: 6vh;
+		color: #fff;
+		font-size: 3.7rem;
+		font-family: 'Open Sans', sans-serif;
+		letter-spacing: 0.1rem;
+	}
+	.hero h3{
+		color: #fff;
+		font-size: 1.5rem;
+		font-family: 'Open Sans', sans-serif;
+		padding-bottom: 15px;
+	}
+	@media only screen and (max-width: 40em) {
+		.hero h1{
+			font-size: 2.5rem;
+			letter-spacing: 0;
+		}
+		.hero h3{
+			font-size: 1rem;
+		}
+	}
+	/* Location Search Header */
+	.hero.small {
+		height: 30vh;
+		min-height: 200px;
+		text-align: center;
+		padding-top: 80px;
+	}
+	.input-group {
+		text-align: center;
+	}	
+	.input-group.location {
+		max-width: 350px;
+	}
+
+
+
+
+/* How It Works */
+#how {
+	text-align: center;
+}
+
+/* Become Photographer */
+.callout.photographer {
+	border-width: 1px 0;
+	border-color: #DDD;
+	margin: 0;
+	background-color: #EEE;
+	text-align: center;
+}
+
+/* Footer */
+.footer {
+	background-color: #333;
+	margin: 0;
+	text-align: center;
+}
+	.footer p {
+		color: #fff;
+		font-size: 0.8rem;
+	}
+
+
+/* Nav Styles */
+.title-bar {
+  background: #000;
+  padding: 1rem;
+  margin: 0; }
+	.title-bar a {
+	  color:#fff;
+	  font-size: 1.2rem; }
+
+.top-bar {
+	background: #000;
+	width: 100%;
+	margin: 0;
+	padding: 0.5rem 0 0.5rem 0; }
+	.top-bar ul {
+		background: #000; }
+	.top-bar ul li {
+		background: #000; }
+	.top-bar ul li a {
+		color: #fff;
+		font-size: 0.9rem;
+		font-weight: 700; }
+	.top-bar ul li a:hover {
+		color: #1585cf; }
+
+.menu-text a {
+  color: #fff; }
+  @media only screen and (max-width: 40em) {
+    .menu-text {
+      display: none !important; } }
+
+@media only screen and (min-width: 40em) {
+  .menu:last-child {
+    border-right: 1px solid #4e4e4e; }
+
+  .menu:first-child {
+    border-right: none; }
+
+  .menu li:not(:last-child) {
+    border-left: 1px solid #4e4e4e; } }
+
+.dropdown.menu .submenu {
+  border: none;
+  margin-top: 0.6rem; }
+	.dropdown.menu .submenu li {
+	  border: none;
+	  background: #444; }
+
+
+
+
+/*.dropdown.menu .is-dropdown-submenu-parent.is-right-arrow > a::after {
+  border-color: #fff transparent transparent; }
+
+.is-drilldown-submenu-parent > a::after {
+  border-color: transparent transparent transparent #fff; }
+
+.js-drilldown-back::before {
+  border-color: transparent #fff transparent transparent; }*/
+
