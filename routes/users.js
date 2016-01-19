@@ -26,7 +26,7 @@ router.post('/', function(request, response) {
       response.json({success:false, message: "Password must be at least 8 characters"});
     }
     else {
-      console.log(request.body);
+      //console.log(request.body);
       var newUser = new User({
         firstName: request.body.firstName,
         lastName: request.body.lastName,
@@ -51,7 +51,7 @@ router.post('/', function(request, response) {
 //each user will only get to edit their own favorites
 router.post('/favorite', function(request, response) {
   //reques.user is always initialized in here, since checked that user is logged in
-  User.findOne({email: request.body.email}, function(err, user) {
+  User.findOne({id: request.user._id}, function(err, user) {
     utils.handleError(err);
     if (!user) {
       response.json({

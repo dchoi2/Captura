@@ -18,9 +18,9 @@ class SignupStore extends BaseStore {
 
   _registerToActions(payload) {
     var action = payload.action
-    console.log("actionlogin: ", action)
     switch(action.actionType) {
       case FAILEDSIGNUP:
+        console.log("FAILEDSIGNUP REACHED")
         this._message = action.message // i have no idea why there is another action
         this.emitChange();
         break;

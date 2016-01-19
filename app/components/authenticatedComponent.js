@@ -3,14 +3,6 @@ import SessionStore from '../stores/sessionStore';
 
 export default (ComposedComponent) => {
   return class AuthenticatedComponent extends React.Component {
-
-    static willTransitionTo(transition) {
-      console.log("made it here")
-      if (!SessionStore.isLoggedIn()) {
-        transition.redirect('/login');
-      }
-    }
-
     constructor() {
       super()
       this.state = this._getLoginState();

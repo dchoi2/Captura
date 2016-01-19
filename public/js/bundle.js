@@ -23,13 +23,12 @@ var ExploreActions = function () {
   }
 
   _createClass(ExploreActions, null, [{
-    key: 'getUserInfo',
-    value: function getUserInfo() {
-      console.log(LOGIN_USER);
-      $.ajax({ type: 'GET', url: '/api/sessions' }).done(function (userData) {
+    key: 'getPhotographers',
+    value: function getPhotographers(number) {
+      $.ajax({ type: 'GET', url: '/api/photographers' }).done(function (userData) {
         _appDispatcher2.default.handleViewAction({
-          actionType: LOGIN_USER,
-          data: userData
+          actionType: _exploreConstants.UPDATE_PHOTOS,
+          profiles: userData
         });
         //localStorage.setItem('user', userData.email)
       });
@@ -51,31 +50,6 @@ var ExploreActions = function () {
           console.log("validCredentials!");
           SessionActions.getUserInfo();
         }
-        // if (data.success) {
-        //   browserHistory.push('/');
-        // }
-        // else {
-
-        // }
-      });
-      // .fail(function (jqXhr) {
-      //   console.log(jqXhr.responseJSON.message);
-      // })
-    }
-  }, {
-    key: 'signup',
-    value: function signup(signupData) {
-      return $.ajax({ type: 'POST', url: '/api/users', data: signupData }).done(function (data) {
-        console.log("here");
-        if (!data.success) {
-          _appDispatcher2.default.handleViewAction({
-            actionType: FAILEDSIGNUP,
-            message: data.message
-          });
-        } else {
-          console.log("data: ", data);
-          SessionActions.login(signupData);
-        }
       });
     }
   }]);
@@ -85,7 +59,52 @@ var ExploreActions = function () {
 
 exports.default = ExploreActions;
 
-},{"../constants/exploreConstants.js":11,"../dispatchers/appDispatcher.js":13}],2:[function(require,module,exports){
+},{"../constants/exploreConstants.js":15,"../dispatchers/appDispatcher.js":18}],2:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _appDispatcher = require('../dispatchers/appDispatcher.js');
+
+var _appDispatcher2 = _interopRequireDefault(_appDispatcher);
+
+var _photographerConstants = require('../constants/photographerConstants.js');
+
+var _reactRouter = require('react-router');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+//import RouterContainer from '../services/RouterContainer'
+
+var PhotographerActions = function () {
+  function PhotographerActions() {
+    _classCallCheck(this, PhotographerActions);
+  }
+
+  _createClass(PhotographerActions, null, [{
+    key: 'getPhotographerInfo',
+    value: function getPhotographerInfo(id) {
+      $.ajax({ type: 'GET', url: '/api/photographer/' + id }).done(function (userData) {
+        _appDispatcher2.default.handleViewAction({
+          actionType: _photographerConstants.GET_PHOTOGRAPHER,
+          data: userData
+        });
+      });
+    }
+  }]);
+
+  return PhotographerActions;
+}();
+
+exports.default = PhotographerActions;
+
+},{"../constants/photographerConstants.js":16,"../dispatchers/appDispatcher.js":18,"react-router":"react-router"}],3:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -116,7 +135,6 @@ var SessionActions = function () {
   _createClass(SessionActions, null, [{
     key: 'getUserInfo',
     value: function getUserInfo() {
-      console.log(_sessionConstants.LOGIN_USER);
       $.ajax({ type: 'GET', url: '/api/sessions' }).done(function (userData) {
         _appDispatcher2.default.handleViewAction({
           actionType: _sessionConstants.LOGIN_USER,
@@ -127,19 +145,16 @@ var SessionActions = function () {
     }
   }, {
     key: 'login',
-    value: function login(loginData, cb) {
-      $.ajax({ type: 'POST', url: '/api/sessions', data: loginData }).done(function (data) {
+    value: function login(loginData) {
+      return $.ajax({ type: 'POST', url: '/api/sessions', data: loginData }).done(function (data) {
         if (!data.success) {
-          console.log("failure...");
-          console.log(_sessionConstants.UNAUTHORIZED);
+          console.log("login failed...");
           _appDispatcher2.default.handleViewAction({
             actionType: _sessionConstants.UNAUTHORIZED,
             message: data.message
           });
-          if (cb) cb(false);
         } else {
           console.log("validCredentials!");
-          if (cb) cb(true);
           SessionActions.getUserInfo();
         }
         // if (data.success) {
@@ -183,7 +198,7 @@ var SessionActions = function () {
 
 exports.default = SessionActions;
 
-},{"../constants/sessionConstants.js":12,"../dispatchers/appDispatcher.js":13,"react-router":"react-router"}],3:[function(require,module,exports){
+},{"../constants/sessionConstants.js":17,"../dispatchers/appDispatcher.js":18,"react-router":"react-router"}],4:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -266,7 +281,7 @@ var App = function (_React$Component) {
 
 exports.default = App;
 
-},{"../stores/sessionStore":19,"./navbar/navbar.js":7,"react":"react"}],4:[function(require,module,exports){
+},{"../stores/sessionStore":25,"./navbar/navbar.js":8,"react":"react"}],5:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -296,16 +311,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 exports.default = function (ComposedComponent) {
   return function (_React$Component) {
     _inherits(AuthenticatedComponent, _React$Component);
-
-    _createClass(AuthenticatedComponent, null, [{
-      key: 'willTransitionTo',
-      value: function willTransitionTo(transition) {
-        console.log("made it here");
-        if (!_sessionStore2.default.isLoggedIn()) {
-          transition.redirect('/login');
-        }
-      }
-    }]);
 
     function AuthenticatedComponent() {
       _classCallCheck(this, AuthenticatedComponent);
@@ -357,7 +362,7 @@ exports.default = function (ComposedComponent) {
   }(_react2.default.Component);
 };
 
-},{"../stores/sessionStore":19,"react":"react"}],5:[function(require,module,exports){
+},{"../stores/sessionStore":25,"react":"react"}],6:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -469,7 +474,7 @@ var Home = function (_React$Component) {
 
 exports.default = (0, _authenticatedComponent2.default)(Home);
 
-},{"./authenticatedComponent":4,"react":"react","react-router":"react-router"}],6:[function(require,module,exports){
+},{"./authenticatedComponent":5,"react":"react","react-router":"react-router"}],7:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -552,25 +557,15 @@ var Login = function (_React$Component) {
   }, {
     key: 'login',
     value: function login(e) {
-      var _this2 = this;
-
       e.preventDefault();
-
       var loginData = {
         email: this.state.email,
         password: this.state.password
       };
 
-      _sessionActions2.default.login(loginData, function (loggedIn) {
-        if (!loggedIn) return _this2.setState({ message: "Incorrect Username/Password" });
-
-        var location = _this2.props.location;
-
-        if (location.state && location.state.nextPathname) {
-          _this2.context.router.replace(location.state.nextPathname);
-        } else {
-          _this2.context.router.replace('/');
-        }
+      _sessionActions2.default.login(loginData).fail(function (err) {
+        alert("There's an error logging in");
+        console.log("Error logging in", err);
       });
     }
   }, {
@@ -603,13 +598,9 @@ var Login = function (_React$Component) {
   return Login;
 }(_react2.default.Component);
 
-Login.contextTypes = {
-  router: _react2.default.PropTypes.func.isRequired
-};
-
 exports.default = Login;
 
-},{"../../actions/sessionActions":2,"../../stores/loginStore":18,"react":"react","react-dom":"react-dom"}],7:[function(require,module,exports){
+},{"../../actions/sessionActions":3,"../../stores/loginStore":23,"react":"react","react-dom":"react-dom"}],8:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -761,7 +752,7 @@ var Navbar = function (_React$Component) {
 
 exports.default = Navbar;
 
-},{"../../actions/sessionActions":2,"../../stores/sessionStore":19,"react":"react","react-router":"react-router"}],8:[function(require,module,exports){
+},{"../../actions/sessionActions":3,"../../stores/sessionStore":25,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -918,7 +909,100 @@ var Signup = function (_React$Component) {
 
 exports.default = Signup;
 
-},{"../../actions/sessionActions":2,"../../stores/signupStore":20,"react":"react","react-dom":"react-dom","react-router":"react-router"}],9:[function(require,module,exports){
+},{"../../actions/sessionActions":3,"../../stores/signupStore":26,"react":"react","react-dom":"react-dom","react-router":"react-router"}],10:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _photographerActions = require('../../actions/photographerActions');
+
+var _photographerActions2 = _interopRequireDefault(_photographerActions);
+
+var _photographerStore = require('../../stores/photographerStore');
+
+var _photographerStore2 = _interopRequireDefault(_photographerStore);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var PhotographerProfile = function (_React$Component) {
+  _inherits(PhotographerProfile, _React$Component);
+
+  function PhotographerProfile() {
+    _classCallCheck(this, PhotographerProfile);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PhotographerProfile).call(this));
+
+    _this.state = _photographerStore2.default.getState();
+    return _this;
+  }
+
+  _createClass(PhotographerProfile, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _photographerStore2.default.addChangeListener(this._onChange);
+      var id = this.props.params.id;
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _photographerStore2.default.removeChangeListener(this._onChange);
+    }
+  }, {
+    key: '_onChange',
+    value: function _onChange() {
+      this.state = _photographerStore2.default.getState();
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'login jumbotron center-block' },
+        _react2.default.createElement(
+          'h1',
+          null,
+          'Login'
+        ),
+        _react2.default.createElement(
+          'h2',
+          null,
+          this.state.message
+        ),
+        _react2.default.createElement(
+          'form',
+          { id: 'signup-form', name: 'signup-form', role: 'form', onSubmit: this.login },
+          _react2.default.createElement('input', { type: 'text', ref: 'focus', onChange: this.handleEmailChange, value: this.state.email, name: 'email', id: 'email', placeholder: 'Email Address' }),
+          _react2.default.createElement('input', { type: 'password', onChange: this.handlePwdChange, value: this.state.password, name: 'password', id: 'password', ref: 'password', placeholder: 'Password' }),
+          _react2.default.createElement('input', { type: 'submit', value: 'Log In', className: 'expanded button' })
+        )
+      );
+    }
+  }]);
+
+  return PhotographerProfile;
+}(_react2.default.Component);
+
+exports.default = PhotographerProfile;
+
+},{"../../actions/photographerActions":2,"../../stores/photographerStore":24,"react":"react","react-dom":"react-dom"}],11:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -941,6 +1025,18 @@ var _exploreHeader = require('./exploreHeader');
 
 var _exploreHeader2 = _interopRequireDefault(_exploreHeader);
 
+var _exploreStore = require('../../stores/exploreStore');
+
+var _exploreStore2 = _interopRequireDefault(_exploreStore);
+
+var _exploreActions = require('../../actions/exploreActions');
+
+var _exploreActions2 = _interopRequireDefault(_exploreActions);
+
+var _profileView = require('./profileView');
+
+var _profileView2 = _interopRequireDefault(_profileView);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -948,10 +1044,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-//import Sorter from './explore/sorter'
-//import Filter from './explore/filter'
-//import ProfileView from './explore/profileView'
+//import Sorter from './sorter'
+//import Filter from './filter'
 
 var Explore = function (_React$Component) {
   _inherits(Explore, _React$Component);
@@ -959,16 +1053,37 @@ var Explore = function (_React$Component) {
   function Explore() {
     _classCallCheck(this, Explore);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Explore).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Explore).call(this));
+
+    _this.state = _exploreStore2.default.setProfileState();
+    _this._onChange = _this._onChange.bind(_this);
+    return _this;
   }
 
   _createClass(Explore, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _exploreStore2.default.addChangeListener(this._onChange);
+      _exploreActions2.default.getPhotographers();
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _exploreStore2.default.removeChangeListener(this._onChange);
+    }
+  }, {
+    key: '_onChange',
+    value: function _onChange() {
+      this.state = _exploreStore2.default.setProfileState();
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_exploreHeader2.default, null)
+        _react2.default.createElement(_exploreHeader2.default, null),
+        _react2.default.createElement(_profileView2.default, null)
       );
     }
   }]);
@@ -976,9 +1091,9 @@ var Explore = function (_React$Component) {
   return Explore;
 }(_react2.default.Component);
 
-exports.default = (0, _authenticatedComponent2.default)(Explore);
+exports.default = Explore;
 
-},{"../authenticatedComponent":4,"./exploreHeader":10,"react":"react","react-router":"react-router"}],10:[function(require,module,exports){
+},{"../../actions/exploreActions":1,"../../stores/exploreStore":22,"../authenticatedComponent":5,"./exploreHeader":12,"./profileView":14,"react":"react","react-router":"react-router"}],12:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1019,9 +1134,6 @@ var exploreHeader = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(exploreHeader).call(this));
 
-    _this.state = _exploreStore2.default.getLocationState();
-    _this.handleLocationChange = _this.handleLocationChange.bind(_this);
-    _this.submitLocation = _this.submitLocation.bind(_this);
     _this._onChange = _this._onChange.bind(_this);
     return _this;
   }
@@ -1040,13 +1152,7 @@ var exploreHeader = function (_React$Component) {
   }, {
     key: '_onChange',
     value: function _onChange() {
-      this.setState(LoginStore.getLocationState());
       _reactDom2.default.findDOMNode(this.refs.focus).focus();
-    }
-  }, {
-    key: 'handleLocationChange',
-    value: function handleLocationChange(e) {
-      this.setState({ location: e.target.value });
     }
 
     // This will be called when the user clicks on the login button
@@ -1055,15 +1161,7 @@ var exploreHeader = function (_React$Component) {
     key: 'submitLocation',
     value: function submitLocation(e) {
       e.preventDefault();
-      var loginData = {
-        email: this.state.email,
-        password: this.state.password
-      };
-
-      _exploreActions2.default.login(loginData).fail(function (err) {
-        alert("There's an error logging in");
-        console.log("Error logging in", err);
-      });
+      _exploreActions2.default.searchLocation(this.refs.focus.value);
     }
   }, {
     key: 'render',
@@ -1074,11 +1172,15 @@ var exploreHeader = function (_React$Component) {
         _react2.default.createElement(
           'div',
           { className: 'input-group small-centered location' },
-          _react2.default.createElement('input', { className: 'input-group-field', ref: 'focus', onChange: this.handleLocationChange, placeholder: 'Where is your next event?', type: 'text' }),
           _react2.default.createElement(
-            'div',
-            { className: 'input-group-button' },
-            _react2.default.createElement('input', { type: 'submit', className: 'button', value: 'Submit', onClick: this.submitLocation })
+            'form',
+            { onSubmit: this.submitLocation },
+            _react2.default.createElement('input', { className: 'input-group-field', ref: 'focus', onChange: this.handleLocationChange, placeholder: 'Where is your next event?', type: 'text' }),
+            _react2.default.createElement(
+              'div',
+              { className: 'input-group-button' },
+              _react2.default.createElement('input', { type: 'submit', className: 'button', value: 'Submit', onClick: this.submitLocation })
+            )
           )
         )
       );
@@ -1090,7 +1192,245 @@ var exploreHeader = function (_React$Component) {
 
 exports.default = exploreHeader;
 
-},{"../../actions/exploreActions":1,"../../stores/exploreStore":17,"react":"react","react-dom":"react-dom"}],11:[function(require,module,exports){
+},{"../../actions/exploreActions":1,"../../stores/exploreStore":22,"react":"react","react-dom":"react-dom"}],13:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _exploreActions = require('../../actions/exploreActions');
+
+var _exploreActions2 = _interopRequireDefault(_exploreActions);
+
+var _exploreStore = require('../../stores/exploreStore');
+
+var _exploreStore2 = _interopRequireDefault(_exploreStore);
+
+var _reactRouter = require('react-router');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var profileCard = function (_React$Component) {
+  _inherits(profileCard, _React$Component);
+
+  function profileCard() {
+    _classCallCheck(this, profileCard);
+
+    return _possibleConstructorReturn(this, Object.getPrototypeOf(profileCard).call(this));
+  }
+
+  // componentDidMount() {
+  //   ExploreStore.addChangeListener(this._onChange);
+  // }
+
+  // componentWillUnmount() {
+  //   ExploreStore.removeChangeListener(this._onChange);
+  // }
+
+  // This will be called when the user clicks on the login button
+
+  _createClass(profileCard, [{
+    key: 'render',
+    value: function render() {
+      console.log("in cards");
+      var photographer = this.props.photographer;
+      var id = photographer._id;
+      var profileLink = '/photographer/' + id;
+      var coverImageLink = '/img/users/cover/' + photographer.coverImageLink;
+      var avatarImageLink = '/img/users/cover/' + photographer.avatarImageLink;
+      var name = photographer.firstName + " " + photographer.lastName;
+      var location = photographer.location;
+
+      var ratings = photographer.ratings;
+      var stars = [];
+      for (var i = 0; i < ratings; i++) {
+        stars.push(_react2.default.createElement('i', { className: 'fa fa-star' }));
+      }
+      if (ratings - Math.floor(ratings) > 0.5) {
+        stars.push(_react2.default.createElement('i', { className: 'fa fa-star-half-o' }));
+      }
+
+      var specialities = photographer.specialities;
+      var labels = [];
+      for (var i = 0; i < photographer.specialities.length && i < 4; i++) {
+        labels.push(_react2.default.createElement(
+          'span',
+          { key: i, className: 'label' },
+          photographer.specialities[i]
+        ));
+      }
+      return _react2.default.createElement(
+        'div',
+        { className: 'large-4 columns' },
+        _react2.default.createElement(
+          'div',
+          { className: 'profile-card' },
+          _react2.default.createElement(
+            _reactRouter.Link,
+            { to: profileLink },
+            _react2.default.createElement(
+              'div',
+              { className: 'container' },
+              _react2.default.createElement('img', { src: coverImageLink })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'avatar' },
+              _react2.default.createElement('img', { src: avatarImageLink })
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'profile-info' },
+              _react2.default.createElement(
+                'h5',
+                null,
+                name
+              ),
+              _react2.default.createElement(
+                'p',
+                null,
+                _react2.default.createElement('i', { className: 'fa fa-map-marker' }),
+                '  ',
+                location,
+                ' ·',
+                _react2.default.createElement(
+                  'span',
+                  { className: 'rating' },
+                  stars
+                ),
+                '(81)'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'specialty' },
+                labels,
+                _react2.default.createElement(
+                  'span',
+                  { className: 'label' },
+                  '...'
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return profileCard;
+}(_react2.default.Component);
+
+exports.default = profileCard;
+
+},{"../../actions/exploreActions":1,"../../stores/exploreStore":22,"react":"react","react-dom":"react-dom","react-router":"react-router"}],14:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _exploreActions = require('../../actions/exploreActions');
+
+var _exploreActions2 = _interopRequireDefault(_exploreActions);
+
+var _exploreStore = require('../../stores/exploreStore');
+
+var _exploreStore2 = _interopRequireDefault(_exploreStore);
+
+var _profileCard = require('./profileCard');
+
+var _profileCard2 = _interopRequireDefault(_profileCard);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var ProfileView = function (_React$Component) {
+  _inherits(ProfileView, _React$Component);
+
+  function ProfileView() {
+    _classCallCheck(this, ProfileView);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ProfileView).call(this));
+
+    _this.state = _exploreStore2.default.setProfileState();
+    _this._onChange = _this._onChange.bind(_this);
+    return _this;
+  }
+
+  _createClass(ProfileView, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _exploreStore2.default.addChangeListener(this._onChange);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _exploreStore2.default.removeChangeListener(this._onChange);
+    }
+  }, {
+    key: '_onChange',
+    value: function _onChange() {
+      this.setState(_exploreStore2.default.setProfileState());
+      console.log("updating state");
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      console.log("state:");
+      console.log(this.state.profiles);
+      var that = this;
+      var profileCards = this.state.profiles.map(function (p) {
+        return _react2.default.createElement(_profileCard2.default, _extends({ key: p._id }, that.props, { photographer: p }));
+      });
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'row section' },
+        profileCards
+      );
+    }
+  }]);
+
+  return ProfileView;
+}(_react2.default.Component);
+
+exports.default = ProfileView;
+
+},{"../../actions/exploreActions":1,"../../stores/exploreStore":22,"./profileCard":13,"react":"react","react-dom":"react-dom"}],15:[function(require,module,exports){
 'use strict';
 
 var keyMirror = require('key-mirror');
@@ -1102,7 +1442,16 @@ module.exports = keyMirror({
   UPDATE_PHOTOS: 'UPDATE_PHOTOS'
 });
 
-},{"key-mirror":27}],12:[function(require,module,exports){
+},{"key-mirror":33}],16:[function(require,module,exports){
+'use strict';
+
+var keyMirror = require('key-mirror');
+
+module.exports = keyMirror({
+  GET_PHOTOGRAPHER: 'GET_PHOTOGRAPHER'
+});
+
+},{"key-mirror":33}],17:[function(require,module,exports){
 'use strict';
 
 var keyMirror = require('key-mirror');
@@ -1114,7 +1463,7 @@ module.exports = keyMirror({
   FAILEDSIGNUP: 'FAILEDSIGNUP'
 });
 
-},{"key-mirror":27}],13:[function(require,module,exports){
+},{"key-mirror":33}],18:[function(require,module,exports){
 'use strict';
 
 var Dispatcher = require('flux').Dispatcher;
@@ -1132,7 +1481,7 @@ var AppDispatcher = assign(new Dispatcher(), {
 
 module.exports = AppDispatcher;
 
-},{"flux":24,"react/lib/Object.assign":28}],14:[function(require,module,exports){
+},{"flux":30,"react/lib/Object.assign":34}],19:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -1157,7 +1506,7 @@ _reactDom2.default.render(_react2.default.createElement(
   _routes2.default
 ), document.getElementById('app'));
 
-},{"./routes":15,"react":"react","react-dom":"react-dom","react-router":"react-router"}],15:[function(require,module,exports){
+},{"./routes":20,"react":"react","react-dom":"react-dom","react-router":"react-router"}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1190,27 +1539,34 @@ var _explore = require('./components/user/explore');
 
 var _explore2 = _interopRequireDefault(_explore);
 
+var _profile = require('./components/photographer/profile');
+
+var _profile2 = _interopRequireDefault(_profile);
+
 var _requireAuth = require('./utils/requireAuth');
 
 var _requireAuth2 = _interopRequireDefault(_requireAuth);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Explore Page
+// Home Page
+
+// NavBar
 exports.default = _react2.default.createElement(
   _reactRouter.Route,
   { component: _app2.default },
   _react2.default.createElement(_reactRouter.Route, { path: '/', component: _home2.default }),
   _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _login2.default }),
   _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _signup2.default }),
-  _react2.default.createElement(_reactRouter.Route, { path: '/home', component: _explore2.default, onEnter: _requireAuth2.default })
+  _react2.default.createElement(_reactRouter.Route, { path: '/home', component: _explore2.default, onEnter: _requireAuth2.default }),
+  _react2.default.createElement(_reactRouter.Route, { path: '/photographers/:id', component: _profile2.default, onEnter: _requireAuth2.default })
 );
 
-// Home Page
+//Authentication for Routing
 
-// NavBar
+// Explore Page
 
-},{"./components/app":3,"./components/home":5,"./components/navbar/login":6,"./components/navbar/signup":8,"./components/user/explore":9,"./utils/requireAuth":21,"react":"react","react-router":"react-router"}],16:[function(require,module,exports){
+},{"./components/app":4,"./components/home":6,"./components/navbar/login":7,"./components/navbar/signup":9,"./components/photographer/profile":10,"./components/user/explore":11,"./utils/requireAuth":27,"react":"react","react-router":"react-router"}],21:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1274,7 +1630,7 @@ var BaseStore = function (_EventEmitter) {
 
 exports.default = BaseStore;
 
-},{"../dispatchers/appDispatcher":13,"events":22}],17:[function(require,module,exports){
+},{"../dispatchers/appDispatcher":18,"events":28}],22:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1299,30 +1655,34 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var SessionStore = function (_BaseStore) {
-  _inherits(SessionStore, _BaseStore);
+var ExploreStore = function (_BaseStore) {
+  _inherits(ExploreStore, _BaseStore);
 
-  function SessionStore() {
-    _classCallCheck(this, SessionStore);
+  function ExploreStore() {
+    _classCallCheck(this, ExploreStore);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SessionStore).call(this));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ExploreStore).call(this));
 
     _this.subscribe(function () {
       return _this._registerToActions.bind(_this);
     });
     _this._location = null;
-    _this._firstName = null;
-    _this._lastName = null;
-    _this._email = null;
-    _this._isLoggedIn = false;
+    _this._profiles = [];
     return _this;
   }
 
-  _createClass(SessionStore, [{
+  _createClass(ExploreStore, [{
     key: '_registerToActions',
     value: function _registerToActions(payload) {
       var action = payload.action;
       switch (action.actionType) {
+        case _exploreConstants.UPDATE_PHOTOS:
+          console.log("UPDATE_PHOTOS REACHED");
+          console.log("updating photos");
+          this._profiles = action.profiles;
+          console.log(this._profiles);
+          this.emitChange();
+          break;
         case _exploreConstants.UPDATE_FILTER:
           console.log("setting store");
           this._lastName = action.data.lastName;
@@ -1347,13 +1707,10 @@ var SessionStore = function (_BaseStore) {
       };
     }
   }, {
-    key: 'getState',
-    value: function getState() {
+    key: 'setProfileState',
+    value: function setProfileState() {
       return {
-        firstName: this._firstName,
-        lastName: this._lastName,
-        email: this._email,
-        isLoggedIn: this._isLoggedIn
+        profiles: this._profiles
       };
     }
   }, {
@@ -1383,12 +1740,12 @@ var SessionStore = function (_BaseStore) {
     }
   }]);
 
-  return SessionStore;
+  return ExploreStore;
 }(_baseStore2.default);
 
-exports.default = new SessionStore();
+exports.default = new ExploreStore();
 
-},{"../constants/exploreConstants":11,"./baseStore":16,"react-router":"react-router"}],18:[function(require,module,exports){
+},{"../constants/exploreConstants":15,"./baseStore":21,"react-router":"react-router"}],23:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1435,6 +1792,7 @@ var LoginStore = function (_BaseStore) {
       var action = payload.action;
       switch (action.actionType) {
         case _sessionConstants.UNAUTHORIZED:
+          console.log("UNAUTHORIZED REACHED");
           this._message = action.message; // i have no idea why this is doing this
           this.emitChange();
           break;
@@ -1458,7 +1816,105 @@ var LoginStore = function (_BaseStore) {
 
 exports.default = new LoginStore();
 
-},{"../constants/sessionConstants":12,"./baseStore":16}],19:[function(require,module,exports){
+},{"../constants/sessionConstants":17,"./baseStore":21}],24:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _photographerConstants = require('../constants/photographerConstants');
+
+var _baseStore = require('./baseStore');
+
+var _baseStore2 = _interopRequireDefault(_baseStore);
+
+var _reactRouter = require('react-router');
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var SessionStore = function (_BaseStore) {
+  _inherits(SessionStore, _BaseStore);
+
+  function SessionStore() {
+    _classCallCheck(this, SessionStore);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SessionStore).call(this));
+
+    _this.subscribe(function () {
+      return _this._registerToActions.bind(_this);
+    });
+    _this._firstName = null;
+    _this._lastName = null;
+    _this._email = null;
+    _this._isLoggedIn = false;
+    return _this;
+  }
+
+  _createClass(SessionStore, [{
+    key: '_registerToActions',
+    value: function _registerToActions(payload) {
+      var action = payload.action;
+      switch (action.actionType) {
+        case _photographerConstants.GET_PHOTOGRAPHER:
+          this._lastName = action.data.lastName;
+          this._firstName = action.data.firstName;
+          this._email = action.data.email;
+          this._isLoggedIn = true;
+
+          this.emitChange();
+          _reactRouter.browserHistory.push('/home'); //redirect after state changes
+          break;
+        default:
+          break;
+      };
+    }
+  }, {
+    key: 'getState',
+    value: function getState() {
+      return {
+        firstName: this._firstName,
+        lastName: this._lastName,
+        email: this._email,
+        isLoggedIn: this._isLoggedIn
+      };
+    }
+  }, {
+    key: 'isLoggedIn',
+    value: function isLoggedIn() {
+      return !!this._email;
+    }
+  }, {
+    key: 'firstName',
+    get: function get() {
+      return this._firstName;
+    }
+  }, {
+    key: 'lastName',
+    get: function get() {
+      return this._lastName;
+    }
+  }, {
+    key: 'email',
+    get: function get() {
+      return this._email;
+    }
+  }]);
+
+  return SessionStore;
+}(_baseStore2.default);
+
+exports.default = new SessionStore();
+
+},{"../constants/photographerConstants":16,"./baseStore":21,"react-router":"react-router"}],25:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1507,7 +1963,7 @@ var SessionStore = function (_BaseStore) {
       var action = payload.action;
       switch (action.actionType) {
         case _sessionConstants.LOGIN_USER:
-          console.log("setting store");
+          console.log("LOGIN_USER REACHED");
           this._lastName = action.data.lastName;
           this._firstName = action.data.firstName;
           this._email = action.data.email;
@@ -1518,7 +1974,7 @@ var SessionStore = function (_BaseStore) {
 
           break;
         case _sessionConstants.LOGOUT_USER:
-          console.log("clearing store");
+          console.log("LOGOUT_USER REACHED");
           this._email = null;
           this._firstName = null;
           this._lastName = null;
@@ -1566,7 +2022,7 @@ var SessionStore = function (_BaseStore) {
 
 exports.default = new SessionStore();
 
-},{"../constants/sessionConstants":12,"./baseStore":16,"react-router":"react-router"}],20:[function(require,module,exports){
+},{"../constants/sessionConstants":17,"./baseStore":21,"react-router":"react-router"}],26:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1615,9 +2071,9 @@ var SignupStore = function (_BaseStore) {
     key: '_registerToActions',
     value: function _registerToActions(payload) {
       var action = payload.action;
-      console.log("actionlogin: ", action);
       switch (action.actionType) {
         case _sessionConstants.FAILEDSIGNUP:
+          console.log("FAILEDSIGNUP REACHED");
           this._message = action.message; // i have no idea why there is another action
           this.emitChange();
           break;
@@ -1644,7 +2100,7 @@ var SignupStore = function (_BaseStore) {
 
 exports.default = new SignupStore();
 
-},{"../constants/sessionConstants":12,"./baseStore":16}],21:[function(require,module,exports){
+},{"../constants/sessionConstants":17,"./baseStore":21}],27:[function(require,module,exports){
 'use strict';
 
 var _sessionStore = require('../stores/sessionStore');
@@ -1664,7 +2120,7 @@ function requireAuth(nextState, replace) {
 
 module.exports = requireAuth;
 
-},{"../stores/sessionStore":19}],22:[function(require,module,exports){
+},{"../stores/sessionStore":25}],28:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -1964,7 +2420,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],23:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -2057,7 +2513,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],24:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -2069,7 +2525,7 @@ process.umask = function() { return 0; };
 
 module.exports.Dispatcher = require('./lib/Dispatcher');
 
-},{"./lib/Dispatcher":25}],25:[function(require,module,exports){
+},{"./lib/Dispatcher":31}],31:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -2303,7 +2759,7 @@ var Dispatcher = (function () {
 
 module.exports = Dispatcher;
 }).call(this,require('_process'))
-},{"_process":23,"fbjs/lib/invariant":26}],26:[function(require,module,exports){
+},{"_process":29,"fbjs/lib/invariant":32}],32:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -2355,7 +2811,7 @@ var invariant = function (condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":23}],27:[function(require,module,exports){
+},{"_process":29}],33:[function(require,module,exports){
 
 'use strict';
 
@@ -2380,7 +2836,7 @@ module.exports =
         return mirrored;
     };
 
-},{}],28:[function(require,module,exports){
+},{}],34:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -2428,4 +2884,4 @@ function assign(target, sources) {
 }
 
 module.exports = assign;
-},{}]},{},[14]);
+},{}]},{},[19]);

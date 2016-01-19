@@ -5,7 +5,6 @@ import SessionActions from '../../actions/sessionActions';
 import LoginStore from '../../stores/loginStore';
 
 class Login extends React.Component {
-
   constructor() {
     super()
     this.state = LoginStore.getInputState();
@@ -41,24 +40,16 @@ class Login extends React.Component {
   // This will be called when the user clicks on the login button
   login(e) {
     e.preventDefault();
-
     var loginData = {
       email: this.state.email,
       password: this.state.password
     }
 
-    SessionActions.login(loginData, (loggedIn) => {
-      if (!loggedIn)
-        return this.setState({ message: "Incorrect Username/Password" })
-
-      const { location } = this.props
-
-      if (location.state && location.state.nextPathname) {
-        this.context.router.replace(location.state.nextPathname)
-      } else {
-        this.context.router.replace('/')
-      }
-    })
+    SessionActions.login(loginData)
+      .fail(function(err) {
+        alert("There's an error logging in");
+        console.log("Error logging in", err);
+      })
   }
 
   render() {
@@ -76,10 +67,6 @@ class Login extends React.Component {
       </div>
     );
   }
-}
-
-Login.contextTypes = {
-  router: React.PropTypes.func.isRequired
 }
 
 export default Login;

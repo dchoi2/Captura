@@ -5,13 +5,16 @@ var Photographer = require('../models/photographer').Photographer;
 var utils = require('../utils');
 
 router.get('/', utils.loggedIn, function(request, response) {
+  console.log("here");
   Photographer.find({}, function(err, docs) {
     utils.handleError(err);
+    console.log("Photographers: ",docs)
     response.json(docs);
   });
 });
 
 router.post('/', function(request, response) {
+
   Photographer.findOne({email: request.body.email}, function(err, doc) {
     if (err) {
       response.send({success: false, error: err});
@@ -32,7 +35,7 @@ router.post('/', function(request, response) {
         businessName: request.body.businessName,
         password: request.body.password,
         email: request.body.email,
-        specialities: [],
+        specialities: request.body.specialities,
         links: {
           website: request.body.websiteUrl,
           facebook: request.body.facebookUrl,
@@ -76,8 +79,8 @@ router.post('/favorite', function(request, response) {
         })
         return;
       }
-      User.update({email: request.body.email}, 
-        {$addToSet: {favorites: request.body.favorite}}, 
+      User.update({email: request.body.email},
+        {$addToSet: {favorites: request.body.favorite}},
         function(err) {
           utils.handleError(err);
           response.json({success:true});

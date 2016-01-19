@@ -1,23 +1,27 @@
-import {UPDATE_FILTER, UPDATE_SORT} from '../constants/exploreConstants';
+import {UPDATE_FILTER, UPDATE_SORT, UPDATE_PHOTOS} from '../constants/exploreConstants';
 import BaseStore from './baseStore';
 import {browserHistory} from 'react-router';
 
 
-class SessionStore extends BaseStore {
+class ExploreStore extends BaseStore {
 
   constructor() {
     super();
     this.subscribe(() => this._registerToActions.bind(this))
     this._location = null;
-    this._firstName = null;
-    this._lastName = null;
-    this._email = null
-    this._isLoggedIn = false;
+    this._profiles = [];
   }
 
   _registerToActions(payload) {
     var action = payload.action;
     switch(action.actionType) {
+      case UPDATE_PHOTOS:
+        console.log("UPDATE_PHOTOS REACHED")
+        console.log("updating photos");
+        this._profiles = action.profiles;
+        console.log(this._profiles)
+        this.emitChange();
+        break;
       case UPDATE_FILTER:
         console.log("setting store")
         this._lastName = action.data.lastName
@@ -42,12 +46,9 @@ class SessionStore extends BaseStore {
     };
   }
 
-  getState() {
+  setProfileState() {
     return {
-      firstName: this._firstName,
-      lastName: this._lastName,
-      email: this._email,
-      isLoggedIn: this._isLoggedIn
+      profiles: this._profiles
     }
   }
 
@@ -71,4 +72,4 @@ class SessionStore extends BaseStore {
   }
 }
 
-export default new SessionStore();
+export default new ExploreStore();

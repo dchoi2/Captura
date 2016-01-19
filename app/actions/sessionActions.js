@@ -6,7 +6,6 @@ import {browserHistory} from 'react-router'
 class SessionActions{
 
   static getUserInfo(){
-    console.log(LOGIN_USER)
     $.ajax({type: 'GET', url: '/api/sessions'})
       .done(function(userData) {
         AppDispatcher.handleViewAction({
@@ -17,21 +16,18 @@ class SessionActions{
       })
   }
 
-  static login(loginData, cb) {
-    $.ajax({ type: 'POST', url: '/api/sessions', data: loginData })
+  static login(loginData) {
+    return $.ajax({ type: 'POST', url: '/api/sessions', data: loginData })
     .done(function(data) {
       if (!data.success) {
-        console.log("failure...");
-        console.log(UNAUTHORIZED)
+        console.log("login failed...");
         AppDispatcher.handleViewAction({
           actionType: UNAUTHORIZED,
           message: data.message
         })
-        if (cb) cb(false)
       }
       else {
         console.log("validCredentials!")
-        if (cb) cb(true)
         SessionActions.getUserInfo();
       }
       // if (data.success) {

@@ -16,6 +16,7 @@ class LoginStore extends BaseStore {
     var action = payload.action
     switch(action.actionType) {
       case UNAUTHORIZED:
+        console.log("UNAUTHORIZED REACHED")
         this._message = action.message // i have no idea why this is doing this
         this.emitChange();
         break;

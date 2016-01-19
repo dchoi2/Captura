@@ -12,6 +12,9 @@ import Home from './components/home';
 // Explore Page
 import Explore from './components/user/explore';
 
+import PhotographerProfile from './components/photographer/profile'
+
+//Authentication for Routing
 import requireAuth from './utils/requireAuth';
 
 export default (
@@ -20,5 +23,6 @@ export default (
     <Route path='/login' component={Login}/>
     <Route path='/signup' component={Signup}/>
     <Route path='/home' component={Explore} onEnter={requireAuth}/>
+    <Route path='/photographers/:id' component={PhotographerProfile} onEnter={requireAuth}/>
   </Route>
 );

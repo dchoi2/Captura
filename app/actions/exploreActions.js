@@ -3,13 +3,12 @@ import {UPDATE_LOCATION, UPDATE_SORT, UPDATE_FILTER, UPDATE_PHOTOS} from '../con
 
 class ExploreActions{
 
-  static getUserInfo(){
-    console.log(LOGIN_USER)
-    $.ajax({type: 'GET', url: '/api/sessions'})
+  static getPhotographers(number){
+    $.ajax({type: 'GET', url: '/api/photographers'})
       .done(function(userData) {
         AppDispatcher.handleViewAction({
-          actionType: LOGIN_USER,
-          data: userData
+          actionType: UPDATE_PHOTOS,
+          profiles: userData
         });
         //localStorage.setItem('user', userData.email)
       })
@@ -32,34 +31,10 @@ class ExploreActions{
         console.log("validCredentials!")
         SessionActions.getUserInfo();
       }
-      // if (data.success) {
-      //   browserHistory.push('/');
-      // }
-      // else {
-
-      // }
     })
-    // .fail(function (jqXhr) {
-    //   console.log(jqXhr.responseJSON.message);
-    // })
   }
 
-  static signup(signupData) {
-    return $.ajax({type: 'POST', url: '/api/users', data: signupData})
-      .done(function(data) {
-        console.log("here")
-        if (!data.success) {
-          AppDispatcher.handleViewAction({
-            actionType: FAILEDSIGNUP,
-            message: data.message
-          })
-        }
-        else {
-          console.log("data: ", data);
-          SessionActions.login(signupData);
-        }
-      })
-  }
+
 
 }
 

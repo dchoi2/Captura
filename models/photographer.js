@@ -1,5 +1,6 @@
 var mongoose = require("mongoose");
 //require('mongoose-type-url');
+var specialtyList = ['portrait', 'headshot', 'events', 'engagement', 'wedding', 'lifestyle', 'club', 'concert', 'commercial', 'arch', 'sport', 'nature']
 
 var photographerSchema = new mongoose.Schema({
   firstName: {type: String, required: true},
@@ -15,8 +16,8 @@ var photographerSchema = new mongoose.Schema({
     flickr: String
   },
   reviews: [{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}],
-  bookings: [{type: mongoose.Schema.Types.ObjectId, ref: 'Event'}] 
-  
+  bookings: [{type: mongoose.Schema.Types.ObjectId, ref: 'Event'}]
+
 });
 
 var photographer = mongoose.model('Photographer', photographerSchema);
