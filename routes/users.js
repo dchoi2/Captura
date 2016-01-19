@@ -26,6 +26,7 @@ router.post('/', function(request, response) {
       response.json({success:false, message: "Password must be at least 8 characters"});
     }
     else {
+      console.log(request.body);
       var newUser = new User({
         firstName: request.body.firstName,
         lastName: request.body.lastName,
@@ -68,8 +69,8 @@ router.post('/favorite', function(request, response) {
         })
         return;
       }
-      User.update({email: request.body.email}, 
-        {$addToSet: {favorites: photographer._id}}, 
+      User.update({email: request.body.email},
+        {$addToSet: {favorites: photographer._id}},
         function(err) {
           utils.handleError(err);
           response.json({success:true});

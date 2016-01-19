@@ -26,8 +26,16 @@ var Router = function(passport) {
         return;
       })
     })(request, response);
-    
+
   })
+
+  router.get('/', utils.loggedIn, function(request, response) {
+    User.findOne({_id: request.user._id}, function(err, doc) {
+      utils.handleError(err);
+      response.json({firstName: doc.firstName, lastName:doc.lastName, email:doc.email});
+    });
+  });
+
   return router;
 
 }
