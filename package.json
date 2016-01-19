@@ -43,7 +43,8 @@
     "swig": "~1.4.2",
     "jwt-decode": "~1.5.0",
     "Base64": "~0.3.0",
-    "key-mirror": "~1.0.1"
+    "key-mirror": "~1.0.1",
+    "react-dropzone": "~3.3.2"
   },
   "devDependencies": {
     "babel-loader": "~6.2.1",

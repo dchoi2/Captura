@@ -2,7 +2,19 @@ body {
 	font-family: 'Open Sans', sans-serif;
 	margin: 0;
 	padding: 0;
-	background-color: #fff;
+	background-color: #F8F8F8 ;
+}
+
+h3 {
+	font-family: 'Open Sans', sans-serif;
+}
+
+h5 {
+
+}
+
+.row.section {
+	padding: 1em 0;
 }
 
 /* Modals (Reveal) */
@@ -21,6 +33,7 @@ body {
 	font-weight: bold;
 	letter-spacing: 0.05rem;
 	border-radius: 5px;
+	margin: 0.5em 0;
 }
 
 .primary.button {
@@ -51,7 +64,7 @@ body {
 
 /* Hero */
 .hero {
-  background: url("../img/hero-2.jpg") no-repeat bottom center;
+  background: url("../img/hero-main.jpg") no-repeat bottom center;
   background-size: cover;
   height: 65vh;
   min-height: 300px;
@@ -88,14 +101,19 @@ body {
 		text-align: center;
 		padding-top: 80px;
 	}
+		.hero.small.explore {
+			background: url("../img/hero-explore.jpg") no-repeat center center;
+			background-size: cover;
+		}
+		/*.hero.small.explore input {
+			font-size: 2rem;
+		}*/
 	.input-group {
 		text-align: center;
 	}	
 	.input-group.location {
-		max-width: 350px;
+		max-width: 400px;
 	}
-
-
 
 
 /* How It Works */
@@ -171,6 +189,144 @@ body {
 	.dropdown.menu .submenu li {
 	  border: none;
 	  background: #444; }
+
+
+/* Filter Box */
+.accordion {
+	margin: 0;
+}
+.accordion-title {
+	font-size: 0.9rem;
+	padding: 0.8em;
+	font-weight: 700;
+}
+.accordion-content {
+	padding-top: 0;
+	padding-bottom: 0.5em;
+}
+.fieldset {
+	padding: 0.5em;
+	border: 1px solid #DDD;
+	margin: 0.5em 0;
+}
+	.fieldset legend {
+		font-size: 0.7rem;
+		text-transform: uppercase;
+		font-weight: 700;
+		color: #999;
+		padding: 0.5em;
+		letter-spacing: 0.03rem;
+	}
+
+/* Results / Sorting */
+.sorting {
+	font-size: 0.8rem;
+	font-weight: 700;
+	margin-top: 2em;
+}
+	.sorting p {
+		color: #999;
+	}
+
+
+/* Profile Cards */
+.profile-card {
+	background-color: #fff;
+	border-radius: 5px;
+	padding: 0;
+	margin: 0.5em 0;
+	width: 100%;
+	min-height: 380px;
+}
+	.profile-card:hover {
+		box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+	}
+	.profile-card:hover h5 {
+		color: #1585cf;
+	}
+
+.container {
+  margin: 0;
+  border: 0;
+}
+	.container img {
+		border-top-right-radius: 5px;
+		border-top-left-radius: 5px;
+		height: 250px;
+		width: 100%;
+	  object-fit: cover;
+	}
+
+.avatar {
+	float: left;
+	padding: 0.7em 1em 0 1em;
+}
+	.avatar img {
+		width: 50px;
+	  height: 50px;
+	  border-radius: 50%;
+	  border: 2px solid #DDD;
+	}
+
+.profile-info {
+	padding: 0.7em 1em 0.2em 1em;
+}
+	.profile-info h5 {
+	font-size: 1.1rem;
+	color: #666;
+	font-weight: 700;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+	}
+	.profile-info p {
+	font-size: 0.8rem;
+	color: #999;
+	}
+
+.specialty {
+	max-height: 80px;
+	overflow: hidden;
+	margin-bottom: 1em;
+	padding: 0;
+}
+.label {
+	margin: 0.2rem 0.2rem 0 0;
+	background: #EEE;
+	border-radius: 10px;
+	color: #999;
+}
+
+
+/* Star Rating */
+.rating { 
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+	float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #FFED85;  } 
 
 
 

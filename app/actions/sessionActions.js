@@ -1,12 +1,12 @@
 import AppDispatcher from '../dispatchers/appDispatcher.js';
-import {LOGIN_USER, UNAUTHORIZED, FAILEDSIGNUP, LOGOUT_USER} from '../constants/sessionConstants.js';
+import {LOGIN_USER, LOGOUT_USER} from '../constants/sessionConstants.js';
 import {browserHistory} from 'react-router'
 //import RouterContainer from '../services/RouterContainer'
 
 class SessionActions{
 
   static getUserInfo(){
-    $.ajax({type: 'GET', url: '/api/sessions'})
+    $.ajax({type: 'GET', url: '/api/sessions/users'})
       .done(function(userData) {
         AppDispatcher.handleViewAction({
           actionType: LOGIN_USER,
@@ -16,44 +16,71 @@ class SessionActions{
       })
   }
 
-  static login(loginData) {
-    return $.ajax({ type: 'POST', url: '/api/sessions', data: loginData })
+  static userLogin(loginData, cb) {
+    $.ajax({ type: 'POST', url: '/api/sessions/users', data: loginData })
     .done(function(data) {
       if (!data.success) {
         console.log("login failed...");
-        AppDispatcher.handleViewAction({
-          actionType: UNAUTHORIZED,
-          message: data.message
-        })
+        if (cb) cb(data);
       }
       else {
         console.log("validCredentials!")
         SessionActions.getUserInfo();
       }
-      // if (data.success) {
-      //   browserHistory.push('/');
-      // }
-      // else {
-
-      // }
     })
-    // .fail(function (jqXhr) {
-    //   console.log(jqXhr.responseJSON.message);
-    // })
   }
 
-  static signup(signupData) {
-    return $.ajax({type: 'POST', url: '/api/users', data: signupData})
+  static signup(signupData, cb) {
+    $.ajax({type: 'POST', url: '/api/users', data: signupData})
       .done(function(data) {
         if (!data.success) {
-          AppDispatcher.handleViewAction({
-            actionType: FAILEDSIGNUP,
-            message: data.message
-          })
+          if (cb) cb(data)
         }
         else {
-          SessionActions.login(signupData);
+          SessionActions.userLogin(signupData);
         }
+      })
+  }
+
+  static getPhotographerInfo(){
+    $.ajax({type: 'GET', url: '/api/sessions/photographer'})
+      .done(function(userData) {
+        AppDispatcher.handleViewAction({
+          actionType: LOGIN_PHOTOGRAPHER,
+          data: userData
+        });
+      })
+  }
+
+  static photographerLogin(applyData, cb) {
+    $.ajax({ type: 'POST', url: '/api/sessions/photographers', data: applyData })
+    .done(function(data) {
+      if (!data.success) {
+        console.log("login failed...");
+        if (cb) cb(data)
+      }
+      else {
+        console.log("validCredentials!")
+        SessionActions.getPhotographerInfo();
+      }
+    })
+  }
+
+  static applyFor(applyData, cb) {
+    console.log("applyData", applyData)
+    console.log(cb)
+    $.ajax({type: 'POST', url: '/api/photographers', data: applyData})
+      .done(function(data) {
+        console.log("sent Post")
+        if (!data.success) {
+          if (cb) cb(data)
+        }
+        else {
+          SessionActions.photographerLogin(applyData);
+        }
+      })
+      .fail(function(data) {
+        console.log("error happend", data)
       })
   }
 

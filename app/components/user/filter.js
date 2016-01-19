@@ -45,7 +45,7 @@ class Filter extends React.Component {
                       <input type="text" placeholder="City, State" ref="locationCityState"/>
                     </div>
                     <div className="large-8 columns">
-                      <input id="travel" type="checkbox" ref="locationCheck"/><label for="travel">Show those open for travel</label>
+                      <input id="travel" type="checkbox" ref="locationCheck"/><label htmlFor="travel">Show those open for travel</label>
                     </div>
                 </fieldset>
                 <fieldset className="fieldset">
@@ -71,24 +71,24 @@ class Filter extends React.Component {
                 <fieldset className="fieldset">
                   <legend>Specialties:</legend>
                   <div className="large-3 columns">
-                    <input id="portrait" type="checkbox" ref="sP"/><label for="portrait">Portrait</label><br/>
-                    <input id="headshot" type="checkbox" ref="sH"/><label for="headshot">Headshot</label><br/>
-                    <input id="events" type="checkbox"  ref="sEv"/><label for="events">Events</label>
+                    <input id="portrait" type="checkbox" ref="sP"/><label htmlFor="portrait">Portrait</label><br/>
+                    <input id="headshot" type="checkbox" ref="sH"/><label htmlFor="headshot">Headshot</label><br/>
+                    <input id="events" type="checkbox"  ref="sEv"/><label htmlFor="events">Events</label>
                   </div>
                   <div className="large-3 columns">
-                    <input id="engagement" type="checkbox" ref="sEn"/><label for="engagement">Engagement</label><br/>
-                    <input id="wedding" type="checkbox" ref="sW"/><label for="wedding">Wedding</label><br/>
-                    <input id="lifestyle" type="checkbox" ref="sL"/><label for="lifestyle">Lifestyle/Candid</label>
+                    <input id="engagement" type="checkbox" ref="sEn"/><label htmlFor="engagement">Engagement</label><br/>
+                    <input id="wedding" type="checkbox" ref="sW"/><label htmlFor="wedding">Wedding</label><br/>
+                    <input id="lifestyle" type="checkbox" ref="sL"/><label htmlFor="lifestyle">Lifestyle/Candid</label>
                   </div>
                   <div className="large-3 columns">
-                    <input id="club" type="checkbox" ref="sCl"/><label for="club">Club/Nightlife</label><br/>
-                    <input id="concert" type="checkbox" ref="sCon"/><label for="concert">Concert/Performance</label><br/>
-                    <input id="commercial" type="checkbox" ref="sCom"/><label for="commercial">Commercial</label>
+                    <input id="club" type="checkbox" ref="sCl"/><label htmlFor="club">Club/Nightlife</label><br/>
+                    <input id="concert" type="checkbox" ref="sCon"/><label htmlFor="concert">Concert/Performance</label><br/>
+                    <input id="commercial" type="checkbox" ref="sCom"/><label htmlFor="commercial">Commercial</label>
                   </div>
                   <div className="large-3 columns">
-                    <input id="arch" type="checkbox" ref="sA"/><label for="arch">Real Estate/Architecture</label><br/>
-                    <input id="sports" type="checkbox" ref="sSp"/><label for="sports">Sports</label><br/>
-                    <input id="nature" type="checkbox" ref="sN"/><label for="nature">Nature</label>
+                    <input id="arch" type="checkbox" ref="sA"/><label htmlFor="arch">Real Estate/Architecture</label><br/>
+                    <input id="sports" type="checkbox" ref="sSp"/><label htmlFor="sports">Sports</label><br/>
+                    <input id="nature" type="checkbox" ref="sN"/><label htmlFor="nature">Nature</label>
                   </div>
                 </fieldset>
                   <input type="submit" className="button" value="Apply" onSubmit={this.setFilters}/> <input type="submit" className="hollow button" value="Clear All" onClick={this.clearFilters}/>

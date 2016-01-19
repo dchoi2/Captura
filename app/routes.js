@@ -14,6 +14,8 @@ import Explore from './components/user/explore';
 
 import PhotographerProfile from './components/photographer/profile'
 
+import Apply from './components/photographer/apply'
+
 //Authentication for Routing
 import requireAuth from './utils/requireAuth';
 
@@ -24,5 +26,6 @@ export default (
     <Route path='/signup' component={Signup}/>
     <Route path='/home' component={Explore} onEnter={requireAuth}/>
     <Route path='/photographers/:id' component={PhotographerProfile} onEnter={requireAuth}/>
+    <Route path='/apply' component={Apply}/>
   </Route>
 );

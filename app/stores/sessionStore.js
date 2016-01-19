@@ -1,4 +1,4 @@
-import {LOGIN_USER, LOGOUT_USER} from '../constants/sessionConstants';
+import {LOGIN_USER, LOGOUT_USER, LOGIN_PHOTOGRAPHER} from '../constants/sessionConstants';
 import BaseStore from './baseStore';
 import {browserHistory} from 'react-router';
 
@@ -26,8 +26,13 @@ class SessionStore extends BaseStore {
 
         this.emitChange();
         browserHistory.push('/home'); //redirect after state changes
-
         break;
+      case LOGIN_PHOTOGRAPHER:
+        console.log("LOGIN_PHOTOGRAPHER REACHED")
+        this._lastName = action.data.lastName
+        this._firstName = action.data.firstName
+        this._email = action.data.email
+        this._isLoggedIn = true;
       case LOGOUT_USER:
         console.log("LOGOUT_USER REACHED")
         this._email = null;

@@ -4,6 +4,17 @@ import ReactDOM from 'react-dom';
 import PhotographerActions from '../../actions/photographerActions';
 import PhotographerStore from '../../stores/photographerStore';
 
+class PhotographerProfileHeader extends React.Component {
+  render() {
+    return (
+      <div className="container cover">
+        <img src="img/users/cover/001.jpg"/>
+      </div>
+    )
+  }
+}
+
+
 class PhotographerProfile extends React.Component {
   constructor() {
     super()
@@ -25,7 +36,7 @@ class PhotographerProfile extends React.Component {
 
   render() {
     return (
-      <div className="login jumbotron center-block">
+      <div className="">
         <h1>Login</h1>
           <h2>
             {this.state.message}

@@ -14,8 +14,9 @@ router.get('/', utils.loggedIn, function(request, response) {
 });
 
 router.post('/', function(request, response) {
-
+  console.log("made it here")
   Photographer.findOne({email: request.body.email}, function(err, doc) {
+    console.log("Creating New Profile")
     if (err) {
       response.send({success: false, error: err});
     }
