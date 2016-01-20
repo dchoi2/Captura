@@ -2,16 +2,15 @@ import {LOGIN_USER, LOGOUT_USER, LOGIN_PHOTOGRAPHER} from '../constants/sessionC
 import BaseStore from './baseStore';
 import {browserHistory} from 'react-router';
 
-
 class SessionStore extends BaseStore {
+
 
   constructor() {
     super();
     this.subscribe(() => this._registerToActions.bind(this))
-    this._firstName = null;
-    this._lastName = null;
-    this._email = null
+    this._user = null;
     this._isLoggedIn = false;
+    this._autoLogin();
   }
 
   _registerToActions(payload) {
@@ -19,26 +18,18 @@ class SessionStore extends BaseStore {
     switch(action.actionType) {
       case LOGIN_USER:
         console.log("LOGIN_USER REACHED")
-        this._lastName = action.data.lastName
-        this._firstName = action.data.firstName
-        this._email = action.data.email
-        this._isLoggedIn = true;
-
+        this._user = action.user
+        console.log("in sessionStore.LOGIN_USER:", localStorage.getItem('user'))
         this.emitChange();
         browserHistory.push('/home'); //redirect after state changes
         break;
       case LOGIN_PHOTOGRAPHER:
         console.log("LOGIN_PHOTOGRAPHER REACHED")
-        this._lastName = action.data.lastName
-        this._firstName = action.data.firstName
-        this._email = action.data.email
-        this._isLoggedIn = true;
+        this._user = action.user
+        this.emitChange();
       case LOGOUT_USER:
         console.log("LOGOUT_USER REACHED")
-        this._email = null;
-        this._firstName = null;
-        this._lastName = null;
-        this._isLoggedIn = false
+        this._user = null;
         this.emitChange();
         break;
       default:
@@ -46,28 +37,31 @@ class SessionStore extends BaseStore {
     };
   }
 
-  getState() {
-    return {
-      firstName: this._firstName,
-      lastName: this._lastName,
-      email: this._email,
-      isLoggedIn: this._isLoggedIn
+  get user(){
+    return this._user
+  }
+
+  _autoLogin () {
+    if(typeof(Storage) !== "undefined"){
+      let user = localStorage.getItem("user");
+      console.log(user);
+      if (user) {
+        this._user = JSON.parse(user);
+        console.log("&*&*&* autologin success")
+      }
     }
   }
 
-  get firstName() {
-    return this._firstName;
-  }
-
-  get lastName() {
-    return this._lastName;
-  }
-  get email() {
-    return this._email;
+  getState() {
+    return {
+      user: this._user,
+      isLoggedIn: this.isLoggedIn()
+    }
   }
 
   isLoggedIn() {
-    return !!this._email;
+    console.log("calling isLoggedIn")
+    return !!this._user
   }
 }
 

@@ -60,6 +60,8 @@ app.use('/api/sessions', sessions);
 // React URL Routing
 app.use(function(req, res) {
   Router.match({ routes: routes.default, location: req.url }, function(err, redirectLocation, renderProps) {
+    console.log("here in server")
+    console.log(redirectLocation, renderProps)
     if (err) {
       res.status(500).send(err.message)
     } else if (redirectLocation) {

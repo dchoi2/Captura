@@ -6,6 +6,7 @@ class App extends React.Component{
   constructor() {
     super()
     this.state = this._getLoginState();
+    console.log("in app.js", this.state)
   }
 
   _getLoginState() {

@@ -30,11 +30,21 @@ var Router = function(passport) {
 
   })
 
-  router.get('/users', utils.loggedIn, function(request, response) {
-    User.findOne({_id: request.user._id}, function(err, doc) {
-      utils.handleError(err);
-      response.json({firstName: doc.firstName, lastName:doc.lastName, email:doc.email});
-    });
+  router.get('/users', function(request, response) {
+    if (request.user === undefined) {
+      //Not Logged In
+      response.json({
+        user: null
+      })
+    } else {
+      response.json({
+        user: {
+          firstName: request.user.firstName,
+          lastName:  request.user.lastName,
+          email:     request.user.email
+        }
+      })
+    }
   });
 
   //Use passport.js to handle authentication.

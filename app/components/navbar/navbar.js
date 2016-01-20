@@ -41,7 +41,7 @@ class Navbar extends React.Component {
   }
 
   get headerItems() {
-    if (!this.state.isLoggedIn) {
+    if (!SessionStore.isLoggedIn()) {
       return (
           <div className="top-bar-right">
             <ul className="menu align-right">

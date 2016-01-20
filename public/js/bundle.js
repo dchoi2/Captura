@@ -133,14 +133,17 @@ var SessionActions = function () {
   }
 
   _createClass(SessionActions, null, [{
-    key: 'getUserInfo',
-    value: function getUserInfo() {
-      $.ajax({ type: 'GET', url: '/api/sessions/users' }).done(function (userData) {
+    key: 'checkSession',
+    value: function checkSession(cb) {
+      $.ajax({ type: 'GET', url: '/api/sessions/users' }).done(function (data) {
         _appDispatcher2.default.handleViewAction({
           actionType: _sessionConstants.LOGIN_USER,
-          data: userData
+          user: data.user
         });
-        //localStorage.setItem('user', userData.email)
+
+        localStorage.setItem('user', JSON.stringify(data.user));
+        console.log("setting local storage user to ", localStorage.getItem('user'));
+        if (cb) cb(data);
       });
     }
   }, {
@@ -152,7 +155,7 @@ var SessionActions = function () {
           if (cb) cb(data);
         } else {
           console.log("validCredentials!");
-          SessionActions.getUserInfo();
+          SessionActions.checkSession();
         }
       });
     }
@@ -193,8 +196,6 @@ var SessionActions = function () {
   }, {
     key: 'applyFor',
     value: function applyFor(applyData, cb) {
-      console.log("applyData", applyData);
-      console.log(cb);
       $.ajax({ type: 'POST', url: '/api/photographers', data: applyData }).done(function (data) {
         console.log("sent Post");
         if (!data.success) {
@@ -260,6 +261,7 @@ var App = function (_React$Component) {
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this));
 
     _this.state = _this._getLoginState();
+    console.log("in app.js", _this.state);
     return _this;
   }
 
@@ -324,6 +326,12 @@ var _sessionStore = require('../stores/sessionStore');
 
 var _sessionStore2 = _interopRequireDefault(_sessionStore);
 
+var _sessionActions = require('../actions/sessionActions');
+
+var _sessionActions2 = _interopRequireDefault(_sessionActions);
+
+var _reactRouter = require('react-router');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -350,9 +358,7 @@ exports.default = function (ComposedComponent) {
       value: function _getLoginState() {
         return {
           userLoggedIn: _sessionStore2.default.isLoggedIn(),
-          firstName: _sessionStore2.default.firstName,
-          lastName: _sessionStore2.default.lastName,
-          email: _sessionStore2.default.email
+          user: _sessionStore2.default.user
         };
       }
     }, {
@@ -364,7 +370,21 @@ exports.default = function (ComposedComponent) {
     }, {
       key: '_onChange',
       value: function _onChange() {
-        this.setState(this._getLoginState());
+        var userLoggedInState = this._getLoginState();
+        this.setState(userLoggedInState);
+
+        //get any nextTransitionPath - NB it can only be got once then it self-nullifies
+        // let transitionPath = RouterStore.nextTransitionPath || '/';
+
+        //trigger router change
+        console.log("&*&*&* App onLoginChange event: loggedIn=", userLoggedInState.userLoggedIn);
+        // "nextTransitionPath=", transitionPath);
+
+        if (userLoggedInState.userLoggedIn == false) {
+          //   router.transitionTo(transitionPath);
+          // }else{
+          _reactRouter.browserHistory.push('/login');
+        }
       }
     }, {
       key: 'componentWillUnmount',
@@ -386,7 +406,7 @@ exports.default = function (ComposedComponent) {
   }(_react2.default.Component);
 };
 
-},{"../stores/sessionStore":25,"react":"react"}],6:[function(require,module,exports){
+},{"../actions/sessionActions":3,"../stores/sessionStore":25,"react":"react","react-router":"react-router"}],6:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -419,10 +439,20 @@ var Home = function (_React$Component) {
   function Home() {
     _classCallCheck(this, Home);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(Home).apply(this, arguments));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Home).call(this));
+
+    console.log("here in Home");
+    return _this;
   }
 
   _createClass(Home, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      if (this.props.userLoggedIn) {
+        _reactRouter.browserHistory.push('/home');
+      }
+    }
+  }, {
     key: 'render',
     value: function render() {
       return _react2.default.createElement(
@@ -774,7 +804,7 @@ var Navbar = function (_React$Component) {
   }, {
     key: 'headerItems',
     get: function get() {
-      if (!this.state.isLoggedIn) {
+      if (!_sessionStore2.default.isLoggedIn()) {
         return _react2.default.createElement(
           'div',
           { className: 'top-bar-right' },
@@ -1474,6 +1504,7 @@ var Explore = function (_React$Component) {
 
     _this.state = _exploreStore2.default.setProfileState();
     _this._onChange = _this._onChange.bind(_this);
+    console.log("here in Explore");
     return _this;
   }
 
@@ -1508,7 +1539,7 @@ var Explore = function (_React$Component) {
   return Explore;
 }(_react2.default.Component);
 
-exports.default = Explore;
+exports.default = (0, _authenticatedComponent2.default)(Explore);
 
 },{"../../actions/exploreActions":1,"../../stores/exploreStore":23,"../authenticatedComponent":5,"./exploreHeader":13,"./profileView":15,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
 'use strict';
@@ -2130,6 +2161,7 @@ var ExploreStore = function (_BaseStore) {
   }, {
     key: 'setProfileState',
     value: function setProfileState() {
+      console.log('set profile states');
       return {
         profiles: this._profiles
       };
@@ -2300,10 +2332,9 @@ var SessionStore = function (_BaseStore) {
     _this.subscribe(function () {
       return _this._registerToActions.bind(_this);
     });
-    _this._firstName = null;
-    _this._lastName = null;
-    _this._email = null;
+    _this._user = null;
     _this._isLoggedIn = false;
+    _this._autoLogin();
     return _this;
   }
 
@@ -2314,26 +2345,18 @@ var SessionStore = function (_BaseStore) {
       switch (action.actionType) {
         case _sessionConstants.LOGIN_USER:
           console.log("LOGIN_USER REACHED");
-          this._lastName = action.data.lastName;
-          this._firstName = action.data.firstName;
-          this._email = action.data.email;
-          this._isLoggedIn = true;
-
+          this._user = action.user;
+          console.log("in sessionStore.LOGIN_USER:", localStorage.getItem('user'));
           this.emitChange();
           _reactRouter.browserHistory.push('/home'); //redirect after state changes
           break;
         case _sessionConstants.LOGIN_PHOTOGRAPHER:
           console.log("LOGIN_PHOTOGRAPHER REACHED");
-          this._lastName = action.data.lastName;
-          this._firstName = action.data.firstName;
-          this._email = action.data.email;
-          this._isLoggedIn = true;
+          this._user = action.user;
+          this.emitChange();
         case _sessionConstants.LOGOUT_USER:
           console.log("LOGOUT_USER REACHED");
-          this._email = null;
-          this._firstName = null;
-          this._lastName = null;
-          this._isLoggedIn = false;
+          this._user = null;
           this.emitChange();
           break;
         default:
@@ -2341,34 +2364,35 @@ var SessionStore = function (_BaseStore) {
       };
     }
   }, {
+    key: '_autoLogin',
+    value: function _autoLogin() {
+      if (typeof Storage !== "undefined") {
+        var user = localStorage.getItem("user");
+        console.log(user);
+        if (user) {
+          this._user = JSON.parse(user);
+          console.log("&*&*&* autologin success");
+        }
+      }
+    }
+  }, {
     key: 'getState',
     value: function getState() {
       return {
-        firstName: this._firstName,
-        lastName: this._lastName,
-        email: this._email,
-        isLoggedIn: this._isLoggedIn
+        user: this._user,
+        isLoggedIn: this.isLoggedIn()
       };
     }
   }, {
     key: 'isLoggedIn',
     value: function isLoggedIn() {
-      return !!this._email;
+      console.log("calling isLoggedIn");
+      return !!this._user;
     }
   }, {
-    key: 'firstName',
+    key: 'user',
     get: function get() {
-      return this._firstName;
-    }
-  }, {
-    key: 'lastName',
-    get: function get() {
-      return this._lastName;
-    }
-  }, {
-    key: 'email',
-    get: function get() {
-      return this._email;
+      return this._user;
     }
   }]);
 
@@ -2386,9 +2410,16 @@ var _sessionStore2 = _interopRequireDefault(_sessionStore);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function is_server() {
+  return !(typeof window != 'undefined' && window.document);
+}
+
 function requireAuth(nextState, replace) {
   console.log("evoked requireAuth");
-  if (!_sessionStore2.default.isLoggedIn()) {
+  console.log("in requireAuth, loggedin: ", _sessionStore2.default.isLoggedIn());
+  if (is_server()) {
+    console.log("Have to authenticate on the server side...");
+  } else if (!_sessionStore2.default.isLoggedIn()) {
     replace({
       pathname: '/login',
       state: { nextPathname: nextState.location.pathname }

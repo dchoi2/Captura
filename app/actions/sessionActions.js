@@ -5,14 +5,18 @@ import {browserHistory} from 'react-router'
 
 class SessionActions{
 
-  static getUserInfo(){
+  static checkSession(cb){
     $.ajax({type: 'GET', url: '/api/sessions/users'})
-      .done(function(userData) {
+      .done(function(data) {
         AppDispatcher.handleViewAction({
           actionType: LOGIN_USER,
-          data: userData
+          user: data.user
         });
-        //localStorage.setItem('user', userData.email)
+
+
+        localStorage.setItem('user', JSON.stringify(data.user))
+        console.log("setting local storage user to ", localStorage.getItem('user'))
+        if (cb) cb(data)
       })
   }
 
@@ -25,7 +29,7 @@ class SessionActions{
       }
       else {
         console.log("validCredentials!")
-        SessionActions.getUserInfo();
+        SessionActions.checkSession();
       }
     })
   }
@@ -67,8 +71,6 @@ class SessionActions{
   }
 
   static applyFor(applyData, cb) {
-    console.log("applyData", applyData)
-    console.log(cb)
     $.ajax({type: 'POST', url: '/api/photographers', data: applyData})
       .done(function(data) {
         console.log("sent Post")

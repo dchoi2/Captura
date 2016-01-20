@@ -1,5 +1,7 @@
 import React from 'react';
 import SessionStore from '../stores/sessionStore';
+import SessionActions from '../actions/sessionActions';
+import {browserHistory} from 'react-router';
 
 export default (ComposedComponent) => {
   return class AuthenticatedComponent extends React.Component {
@@ -11,9 +13,7 @@ export default (ComposedComponent) => {
     _getLoginState() {
       return {
         userLoggedIn: SessionStore.isLoggedIn(),
-        firstName: SessionStore.firstName,
-        lastName: SessionStore.lastName,
-        email: SessionStore.email
+        user: SessionStore.user
       };
     }
 
@@ -23,7 +23,21 @@ export default (ComposedComponent) => {
     }
 
     _onChange() {
-      this.setState(this._getLoginState());
+      var userLoggedInState = this._getLoginState();
+      this.setState(userLoggedInState);
+
+          //get any nextTransitionPath - NB it can only be got once then it self-nullifies
+      // let transitionPath = RouterStore.nextTransitionPath || '/';
+
+      //trigger router change
+      console.log("&*&*&* App onLoginChange event: loggedIn=", userLoggedInState.userLoggedIn)
+        // "nextTransitionPath=", transitionPath);
+
+      if(userLoggedInState.userLoggedIn == false){
+      //   router.transitionTo(transitionPath);
+      // }else{
+        browserHistory.push('/login');
+      }
     }
 
     componentWillUnmount() {

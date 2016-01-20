@@ -47,6 +47,7 @@ class ExploreStore extends BaseStore {
   }
 
   setProfileState() {
+    console.log('set profile states')
     return {
       profiles: this._profiles
     }

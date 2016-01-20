@@ -13,6 +13,7 @@ class Explore extends React.Component {
     super()
     this.state = ExploreStore.setProfileState()
     this._onChange = this._onChange.bind(this);
+    console.log("here in Explore")
   }
 
   componentDidMount() {
@@ -38,4 +39,4 @@ class Explore extends React.Component {
   }
 }
 
-export default Explore;
+export default AuthenticatedComponent(Explore);

@@ -1,8 +1,19 @@
 import React from 'react';
 import AuthenticatedComponent from './authenticatedComponent';
-import {Link} from 'react-router'
+import {Link, browserHistory} from 'react-router'
 
 class Home extends React.Component {
+  constructor() {
+    super()
+    console.log("here in Home")
+  }
+
+  componentDidMount() {
+    if (this.props.userLoggedIn) {
+      browserHistory.push('/home')
+    }
+  }
+
   render() {
     return (
       <div>
