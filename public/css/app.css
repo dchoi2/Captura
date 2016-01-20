@@ -34,6 +34,7 @@ h5 {
 	letter-spacing: 0.05rem;
 	border-radius: 5px;
 	margin: 0.5em 0;
+	color: #fff;
 }
 
 .primary.button {
@@ -94,32 +95,64 @@ h5 {
 			font-size: 1rem;
 		}
 	}
-	/* Location Search Header */
+	/* Page Header */
 	.hero.small {
 		height: 30vh;
 		min-height: 200px;
 		text-align: center;
 		padding-top: 80px;
 	}
+		/* Location Search Header */
 		.hero.small.explore {
 			background: url("../img/hero-explore.jpg") no-repeat center center;
 			background-size: cover;
 		}
-		/*.hero.small.explore input {
-			font-size: 2rem;
-		}*/
-	.input-group {
-		text-align: center;
-	}	
-	.input-group.location {
-		max-width: 400px;
-	}
+			.input-group {
+				text-align: center;
+			}	
+			.input-group.location {
+				max-width: 400px;
+			}
+		/* User Settings Header */
+		.hero.small.user {
+			background: url("../img/hero-user.jpg") no-repeat center center;
+			background-size: cover;
+		}
+			.hero.small.user h3 {
+				font-size: 2rem;
+				font-weight: 700;
+			}
 
 
 /* How It Works */
 #how {
 	text-align: center;
+	padding: 1em;
 }
+	.circle {
+    border-radius: 50%;
+    padding: 8px;
+    border: 1px solid #1585cf;
+    color: #1585cf;
+    font-weight: 100;
+    font-size: 2.5rem;
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    margin: 0.2em;
+	}
+	#how h2 {
+		font-family: 'Open Sans', sans-serif;
+		color: #666;
+		font-weight: 100;
+		font-size: 1.5rem;
+		letter-spacing: 0.05rem;
+	}
+	#how p {
+		color: #666;
+		font-size: 0.9rem;
+		padding: 0.3em;
+	}
 
 /* Become Photographer */
 .callout.photographer {
@@ -128,7 +161,12 @@ h5 {
 	margin: 0;
 	background-color: #EEE;
 	text-align: center;
+	padding: 2em;
+	color: #666;
 }
+	.callout.photographer a {
+		margin-left: 1em;
+	}
 
 /* Footer */
 .footer {
@@ -229,7 +267,7 @@ h5 {
 	}
 
 
-/* Profile Cards */
+/*  Photographer Profile & Card */
 .profile-card {
 	background-color: #fff;
 	border-radius: 5px;
@@ -256,21 +294,43 @@ h5 {
 		width: 100%;
 	  object-fit: cover;
 	}
+	.container.cover {
+	margin: 0;
+	padding: 0;
+	}
+		.container.cover img {
+			width: 100%;
+		  object-fit: cover;
+		  height: 40vh;
+		  min-height: 350px;
+		}
 
 .avatar {
 	float: left;
-	padding: 0.7em 1em 0 1em;
 }
+	.avatar {
+	  padding-right: 2em;
+	}
 	.avatar img {
-		width: 50px;
-	  height: 50px;
 	  border-radius: 50%;
 	  border: 2px solid #DDD;
+	}
+	.avatar.small {
+		padding: 0.7em 1em 0 1em;
+	}
+	.avatar.small img {
+		width: 50px;
+	  height: 50px;
 	}
 
 .profile-info {
 	padding: 0.7em 1em 0.2em 1em;
 }
+	.profile-info h3 {
+		font-size: 2rem;
+		color: #666;
+		font-weight: 700;
+	}
 	.profile-info h5 {
 	font-size: 1.1rem;
 	color: #666;
@@ -283,8 +343,15 @@ h5 {
 	color: #999;
 	}
 
+.social p a {
+	font-size: 1rem;
+	color: #999;
+}
+	.social p a:hover {
+		color: #666;
+	}
+
 .specialty {
-	max-height: 80px;
 	overflow: hidden;
 	margin-bottom: 1em;
 	padding: 0;
@@ -295,7 +362,6 @@ h5 {
 	border-radius: 10px;
 	color: #999;
 }
-
 
 /* Star Rating */
 .rating { 

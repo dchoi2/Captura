@@ -9,7 +9,7 @@ class Home extends React.Component {
         <div className="callout large hero">
           <h1><em>Live</em> in the moment.</h1>
           <h3>Leave the capturing to us.</h3>
-          <button className="primary button"><Link to={this.props.userLoggedIn ? '/home' : '/signup'}>Get Started</Link></button>
+          <Link to={this.props.userLoggedIn ? '/home' : '/signup'} className="primary button">Get Started</Link>
         </div>
 
         <div id="how" className="row">

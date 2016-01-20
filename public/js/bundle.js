@@ -447,13 +447,9 @@ var Home = function (_React$Component) {
             'Leave the capturing to us.'
           ),
           _react2.default.createElement(
-            'button',
-            { className: 'primary button' },
-            _react2.default.createElement(
-              _reactRouter.Link,
-              { to: this.props.userLoggedIn ? '/home' : '/signup' },
-              'Get Started'
-            )
+            _reactRouter.Link,
+            { to: this.props.userLoggedIn ? '/home' : '/signup', className: 'primary button' },
+            'Get Started'
           )
         ),
         _react2.default.createElement(
