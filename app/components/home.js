@@ -31,7 +31,7 @@ class Home extends React.Component {
         </div>
 
         <div className="callout medium photographer">
-          <h2>Are you a photographer?</h2><button className="hollow button"><Link to='/apply'>Apply Now</Link></button>
+          <h3>Are you a photographer?<Link to='/apply' className="hollow button">Apply Now</Link></h3>
         </div>
       </div>
     )

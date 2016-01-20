@@ -521,16 +521,12 @@ var Home = function (_React$Component) {
           'div',
           { className: 'callout medium photographer' },
           _react2.default.createElement(
-            'h2',
+            'h3',
             null,
-            'Are you a photographer?'
-          ),
-          _react2.default.createElement(
-            'button',
-            { className: 'hollow button' },
+            'Are you a photographer?',
             _react2.default.createElement(
               _reactRouter.Link,
-              { to: '/apply' },
+              { to: '/apply', className: 'hollow button' },
               'Apply Now'
             )
           )
