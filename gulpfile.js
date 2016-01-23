@@ -122,7 +122,7 @@ gulp.task('copy-resources', function() {
   gulp.src(['src/assets/img/**/*'])
     .pipe(gulp.dest('public/img'));
   gulp.src(['src/assets/icons/**/*'])
-    .pipe(gulp.dest('public/img'));
+    .pipe(gulp.dest('public/icons'));
   // gulp.src(['src/assets/js/vendor/what-input.min.js',
   //           'src/assets/js/app.js'])
   //   .pipe(gulp.dest('public/js'));

@@ -25,7 +25,7 @@ class App extends React.Component{
   }
 
   componentWillUnmount(){
-    LoginStore.removeChangeListener(this.changeListener);
+    SessionStore.removeChangeListener(this.changeListener);
   }
 
   render() {

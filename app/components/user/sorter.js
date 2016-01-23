@@ -7,45 +7,39 @@ import ExploreStore from '../../stores/exploreStore';
 class Sorter extends React.Component {
   constructor() {
     super()
-    this.state = ExploreStore.getInputState();
-    this.handleLocationChange = this.handleLocationChange.bind(this);
-    this.submitLocation = this.submitLocation.bind(this);
-    this._onChange = this._onChange.bind(this);
+    this.state = ExploreStore.getSortState();
+    // this._onChange = this._onChange.bind(this);
+    this.sortBy = this.sortBy.bind(this)
   }
 
   componentDidMount() {
-    ExploreStore.addChangeListener(this._onChange);
-    ReactDOM.findDOMNode(this.refs.focus).focus();
+    this.changeListener = this._onChange.bind(this)
+    ExploreStore.addChangeListener(this.changeListener);
   }
 
   componentWillUnmount() {
-    ExploreStore.removeChangeListener(this._onChange);
+    ExploreStore.removeChangeListener(this.changeListener);
   }
 
   _onChange() {
-    this.setState(LoginStore.getInputState());
-    ReactDOM.findDOMNode(this.refs.focus).focus();
-  }
-
-  handleLocationChange(e) {
-    this.setState({location: e.target.value});
+    this.setState(ExploreStore.getSortState());
   }
 
   // This will be called when the user clicks on the login button
-  sortBy() {
-    this.setState({sorting: "rate"})
+  sortBy(e) {
+    ExploreActions.setSort(e.target.getAttribute('data-value'))
   }
 
   render() {
     return (
-        <div className="row sorting">
-          <div className="medium-6 columns">
-            <p className="show-for-medium">Showing <em>all</em> photographers</p>
-          </div>
-          <div className="medium-6 columns">
-            <p className="text-right">Sort by: <p onClick={this.sortBy}>Top Rated</a> | <a href="#">Most Favorited</a> | <a href="#">Random</a></p>
-          </div>
+      <div className="row sorting">
+        <div className="medium-6 columns">
+          <p className="show-for-medium">Showing <em>all</em> photographers</p>
         </div>
+        <div className="medium-6 columns">
+          <p className="text-right">Sort by: <a data-value='rate' onClick={this.sortBy}>Top Rated</a> | <a data-value='favorite' onClick={this.sortBy}>Most Favorited</a> | <a data-value='random' onClick={this.sortBy}>Random</a></p>
+        </div>
+      </div>
     );
   }
 }

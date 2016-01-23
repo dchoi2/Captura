@@ -35,21 +35,26 @@ var ExploreActions = function () {
     }
   }, {
     key: 'searchLocation',
-    value: function searchLocation(location) {
-      console.log("Logging in...");
-      console.log(UNAUTHORIZED);
-      return $.ajax({ type: 'POST', url: '/api/sessions', data: loginData }).done(function (data) {
+    value: function searchLocation(locData, cb) {
+      return $.ajax({ type: 'POST', url: '/api/photographers/location', data: locData }).done(function (data) {
         if (!data.success) {
           console.log("failure...");
-          console.log(UNAUTHORIZED);
-          _appDispatcher2.default.handleViewAction({
-            actionType: UNAUTHORIZED,
-            message: data.message
-          });
+          cb(data);
         } else {
-          console.log("validCredentials!");
-          SessionActions.getUserInfo();
+          console.log("location submitted");
+          _appDispatcher2.default.handleViewAction({
+            actionType: _exploreConstants.UPDATE_LOCATION,
+            profiles: data.profiles // should contain location
+          });
         }
+      });
+    }
+  }, {
+    key: 'setSort',
+    value: function setSort(sortBy) {
+      _appDispatcher2.default.handleViewAction({
+        actionType: _exploreConstants.UPDATE_SORT,
+        sortBy: sortBy
       });
     }
   }]);
@@ -59,7 +64,7 @@ var ExploreActions = function () {
 
 exports.default = ExploreActions;
 
-},{"../constants/exploreConstants.js":16,"../dispatchers/appDispatcher.js":19}],2:[function(require,module,exports){
+},{"../constants/exploreConstants.js":18,"../dispatchers/appDispatcher.js":21}],2:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -104,7 +109,7 @@ var PhotographerActions = function () {
 
 exports.default = PhotographerActions;
 
-},{"../constants/photographerConstants.js":17,"../dispatchers/appDispatcher.js":19,"react-router":"react-router"}],3:[function(require,module,exports){
+},{"../constants/photographerConstants.js":19,"../dispatchers/appDispatcher.js":21,"react-router":"react-router"}],3:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -201,7 +206,9 @@ var SessionActions = function () {
         if (!data.success) {
           if (cb) cb(data);
         } else {
-          SessionActions.photographerLogin(applyData);
+          console.log("success! ", data);
+
+          //SessionActions.photographerLogin(applyData);
         }
       }).fail(function (data) {
         console.log("error happend", data);
@@ -223,7 +230,7 @@ var SessionActions = function () {
 
 exports.default = SessionActions;
 
-},{"../constants/sessionConstants.js":18,"../dispatchers/appDispatcher.js":19,"react-router":"react-router"}],4:[function(require,module,exports){
+},{"../constants/sessionConstants.js":20,"../dispatchers/appDispatcher.js":21,"react-router":"react-router"}],4:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -286,7 +293,7 @@ var App = function (_React$Component) {
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      LoginStore.removeChangeListener(this.changeListener);
+      _sessionStore2.default.removeChangeListener(this.changeListener);
     }
   }, {
     key: 'render',
@@ -307,7 +314,7 @@ var App = function (_React$Component) {
 
 exports.default = App;
 
-},{"../stores/sessionStore":25,"./navbar/navbar.js":8,"react":"react"}],5:[function(require,module,exports){
+},{"../stores/sessionStore":27,"./navbar/navbar.js":8,"react":"react"}],5:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -350,6 +357,7 @@ exports.default = function (ComposedComponent) {
       var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AuthenticatedComponent).call(this));
 
       _this.state = _this._getLoginState();
+      //this._checkLoggedIn();
       return _this;
     }
 
@@ -364,12 +372,12 @@ exports.default = function (ComposedComponent) {
     }, {
       key: 'componentDidMount',
       value: function componentDidMount() {
-        this.changeListener = this._onChange.bind(this);
+        this.changeListener = this._checkLoggedIn.bind(this);
         _sessionStore2.default.addChangeListener(this.changeListener);
       }
     }, {
-      key: '_onChange',
-      value: function _onChange() {
+      key: '_checkLoggedIn',
+      value: function _checkLoggedIn() {
         var userLoggedInState = this._getLoginState();
         this.setState(userLoggedInState);
 
@@ -406,7 +414,7 @@ exports.default = function (ComposedComponent) {
   }(_react2.default.Component);
 };
 
-},{"../actions/sessionActions":3,"../stores/sessionStore":25,"react":"react","react-router":"react-router"}],6:[function(require,module,exports){
+},{"../actions/sessionActions":3,"../stores/sessionStore":27,"react":"react","react-router":"react-router"}],6:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -860,7 +868,7 @@ var Navbar = function (_React$Component) {
 
 exports.default = Navbar;
 
-},{"../../actions/sessionActions":3,"../../stores/sessionStore":25,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
+},{"../../actions/sessionActions":3,"../../stores/sessionStore":27,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1004,6 +1012,546 @@ exports.default = Signup;
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _reactRouter = require('react-router');
+
+var _reactDropzone = require('react-dropzone');
+
+var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
+
+var _specialitiesTools = require('../../utils/specialitiesTools');
+
+var _specialitiesTools2 = _interopRequireDefault(_specialitiesTools);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var AccountInfo = function (_React$Component) {
+  _inherits(AccountInfo, _React$Component);
+
+  function AccountInfo() {
+    _classCallCheck(this, AccountInfo);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AccountInfo).call(this));
+
+    _this.state = _this.resetState();
+    _this.signup = _this.signup.bind(_this);
+    _this.useBusinessCheck = _this.useBusinessCheck.bind(_this);
+    return _this;
+  }
+
+  _createClass(AccountInfo, [{
+    key: 'resetState',
+    value: function resetState() {
+      return {
+        useBusiness: false,
+        message: '',
+        data: _specialitiesTools2.default.initCheckedState
+      };
+    }
+  }, {
+    key: 'useBusinessCheck',
+    value: function useBusinessCheck(e) {
+      this.setState({ "useBusiness": !this.state.useBusiness });
+    }
+  }, {
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      _reactDom2.default.findDOMNode(this.refs.email).focus();
+    }
+
+    // This will be called when the user clicks on the login button
+
+  }, {
+    key: 'signup',
+    value: function signup(e) {
+      e.preventDefault();
+      var loc = this.refs.location.value.split(',');
+      if (this.refs.password.value !== this.refs.confirm.value) {
+        this.setState({ message: "Passwords don't match", password: '', confirm: '' });
+        _reactDom2.default.findDOMNode(this.refs.password).focus();
+      } else if (this.state.useBusiness === true && this.refs.businessName.value === '') {
+        this.setState({ message: "You selected to use a business name. Please provide one." });
+        _reactDom2.default.findDOMNode(this.refs.businessName).focus();
+      } else if (loc.length !== 2) {
+        this.setState({ message: "Location must be of format: City, State" });
+        _reactDom2.default.findDOMNode(this.refs.location).focus();
+      } else {
+        var city = loc[0].trim();
+        var state = loc[1].trim();
+
+        var loc = this.refs.location.value.split(',');
+        var specialities = this.state.data.filter(function (d) {
+          return d.selected;
+        }).map(function (d) {
+          return _specialitiesTools2.default.idToString[d.id];
+        });
+        console.log(specialities);
+        var applyData = {
+          firstName: this.refs.firstName.value,
+          lastName: this.refs.lastName.value,
+          businessName: this.refs.businessName.value,
+          useBusiness: this.state.useBusiness,
+          email: this.refs.email.value,
+          password: this.refs.password.value,
+          city: city,
+          state: state,
+          specialities: specialities,
+          portfolio: this.refs.portfolio.value
+        };
+        var that = this;
+        SessionActions.applyFor(applyData, function (data) {
+          that.setState({ message: data.message });
+        });
+      }
+    }
+  }, {
+    key: '_changeSelection',
+    value: function _changeSelection(id) {
+      var state = this.state.data.map(function (d) {
+        return {
+          id: d.id,
+          selected: d.id === id ? !d.selected : d.selected
+        };
+      });
+      this.setState({ data: state });
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      console.log(this.state);
+      var that = this;
+
+      var checks = _specialitiesTools2.default.getCheckBoxes(this.state.data, function (data_id) {
+        return that._changeSelection.bind(that, data_id);
+      });
+
+      var checkGroups = [];
+      for (var i = 0; i < checks.length; i += 3) {
+        checkGroups.push(_react2.default.createElement(
+          'div',
+          { className: 'large-3 columns' },
+          checks[i],
+          checks[i + 1],
+          checks[i + 2]
+        ));
+      }
+
+      return _react2.default.createElement(
+        'div',
+        { className: 'row section' },
+        _react2.default.createElement(
+          'div',
+          { className: 'medium-3 columns' },
+          _react2.default.createElement(
+            'ul',
+            { className: 'tabs vertical', id: 'account-tabs', 'data-tabs': true },
+            _react2.default.createElement(
+              'li',
+              { className: 'tabs-title is-active' },
+              _react2.default.createElement(
+                'a',
+                { href: '#bookings', 'aria-selected': 'true' },
+                'My Bookings'
+              )
+            ),
+            _react2.default.createElement(
+              'li',
+              { className: 'tabs-title' },
+              _react2.default.createElement(
+                'a',
+                { href: '#edit' },
+                'Edit Info'
+              )
+            )
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'medium-9 columns' },
+          _react2.default.createElement(
+            'div',
+            { className: 'tabs-content vertical', 'data-tabs-content': 'example-vert-tabs' },
+            _react2.default.createElement(
+              'div',
+              { className: 'tabs-panel is-active', id: 'bookings' },
+              _react2.default.createElement(
+                'h3',
+                null,
+                'My Bookings'
+              )
+            ),
+            _react2.default.createElement(
+              'div',
+              { className: 'tabs-panel', id: 'edit' },
+              _react2.default.createElement(
+                'h3',
+                null,
+                'Edit Account Information'
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'callout success' },
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  'You',
+                  '\'',
+                  've successfully updated your profile! You can ',
+                  _react2.default.createElement(
+                    'a',
+                    { href: '#' },
+                    'view it here'
+                  ),
+                  '.'
+                )
+              ),
+              _react2.default.createElement(
+                'div',
+                { className: 'callout alert' },
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  'Oh no! Something went wrong!'
+                )
+              ),
+              _react2.default.createElement(
+                'form',
+                { id: 'photog-edit-profile-form', name: 'edit-profile-form', action: '#' },
+                _react2.default.createElement(
+                  'div',
+                  { className: 'row' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'large-6 columns' },
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'Profile Picture'
+                    ),
+                    _react2.default.createElement('input', { type: 'submit', value: 'Upload', className: 'button' })
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'large-6 columns' },
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'Cover Photo'
+                    ),
+                    _react2.default.createElement('input', { type: 'submit', value: 'Upload', className: 'button' })
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'row' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'columns' },
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'First Name'
+                    ),
+                    _react2.default.createElement('input', { type: 'text', name: 'firstname', id: 'firstname', placeholder: 'First name', value: 'John' }),
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'Last Name'
+                    ),
+                    _react2.default.createElement('input', { type: 'text', name: 'lastname', id: 'lastname', placeholder: 'Last name', value: 'Smith' }),
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'Business Name (Optional)'
+                    ),
+                    _react2.default.createElement('input', { type: 'text', name: 'lastname', id: 'bizname', placeholder: 'Business name (optional)' }),
+                    _react2.default.createElement('input', { id: 'usebizname', type: 'checkbox' }),
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'usebizname' },
+                      'Use business name on Captura'
+                    ),
+                    _react2.default.createElement(
+                      'p',
+                      { className: 'help-text', id: 'usebiznameHelpText' },
+                      'This means your business name appear in place of your full name.'
+                    ),
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'Location'
+                    ),
+                    _react2.default.createElement('input', { type: 'text', name: 'location', id: 'location', placeholder: 'Location (City, State)', value: 'San Francisco, CA' }),
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'Email Address'
+                    ),
+                    _react2.default.createElement('input', { type: 'email', name: 'email', id: 'email', placeholder: 'Email address', value: 'me@johnsmithphotography.com' }),
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'Change Password'
+                    ),
+                    _react2.default.createElement('input', { type: 'password', name: 'password', id: 'password', placeholder: 'Old Password' }),
+                    _react2.default.createElement('input', { type: 'password', name: 'password', id: 'password', placeholder: 'New Password' }),
+                    _react2.default.createElement('input', { type: 'password', name: 'password', id: 'password', placeholder: 'Confirm New Password' })
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'row' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'columns' },
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'Link to Portfolio'
+                    ),
+                    _react2.default.createElement('input', { type: 'url', name: 'portfolio', id: 'portfolio', placeholder: 'Portfolio URL', value: 'http://johnsmithphotography.com' }),
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'Link to Facebook Page (Optional)'
+                    ),
+                    _react2.default.createElement('input', { type: 'url', name: 'facebook', id: 'facebook', placeholder: 'Facebook Page URL (Optional)' }),
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'Link to Instagram (Optional)'
+                    ),
+                    _react2.default.createElement('input', { type: 'url', name: 'instagram', id: 'instagram', placeholder: 'Instagram Profile URL (Optional)' }),
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'Link to Flickr (Optional)'
+                    ),
+                    _react2.default.createElement('input', { type: 'url', name: 'flickr', id: 'flickr', placeholder: 'Flickr Profile URL (Optional)' })
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'row about' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'columns' },
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'About Me (Optional)'
+                    ),
+                    _react2.default.createElement(
+                      'p',
+                      { className: 'help-text', id: 'specialtyHelpText' },
+                      'Limited to 4000 characters.'
+                    ),
+                    _react2.default.createElement('textarea', { name: 'about', id: 'about', form: 'photog-edit-profile-form', rows: '4', placeholder: 'Write something about yourself and your work (Optional)', maxlength: '4000' })
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'row' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'columns' },
+                    _react2.default.createElement(
+                      'legend',
+                      null,
+                      'Specialties'
+                    ),
+                    _react2.default.createElement(
+                      'p',
+                      { className: 'help-text', id: 'specialtyHelpText' },
+                      'Select at least one.'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'row' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'large-6 columns' },
+                    _react2.default.createElement('input', { id: 'portrait', type: 'checkbox' }),
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'portrait' },
+                      'Portrait'
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement('input', { id: 'headshot', type: 'checkbox' }),
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'headshot' },
+                      'Headshot'
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement('input', { id: 'events', type: 'checkbox' }),
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'events' },
+                      'Events'
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement('input', { id: 'engagement', type: 'checkbox' }),
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'engagement' },
+                      'Engagement'
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement('input', { id: 'wedding', type: 'checkbox' }),
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'wedding' },
+                      'Wedding'
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement('input', { id: 'lifestyle', type: 'checkbox' }),
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'lifestyle' },
+                      'Lifestyle/Candid'
+                    )
+                  ),
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'large-6 columns' },
+                    _react2.default.createElement('input', { id: 'club', type: 'checkbox' }),
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'club' },
+                      'Club/Nightlife'
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement('input', { id: 'concert', type: 'checkbox' }),
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'concert' },
+                      'Concert/Performance'
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement('input', { id: 'commercial', type: 'checkbox' }),
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'commercial' },
+                      'Commercial'
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement('input', { id: 'arch', type: 'checkbox' }),
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'arch' },
+                      'Real Estate/Architecture'
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement('input', { id: 'sports', type: 'checkbox' }),
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'sports' },
+                      'Sports'
+                    ),
+                    _react2.default.createElement('br', null),
+                    _react2.default.createElement('input', { id: 'nature', type: 'checkbox' }),
+                    _react2.default.createElement(
+                      'label',
+                      { htmlFor: 'nature' },
+                      'Nature'
+                    )
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'row section' },
+                  _react2.default.createElement(
+                    'div',
+                    { className: 'columns' },
+                    _react2.default.createElement('input', { type: 'submit', value: 'Save', className: 'button' }),
+                    ' ',
+                    _react2.default.createElement('input', { type: 'submit', value: 'Cancel', className: 'hollow button' })
+                  )
+                )
+              )
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return AccountInfo;
+}(_react2.default.Component);
+
+//     <div>
+//   <div className="callout hero small photographer">
+//     <h3>Capture for Captura</h3>
+//     <p>Apply to be a photographer</p>
+//   </div>
+//   <form id="apply-form" name="apply-form" action="#" onSubmit={this.signup}>
+
+//     <div className="row section">
+//             {this.state.message ?
+//     <div scrollIntoView={true} className="callout alert">
+//       <p>{this.state.message}</p>
+//     </div> : null}
+//       <div className="columns">
+//         <legend>Account Information:</legend>
+//         <input type="email" ref="email" name="email" id="email" placeholder="Email address" required/>
+//         <input type="password" ref="password" name="password" id="password" placeholder="Password" required/>
+//         <input type="password" ref="confirm" name="confirm-password" id="confirm-password" placeholder="Confirm Password" />
+//       </div>
+//     </div>
+//     <div className="row">
+//       <div className="columns">
+//         <legend>Personal Information:</legend>
+//         <input type="text" ref="firstName" name="firstname" id="firstname" placeholder="First name" required/>
+//         <input type="text" ref="lastName" name="lastname" id="lastname" placeholder="Last name" required/>
+//         <input type="text" ref="businessName" name="businesName" id="bizname" placeholder="Business name (optional)" />
+//         <input checked={this.state.useBusiness} onChange={this.useBusinessCheck} id="usebizname" type="checkbox"/><label htmlhtmlFor="usebizname">Use business name on Captura</label>
+//         <p className="help-text" id="usebiznameHelpText">This means your business name appear in place of your full name.</p>
+//         <input type="text" ref="location" name="location" id="location" placeholder="Location (City, State)" required/>
+//         <p className="help-text" id="locationHelpText">Where are you based? Please enter in this format: City, State (e.g. Boston, MA) </p>
+//         <input type="url" ref="portfolio" name="portfolio" id="portfolio" placeholder="Portfolio URL" required/>
+//         <p className="help-text" id="portfolioHelpText">To ensure quality experience for our clients, we need your portfolio to verify your work.</p>
+//       </div>
+//     </div>
+//     <div className="row">
+//       <div className="columns">
+//         <legend>specialities</legend>
+//         <p className="help-text" id="specialtyHelpText">Select at least one.</p>
+//       </div>
+//     </div>
+//     <div className="row">
+//     {checkGroups}
+//     </div>
+//     <div className="row section">
+//       <div className="columns">
+//         <p className="help-text" id="applyHelpText">After you submit, our team will review your application and notify you once your application has been approved. Once approved, you will be able to further customize your Captura profile to best showcase your skills and interests. Then, you{'\u0027'}re ready to be booked!</p>
+//         <input type="submit" value="Submit Application" className="button" />
+//       </div>
+//     </div>
+//   </form>
+// </div>
+
+},{"../../utils/specialitiesTools":29,"react":"react","react-dom":"react-dom","react-dropzone":36,"react-router":"react-router"}],11:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
@@ -1026,6 +1574,10 @@ var _reactDropzone = require('react-dropzone');
 
 var _reactDropzone2 = _interopRequireDefault(_reactDropzone);
 
+var _specialitiesTools = require('../../utils/specialitiesTools');
+
+var _specialitiesTools2 = _interopRequireDefault(_specialitiesTools);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1042,44 +1594,30 @@ var Apply = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Apply).call(this));
 
-    _this.state = {
-      avatar: null,
-      coverPhoto: null,
-      files: []
-    };
+    _this.state = _this.resetState();
     _this.signup = _this.signup.bind(_this);
-    _this.onOpenClick = _this.onOpenClick.bind(_this);
-    _this.onDrop = _this.onDrop.bind(_this);
-    _this.test = _this.test.bind(_this);
-    //this._onChange = this._onChange.bind(this);
+    _this.useBusinessCheck = _this.useBusinessCheck.bind(_this);
     return _this;
   }
 
   _createClass(Apply, [{
+    key: 'resetState',
+    value: function resetState() {
+      return {
+        useBusiness: false,
+        message: '',
+        data: _specialitiesTools2.default.initCheckedState
+      };
+    }
+  }, {
+    key: 'useBusinessCheck',
+    value: function useBusinessCheck(e) {
+      this.setState({ "useBusiness": !this.state.useBusiness });
+    }
+  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _reactDom2.default.findDOMNode(this.refs.firstName).focus();
-    }
-  }, {
-    key: 'onDrop',
-    value: function onDrop(files) {
-      console.log(files);
-      if (files[0].type !== 'image/jpeg') {
-        console.log("file is not jpg");
-      }
-      this.setState({
-        files: files
-      });
-    }
-  }, {
-    key: 'onOpenClick',
-    value: function onOpenClick() {
-      this.refs.dropzone.open();
-    }
-  }, {
-    key: 'test',
-    value: function test() {
-      console.log(this.refs.sP);
+      _reactDom2.default.findDOMNode(this.refs.email).focus();
     }
 
     // This will be called when the user clicks on the login button
@@ -1088,17 +1626,38 @@ var Apply = function (_React$Component) {
     key: 'signup',
     value: function signup(e) {
       e.preventDefault();
-      if (this.state.password !== this.state.confirm) {
-        this.setState({ message: "Passwords don't match" });
+      var loc = this.refs.location.value.split(',');
+      if (this.refs.password.value !== this.refs.confirm.value) {
+        this.setState({ message: "Passwords don't match", password: '', confirm: '' });
+        _reactDom2.default.findDOMNode(this.refs.password).focus();
+      } else if (this.state.useBusiness === true && this.refs.businessName.value === '') {
+        this.setState({ message: "You selected to use a business name. Please provide one." });
+        _reactDom2.default.findDOMNode(this.refs.businessName).focus();
+      } else if (loc.length !== 2) {
+        this.setState({ message: "Location must be of format: City, State" });
+        _reactDom2.default.findDOMNode(this.refs.location).focus();
       } else {
-        console.log(this.refs.sP.value);
-        console.log(this.refs.sH.value);
+        var city = loc[0].trim();
+        var state = loc[1].trim();
+
+        var loc = this.refs.location.value.split(',');
+        var specialities = this.state.data.filter(function (d) {
+          return d.selected;
+        }).map(function (d) {
+          return _specialitiesTools2.default.idToString[d.id];
+        });
+        console.log(specialities);
         var applyData = {
           firstName: this.refs.firstName.value,
           lastName: this.refs.lastName.value,
           businessName: this.refs.businessName.value,
+          useBusiness: this.state.useBusiness,
           email: this.refs.email.value,
-          password: this.refs.password.value
+          password: this.refs.password.value,
+          city: city,
+          state: state,
+          specialities: specialities,
+          portfolio: this.refs.portfolio.value
         };
         var that = this;
         _sessionActions2.default.applyFor(applyData, function (data) {
@@ -1107,174 +1666,160 @@ var Apply = function (_React$Component) {
       }
     }
   }, {
+    key: '_changeSelection',
+    value: function _changeSelection(id) {
+      var state = this.state.data.map(function (d) {
+        return {
+          id: d.id,
+          selected: d.id === id ? !d.selected : d.selected
+        };
+      });
+      this.setState({ data: state });
+    }
+  }, {
     key: 'render',
     value: function render() {
+      console.log(this.state);
+      var that = this;
+
+      var checks = _specialitiesTools2.default.getCheckBoxes(this.state.data, function (data_id) {
+        return that._changeSelection.bind(that, data_id);
+      });
+
+      var checkGroups = [];
+      for (var i = 0; i < checks.length; i += 3) {
+        checkGroups.push(_react2.default.createElement(
+          'div',
+          { className: 'large-3 columns' },
+          checks[i],
+          checks[i + 1],
+          checks[i + 2]
+        ));
+      }
 
       return _react2.default.createElement(
         'div',
-        { className: 'login jumbotron center-block' },
+        null,
         _react2.default.createElement(
-          'h1',
-          null,
-          'Apply to be a Photographer!'
-        ),
-        _react2.default.createElement(
-          'h2',
-          null,
-          this.state.message
+          'div',
+          { className: 'callout hero small photographer' },
+          _react2.default.createElement(
+            'h3',
+            null,
+            'Capture for Captura'
+          ),
+          _react2.default.createElement(
+            'p',
+            null,
+            'Apply to be a photographer'
+          )
         ),
         _react2.default.createElement(
           'form',
-          { role: 'form', onSubmit: this.signup },
-          _react2.default.createElement('input', { type: 'text', ref: 'firstName', className: 'form-control', name: 'firstname', id: 'firstname', placeholder: 'First name' }),
-          _react2.default.createElement('input', { type: 'text', ref: 'lastName', className: 'form-control', name: 'lastname', id: 'lastname', placeholder: 'Last name' }),
-          _react2.default.createElement('input', { type: 'text', ref: 'businessName', className: 'form-control', name: 'businessName', id: 'businessName', placeholder: 'Business name' }),
-          _react2.default.createElement('input', { type: 'text', ref: 'email', className: 'form-control', name: 'email', id: 'email', placeholder: 'Email' }),
-          _react2.default.createElement('input', { type: 'password', className: 'form-control', id: 'password', ref: 'password', placeholder: 'Password' }),
-          _react2.default.createElement('input', { type: 'password', className: 'form-control', id: 'confirm', ref: 'confirm', placeholder: 'Confirm password' }),
-          _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'website', ref: 'website', placeholder: 'Portfolio Link' }),
-          _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'facebook', ref: 'facebook', placeholder: 'Facebook Page' }),
-          _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'twitter', ref: 'twitter', placeholder: 'Twitter Page' }),
-          _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'instagram', ref: 'instagram', placeholder: 'Instagram Page' }),
-          _react2.default.createElement('input', { type: 'text', className: 'form-control', id: 'flickr', ref: 'flickr', placeholder: 'Flickr Page' }),
+          { id: 'apply-form', name: 'apply-form', action: '#', onSubmit: this.signup },
           _react2.default.createElement(
-            'fieldset',
-            { className: 'fieldset' },
-            _react2.default.createElement(
-              'legend',
-              null,
-              'Specialties:'
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'large-3 columns' },
-              _react2.default.createElement('input', { id: 'portrait', type: 'checkbox', onClick: this.test, ref: 'sP' }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'portrait' },
-                'Portrait'
-              ),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement('input', { id: 'headshot', type: 'checkbox', ref: 'sH' }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'headshot' },
-                'Headshot'
-              ),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement('input', { id: 'events', type: 'checkbox', ref: 'sEv' }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'events' },
-                'Events'
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'large-3 columns' },
-              _react2.default.createElement('input', { id: 'engagement', type: 'checkbox', ref: 'sEn' }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'engagement' },
-                'Engagement'
-              ),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement('input', { id: 'wedding', type: 'checkbox', ref: 'sW' }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'wedding' },
-                'Wedding'
-              ),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement('input', { id: 'lifestyle', type: 'checkbox', ref: 'sL' }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'lifestyle' },
-                'Lifestyle/Candid'
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'large-3 columns' },
-              _react2.default.createElement('input', { id: 'club', type: 'checkbox', ref: 'sCl' }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'club' },
-                'Club/Nightlife'
-              ),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement('input', { id: 'concert', type: 'checkbox', ref: 'sCon' }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'concert' },
-                'Concert/Performance'
-              ),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement('input', { id: 'commercial', type: 'checkbox', ref: 'sCom' }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'commercial' },
-                'Commercial'
-              )
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'large-3 columns' },
-              _react2.default.createElement('input', { id: 'arch', type: 'checkbox', ref: 'sA' }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'arch' },
-                'Real Estate/Architecture'
-              ),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement('input', { id: 'sports', type: 'checkbox', ref: 'sSp' }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'sports' },
-                'Sports'
-              ),
-              _react2.default.createElement('br', null),
-              _react2.default.createElement('input', { id: 'nature', type: 'checkbox', ref: 'sN' }),
-              _react2.default.createElement(
-                'label',
-                { htmlFor: 'nature' },
-                'Nature'
-              )
-            )
-          ),
-          _react2.default.createElement(
-            _reactDropzone2.default,
-            { ref: 'dropzone', onDrop: this.onDrop },
-            _react2.default.createElement(
-              'div',
-              null,
-              'Try dropping some files here, or click to select files to upload.'
-            )
-          ),
-          _react2.default.createElement(
-            'button',
-            { type: 'button', onClick: this.onOpenClick },
-            'Open Dropzone'
-          ),
-          this.state.files.length > 0 ? _react2.default.createElement(
             'div',
-            null,
-            _react2.default.createElement(
-              'h2',
-              null,
-              'Uploading ',
-              this.state.files.length,
-              ' files...'
-            ),
+            { className: 'row section' },
+            this.state.message ? _react2.default.createElement(
+              'div',
+              { scrollIntoView: true, className: 'callout alert' },
+              _react2.default.createElement(
+                'p',
+                null,
+                this.state.message
+              )
+            ) : null,
             _react2.default.createElement(
               'div',
-              null,
-              this.state.files.map(function (file) {
-                return _react2.default.createElement('img', { src: file.preview });
-              })
+              { className: 'columns' },
+              _react2.default.createElement(
+                'legend',
+                null,
+                'Account Information:'
+              ),
+              _react2.default.createElement('input', { type: 'email', ref: 'email', name: 'email', id: 'email', placeholder: 'Email address', required: true }),
+              _react2.default.createElement('input', { type: 'password', ref: 'password', name: 'password', id: 'password', placeholder: 'Password', required: true }),
+              _react2.default.createElement('input', { type: 'password', ref: 'confirm', name: 'confirm-password', id: 'confirm-password', placeholder: 'Confirm Password' })
             )
-          ) : null,
-          _react2.default.createElement('input', { type: 'submit', value: 'Sign Up', className: 'expanded button' })
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'columns' },
+              _react2.default.createElement(
+                'legend',
+                null,
+                'Personal Information:'
+              ),
+              _react2.default.createElement('input', { type: 'text', ref: 'firstName', name: 'firstname', id: 'firstname', placeholder: 'First name', required: true }),
+              _react2.default.createElement('input', { type: 'text', ref: 'lastName', name: 'lastname', id: 'lastname', placeholder: 'Last name', required: true }),
+              _react2.default.createElement('input', { type: 'text', ref: 'businessName', name: 'businesName', id: 'bizname', placeholder: 'Business name (optional)' }),
+              _react2.default.createElement('input', { checked: this.state.useBusiness, onChange: this.useBusinessCheck, id: 'usebizname', type: 'checkbox' }),
+              _react2.default.createElement(
+                'label',
+                { htmlFor: 'usebizname' },
+                'Use business name on Captura'
+              ),
+              _react2.default.createElement(
+                'p',
+                { className: 'help-text', id: 'usebiznameHelpText' },
+                'This means your business name appear in place of your full name.'
+              ),
+              _react2.default.createElement('input', { type: 'text', ref: 'location', name: 'location', id: 'location', placeholder: 'Location (City, State)', required: true }),
+              _react2.default.createElement(
+                'p',
+                { className: 'help-text', id: 'locationHelpText' },
+                'Where are you based? Please enter in this format: City, State (e.g. Boston, MA) '
+              ),
+              _react2.default.createElement('input', { type: 'url', ref: 'portfolio', name: 'portfolio', id: 'portfolio', placeholder: 'Portfolio URL', required: true }),
+              _react2.default.createElement(
+                'p',
+                { className: 'help-text', id: 'portfolioHelpText' },
+                'To ensure quality experience for our clients, we need your portfolio to verify your work.'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            _react2.default.createElement(
+              'div',
+              { className: 'columns' },
+              _react2.default.createElement(
+                'legend',
+                null,
+                'specialities'
+              ),
+              _react2.default.createElement(
+                'p',
+                { className: 'help-text', id: 'specialtyHelpText' },
+                'Select at least one.'
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row' },
+            checkGroups
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'row section' },
+            _react2.default.createElement(
+              'div',
+              { className: 'columns' },
+              _react2.default.createElement(
+                'p',
+                { className: 'help-text', id: 'applyHelpText' },
+                'After you submit, our team will review your application and notify you once your application has been approved. Once approved, you will be able to further customize your Captura profile to best showcase your skills and interests. Then, you',
+                '\'',
+                're ready to be booked!'
+              ),
+              _react2.default.createElement('input', { type: 'submit', value: 'Submit Application', className: 'button' })
+            )
+          )
         )
       );
     }
@@ -1282,58 +1827,104 @@ var Apply = function (_React$Component) {
 
   return Apply;
 }(_react2.default.Component);
+//   <div className="columns">
+//     <legend>specialities</legend>
+//     <p className="help-text" id="specialtyHelpText">Select at least one.</p>
+//   </div>
+// </div>
+// <div className="row">
+//   <div className="large-3 columns">
+//     <input id="portrait" type="checkbox"/><label htmlFor="portrait">Portrait</label><br/>
+//     <input id="headshot" type="checkbox"/><label htmlFor="headshot">Headshot</label><br/>
+//     <input id="events" type="checkbox"/><label htmlFor="events">Events</label>
+//   </div>
+//   <div className="large-3 columns">
+//     <input id="engagement" type="checkbox"/><label htmlFor="engagement">Engagement</label><br/>
+//     <input id="wedding" type="checkbox"/><label htmlFor="wedding">Wedding</label><br/>
+//     <input id="lifestyle" type="checkbox"/><label htmlFor="lifestyle">Lifestyle/Candid</label>
+//   </div>
+//   <div className="large-3 columns">
+//     <input id="club" type="checkbox"/><label htmlFor="club">Club/Nightlife</label><br/>
+//     <input id="concert" type="checkbox"/><label htmlFor="concert">Concert/Performance</label><br/>
+//     <input id="commercial" type="checkbox"/><label htmlFor="commercial">Commercial</label>
+//   </div>
+//   <div className="large-3 columns">
+//     <input id="arch" type="checkbox"/><label htmlFor="arch">Real Estate/Architecture</label><br/>
+//     <input id="sports" type="checkbox"/><label htmlFor="sports">Sports</label><br/>
+//     <input id="nature" type="checkbox"/><label htmlFor="nature">Nature</label>
+//   </div>
+// </div>
 
 exports.default = Apply;
 
-// <form role="form" onSubmit={this.signup}>
-//   <input type="text" ref="firstName" className="form-control" name="firstname" id="firstname" placeholder="First name" />
-//   <input type="text" ref="lastName" className="form-control" name="lastname" id="lastname" placeholder="Last name" />
-//   <input type="text" className="form-control" name="businessName" id="businessName" placeholder="Business name" />
-//   <input type="text"  ref = "email" className="form-control" name="email" id="email"  placeholder="Email" />
-//   <input type="password" className="form-control" id="password" ref="password" placeholder="Password" />
-//   <input type="password"  className="form-control" id="confirm" ref="confirm" placeholder="Confirm password" />
-//   <input type="text"  className="form-control" id="website" ref="website" placeholder="Portfolio Link" />
-//   <input type="text" className="form-control" id="facebook" ref="facebook" placeholder="Facebook Page"/>
-//   <input type="text" className="form-control" id="twitter" ref="twitter" placeholder="Twitter Page"/>
-//   <input type="text" className="form-control" id="instagram" ref="instagram" placeholder="Instagram Page"/>
-//   <input type="text" className="form-control" id="flickr" ref="flickr" placeholder="Flickr Page"/>
-//   <fieldset className="fieldset">
-//     <legend>Specialties:</legend>
-//     <div className="large-3 columns">
-//       <input id="portrait" type="checkbox" ref="sP"/><label htmlFor="portrait">Portrait</label><br/>
-//       <input id="headshot" type="checkbox" ref="sH"/><label htmlFor="headshot">Headshot</label><br/>
-//       <input id="events" type="checkbox"  ref="sEv"/><label htmlFor="events">Events</label>
-//     </div>
-//     <div className="large-3 columns">
-//       <input id="engagement" type="checkbox" ref="sEn"/><label htmlFor="engagement">Engagement</label><br/>
-//       <input id="wedding" type="checkbox" ref="sW"/><label htmlFor="wedding">Wedding</label><br/>
-//       <input id="lifestyle" type="checkbox" ref="sL"/><label htmlFor="lifestyle">Lifestyle/Candid</label>
-//     </div>
-//     <div className="large-3 columns">
-//       <input id="club" type="checkbox" ref="sCl"/><label htmlFor="club">Club/Nightlife</label><br/>
-//       <input id="concert" type="checkbox" ref="sCon"/><label htmlFor="concert">Concert/Performance</label><br/>
-//       <input id="commercial" type="checkbox" ref="sCom"/><label htmlFor="commercial">Commercial</label>
-//     </div>
-//     <div className="large-3 columns">
-//       <input id="arch" type="checkbox" ref="sA"/><label htmlFor="arch">Real Estate/Architecture</label><br/>
-//       <input id="sports" type="checkbox" ref="sSp"/><label htmlFor="sports">Sports</label><br/>
-//       <input id="nature" type="checkbox" ref="sN"/><label htmlFor="nature">Nature</label>
-//     </div>
-//   </fieldset>
-//   <Dropzone ref="dropzone" onDrop={this.onDrop}>
-//       <div>Try dropping some files here, or click to select files to upload.</div>
-//   </Dropzone>
-//   <button type="button" onClick={this.onOpenClick}>
-//       Open Dropzone
-//   </button>
-//   {this.state.files.length > 0 ? <div>
-//   <h2>Uploading {this.state.files.length} files...</h2>
-//   <div>{this.state.files.map((file) => <img src={file.preview} /> )}</div>
-//   </div> : null}
-//   <input type="submit" value="Sign Up" className="expanded button"/>
-// // </form>
+// onDrop(files) {
+//   console.log(files)
+//   if (files[0].type !== 'image/jpeg') {
+//     console.log("file is not jpg")
+//   }
+//   this.setState({
+//     files: files
+//   })
+// }
 
-},{"../../actions/sessionActions":3,"react":"react","react-dom":"react-dom","react-dropzone":33,"react-router":"react-router"}],11:[function(require,module,exports){
+// onOpenClick() {
+//   this.refs.dropzone.open();
+// }
+// <div className="login jumbotron center-block">
+//   <h1>Apply to be a Photographer!</h1>
+//     <h2>
+//       {this.state.message}
+//     </h2>
+//     <form role="form" onSubmit={this.signup}>
+//       <input type="text" ref="firstName" className="form-control" name="firstname" id="firstname" placeholder="First name" />
+//       <input type="text" ref="lastName" className="form-control" name="lastname" id="lastname" placeholder="Last name" />
+//       <input type="text" ref="businessName" className="form-control" name="businessName" id="businessName" placeholder="Business name" />
+//       <input type="text"  ref = "email" className="form-control" name="email" id="email"  placeholder="Email" />
+//       <input type="password" className="form-control" id="password" ref="password" placeholder="Password" />
+//       <input type="password"  className="form-control" id="confirm" ref="confirm" placeholder="Confirm password" />
+//       <input type="text"  className="form-control" id="website" ref="website" placeholder="Portfolio Link" />
+//       <input type="text" className="form-control" id="facebook" ref="facebook" placeholder="Facebook Page"/>
+//       <input type="text" className="form-control" id="twitter" ref="twitter" placeholder="Twitter Page"/>
+//       <input type="text" className="form-control" id="instagram" ref="instagram" placeholder="Instagram Page"/>
+//       <input type="text" className="form-control" id="flickr" ref="flickr" placeholder="Flickr Page"/>
+//       <fieldset className="fieldset">
+//         <legend>specialities:</legend>
+//         <div className="large-3 columns">
+//           <input id="portrait" type="checkbox" onClick={this.test} ref="sP"/><label htmlhtmlFor="portrait">Portrait</label><br/>
+//           <input id="headshot" type="checkbox" ref="sH"/><label htmlhtmlFor="headshot">Headshot</label><br/>
+//           <input id="events" type="checkbox"  ref="sEv"/><label htmlhtmlFor="events">Events</label>
+//         </div>
+//         <div className="large-3 columns">
+//           <input id="engagement" type="checkbox" ref="sEn"/><label htmlhtmlFor="engagement">Engagement</label><br/>
+//           <input id="wedding" type="checkbox" ref="sW"/><label htmlhtmlFor="wedding">Wedding</label><br/>
+//           <input id="lifestyle" type="checkbox" ref="sL"/><label htmlhtmlFor="lifestyle">Lifestyle/Candid</label>
+//         </div>
+//         <div className="large-3 columns">
+//           <input id="club" type="checkbox" ref="sCl"/><label htmlhtmlFor="club">Club/Nightlife</label><br/>
+//           <input id="concert" type="checkbox" ref="sCon"/><label htmlhtmlFor="concert">Concert/Performance</label><br/>
+//           <input id="commercial" type="checkbox" ref="sCom"/><label htmlhtmlFor="commercial">Commercial</label>
+//         </div>
+//         <div className="large-3 columns">
+//           <input id="arch" type="checkbox" ref="sA"/><label htmlhtmlFor="arch">Real Estate/Architecture</label><br/>
+//           <input id="sports" type="checkbox" ref="sSp"/><label htmlhtmlFor="sports">Sports</label><br/>
+//           <input id="nature" type="checkbox" ref="sN"/><label htmlhtmlFor="nature">Nature</label>
+//         </div>
+//       </fieldset>
+//       <Dropzone ref="dropzone" onDrop={this.onDrop}>
+//           <div>Try dropping some files here, or click to select files to upload.</div>
+//       </Dropzone>
+//       <button type="button" onClick={this.onOpenClick}>
+//           Open Dropzone
+//       </button>
+//       {this.state.files.length > 0 ? <div>
+//       <h2>Uploading {this.state.files.length} files...</h2>
+//       <div>{this.state.files.map((file) => <img src={file.preview} /> )}</div>
+//       </div> : null}
+//       <input type="submit" value="Sign Up" className="expanded button"/>
+//     </form>
+// </div>
+
+},{"../../actions/sessionActions":3,"../../utils/specialitiesTools":29,"react":"react","react-dom":"react-dom","react-dropzone":36,"react-router":"react-router"}],12:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1404,6 +1995,7 @@ var PhotographerProfile = function (_React$Component2) {
   _createClass(PhotographerProfile, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
+      console.log("Mounted PhotographerProfile");
       _photographerStore2.default.addChangeListener(this._onChange);
       var id = this.props.params.id;
     }
@@ -1422,23 +2014,88 @@ var PhotographerProfile = function (_React$Component2) {
     value: function render() {
       return _react2.default.createElement(
         'div',
-        { className: '' },
+        { className: 'callout profile' },
         _react2.default.createElement(
-          'h1',
-          null,
-          'Login'
-        ),
-        _react2.default.createElement(
-          'h2',
-          null,
-          this.state.message
-        ),
-        _react2.default.createElement(
-          'form',
-          { id: 'signup-form', name: 'signup-form', role: 'form', onSubmit: this.login },
-          _react2.default.createElement('input', { type: 'text', ref: 'focus', onChange: this.handleEmailChange, value: this.state.email, name: 'email', id: 'email', placeholder: 'Email Address' }),
-          _react2.default.createElement('input', { type: 'password', onChange: this.handlePwdChange, value: this.state.password, name: 'password', id: 'password', ref: 'password', placeholder: 'Password' }),
-          _react2.default.createElement('input', { type: 'submit', value: 'Log In', className: 'expanded button' })
+          'div',
+          { className: 'row section' },
+          _react2.default.createElement(
+            'div',
+            { className: 'medium-8 columns' },
+            _react2.default.createElement(
+              'div',
+              { className: 'profile-top' },
+              _react2.default.createElement(
+                'div',
+                { className: 'avatar-small' },
+                _react2.default.createElement('img', { src: 'img/users/avatar/001.jpg' })
+              ),
+              _react2.default.createElement(
+                'div',
+                null,
+                _react2.default.createElement(
+                  'h3',
+                  null,
+                  'John Smith'
+                ),
+                _react2.default.createElement(
+                  'p',
+                  null,
+                  _react2.default.createElement('i', { className: 'fa fa-map-marker' }),
+                  '  San Francisco, CA ·',
+                  _react2.default.createElement(
+                    'a',
+                    { href: '#reviews', className: 'rating' },
+                    _react2.default.createElement('i', { className: 'fa fa-star' }),
+                    _react2.default.createElement('i', { className: 'fa fa-star' }),
+                    _react2.default.createElement('i', { className: 'fa fa-star' }),
+                    _react2.default.createElement('i', { className: 'fa fa-star' }),
+                    _react2.default.createElement('i', { className: 'fa fa-star-half-o' }),
+                    '(81)'
+                  )
+                ),
+                _react2.default.createElement(
+                  'div',
+                  { className: 'social' },
+                  _react2.default.createElement(
+                    'p',
+                    null,
+                    _react2.default.createElement(
+                      'a',
+                      { href: '#' },
+                      _react2.default.createElement('i', { className: 'fa fa-link' })
+                    ),
+                    '  ',
+                    _react2.default.createElement(
+                      'a',
+                      { href: '#' },
+                      _react2.default.createElement('i', { className: 'fa fa-facebook-official' })
+                    ),
+                    '  ',
+                    _react2.default.createElement(
+                      'a',
+                      { href: '#' },
+                      _react2.default.createElement('i', { className: 'fa fa-flickr' })
+                    )
+                  )
+                )
+              )
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'medium-4 columns text-right' },
+            _react2.default.createElement(
+              'a',
+              { className: 'expanded button' },
+              'Request Quote'
+            ),
+            _react2.default.createElement(
+              'a',
+              { className: 'expanded hollow button' },
+              _react2.default.createElement('i', { className: 'fa fa-heart-o' }),
+              ' Favorite'
+            )
+          )
         )
       );
     }
@@ -1449,7 +2106,7 @@ var PhotographerProfile = function (_React$Component2) {
 
 exports.default = PhotographerProfile;
 
-},{"../../actions/photographerActions":2,"../../stores/photographerStore":24,"react":"react","react-dom":"react-dom"}],12:[function(require,module,exports){
+},{"../../actions/photographerActions":2,"../../stores/photographerStore":26,"react":"react","react-dom":"react-dom"}],13:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1480,6 +2137,10 @@ var _exploreActions = require('../../actions/exploreActions');
 
 var _exploreActions2 = _interopRequireDefault(_exploreActions);
 
+var _sorter = require('./sorter');
+
+var _sorter2 = _interopRequireDefault(_sorter);
+
 var _profileView = require('./profileView');
 
 var _profileView2 = _interopRequireDefault(_profileView);
@@ -1491,7 +2152,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-//import Sorter from './sorter'
 //import Filter from './filter'
 
 var Explore = function (_React$Component) {
@@ -1502,8 +2162,8 @@ var Explore = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Explore).call(this));
 
-    _this.state = _exploreStore2.default.setProfileState();
-    _this._onChange = _this._onChange.bind(_this);
+    _this.state = _exploreStore2.default.setFullState();
+    // this._onChange = this._onChange.bind(this);
     console.log("here in Explore");
     return _this;
   }
@@ -1511,18 +2171,19 @@ var Explore = function (_React$Component) {
   _createClass(Explore, [{
     key: 'componentDidMount',
     value: function componentDidMount() {
-      _exploreStore2.default.addChangeListener(this._onChange);
+      this.changeListener = this._onChange.bind(this);
+      _exploreStore2.default.addChangeListener(this.changeListener);
       _exploreActions2.default.getPhotographers();
     }
   }, {
     key: 'componentWillUnmount',
     value: function componentWillUnmount() {
-      _exploreStore2.default.removeChangeListener(this._onChange);
+      _exploreStore2.default.removeChangeListener(this.changeListener);
     }
   }, {
     key: '_onChange',
     value: function _onChange() {
-      this.state = _exploreStore2.default.setProfileState();
+      this.setState(_exploreStore2.default.setFullState());
     }
   }, {
     key: 'render',
@@ -1530,7 +2191,8 @@ var Explore = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         null,
-        _react2.default.createElement(_exploreHeader2.default, null),
+        _react2.default.createElement(_exploreHeader2.default, { location: this.state.location }),
+        _react2.default.createElement(_sorter2.default, null),
         _react2.default.createElement(_profileView2.default, null)
       );
     }
@@ -1541,7 +2203,7 @@ var Explore = function (_React$Component) {
 
 exports.default = (0, _authenticatedComponent2.default)(Explore);
 
-},{"../../actions/exploreActions":1,"../../stores/exploreStore":23,"../authenticatedComponent":5,"./exploreHeader":13,"./profileView":15,"react":"react","react-router":"react-router"}],13:[function(require,module,exports){
+},{"../../actions/exploreActions":1,"../../stores/exploreStore":25,"../authenticatedComponent":5,"./exploreHeader":14,"./profileView":16,"./sorter":17,"react":"react","react-router":"react-router"}],14:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1582,7 +2244,10 @@ var exploreHeader = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(exploreHeader).call(this));
 
+    _this.state = { message: '' };
+    //this.state = {location: ExploreStore.location}
     _this._onChange = _this._onChange.bind(_this);
+    _this.submitLocation = _this.submitLocation.bind(_this);
     return _this;
   }
 
@@ -1600,7 +2265,8 @@ var exploreHeader = function (_React$Component) {
   }, {
     key: '_onChange',
     value: function _onChange() {
-      _reactDom2.default.findDOMNode(this.refs.focus).focus();
+      //ReactDOM.findDOMNode(this.refs.focus).focus();
+      this.setState(_exploreStore2.default.getErrorState());
     }
 
     // This will be called when the user clicks on the login button
@@ -1609,7 +2275,19 @@ var exploreHeader = function (_React$Component) {
     key: 'submitLocation',
     value: function submitLocation(e) {
       e.preventDefault();
-      _exploreActions2.default.searchLocation(this.refs.focus.value);
+      var that = this;
+      var loc = this.refs.focus.value.split(',');
+      if (loc.length !== 2) {
+        this.setState({ message: "Location must be of format: City, State" });
+        _reactDom2.default.findDOMNode(this.refs.focus).focus();
+      } else {
+        var city = loc[0].trim();
+        var state = loc[1].trim();
+        var country = "US";
+        _exploreActions2.default.searchLocation({ city: city, state: state, country: country }, function (data) {
+          that.setState({ message: data.message });
+        });
+      }
     }
   }, {
     key: 'render',
@@ -1618,18 +2296,15 @@ var exploreHeader = function (_React$Component) {
         'div',
         { className: 'callout hero small explore' },
         _react2.default.createElement(
-          'div',
-          { className: 'input-group small-centered location' },
-          _react2.default.createElement(
-            'form',
-            { onSubmit: this.submitLocation },
-            _react2.default.createElement('input', { className: 'input-group-field', ref: 'focus', onChange: this.handleLocationChange, placeholder: 'Where is your next event?', type: 'text' }),
-            _react2.default.createElement(
-              'div',
-              { className: 'input-group-button' },
-              _react2.default.createElement('input', { type: 'submit', className: 'button', value: 'Submit', onClick: this.submitLocation })
-            )
-          )
+          'form',
+          { className: 'location', onSubmit: this.submitLocation },
+          _react2.default.createElement('input', { ref: 'focus', onChange: this.handleLocationChange, value: this.props.location, placeholder: 'Where is your next event?', type: 'text' }),
+          this.state.message ? _react2.default.createElement(
+            'p',
+            { className: 'help-text' },
+            this.state.message
+          ) : null,
+          _react2.default.createElement('input', { type: 'submit', className: 'button', value: 'Search' })
         )
       );
     }
@@ -1640,7 +2315,7 @@ var exploreHeader = function (_React$Component) {
 
 exports.default = exploreHeader;
 
-},{"../../actions/exploreActions":1,"../../stores/exploreStore":23,"react":"react","react-dom":"react-dom"}],14:[function(require,module,exports){
+},{"../../actions/exploreActions":1,"../../stores/exploreStore":25,"react":"react","react-dom":"react-dom"}],15:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -1700,19 +2375,30 @@ var profileCard = function (_React$Component) {
       console.log("in cards");
       var photographer = this.props.photographer;
       var id = photographer._id;
-      var profileLink = '/photographer/' + id;
-      var coverImageLink = '/img/users/cover/' + photographer.coverImageLink;
-      var avatarImageLink = '/img/users/cover/' + photographer.avatarImageLink;
+      var profileLink = '/photographers/' + id;
+      var coverImageLink = photographer.coverUrl;
+      var avatarImageLink = photographer.avatarUrl;
       var name = photographer.firstName + " " + photographer.lastName;
-      var location = photographer.location;
+      var location = photographer.locationString;
 
-      var ratings = photographer.ratings;
+      var numReviews = photographer.numReviews;
+
+      var totalStars = 5;
+      var rating = photographer.rating;
+
       var stars = [];
-      for (var i = 0; i < ratings; i++) {
-        stars.push(_react2.default.createElement('i', { className: 'fa fa-star' }));
+      for (var i = 1; i <= rating; i++) {
+        stars.push(_react2.default.createElement('i', { key: i, className: 'fa fa-star' }));
       }
-      if (ratings - Math.floor(ratings) > 0.5) {
-        stars.push(_react2.default.createElement('i', { className: 'fa fa-star-half-o' }));
+      if (rating - Math.floor(rating) >= 0.9) {
+        stars.push(_react2.default.createElement('i', { key: rating, className: 'fa fa-star' }));
+      } else if (rating - Math.floor(rating) >= 0.4) {
+        stars.push(_react2.default.createElement('i', { key: rating, className: 'fa fa-star-half-o' }));
+      } else {
+        stars.push(_react2.default.createElement('i', { key: rating, className: 'fa fa-star-o' }));
+      }
+      for (var i = Math.ceil(rating) + 1; i <= totalStars; i++) {
+        stars.push(_react2.default.createElement('i', { key: i, className: 'fa fa-star-o' }));
       }
 
       var specialities = photographer.specialities;
@@ -1740,7 +2426,7 @@ var profileCard = function (_React$Component) {
             ),
             _react2.default.createElement(
               'div',
-              { className: 'avatar' },
+              { className: 'avatar small' },
               _react2.default.createElement('img', { src: avatarImageLink })
             ),
             _react2.default.createElement(
@@ -1763,7 +2449,9 @@ var profileCard = function (_React$Component) {
                   { className: 'rating' },
                   stars
                 ),
-                '(81)'
+                '(',
+                numReviews,
+                ')'
               ),
               _react2.default.createElement(
                 'div',
@@ -1787,7 +2475,7 @@ var profileCard = function (_React$Component) {
 
 exports.default = profileCard;
 
-},{"../../actions/exploreActions":1,"../../stores/exploreStore":23,"react":"react","react-dom":"react-dom","react-router":"react-router"}],15:[function(require,module,exports){
+},{"../../actions/exploreActions":1,"../../stores/exploreStore":25,"react":"react","react-dom":"react-dom","react-router":"react-router"}],16:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1826,6 +2514,29 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+function shuffle(o) {
+  for (var j, x, i = o.length; i; j = Math.floor(Math.random() * i), x = o[--i], o[i] = o[j], o[j] = x) {}
+  return o;
+}
+
+function compareFavorites(a, b) {
+  return b.favorites - a.favorites;
+}
+
+function compareRating(a, b) {
+  // need better rating system
+  return b.rating - a.rating;
+}
+
+function contains(specialities, filters) {
+  for (var i = 0; i < filters.length; i++) {
+    if (specialities.indexOf(filters[i]) === -1) {
+      return false;
+    }
+    return true;
+  }
+}
+
 var ProfileView = function (_React$Component) {
   _inherits(ProfileView, _React$Component);
 
@@ -1834,7 +2545,7 @@ var ProfileView = function (_React$Component) {
 
     var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ProfileView).call(this));
 
-    _this.state = _exploreStore2.default.setProfileState();
+    _this.state = _exploreStore2.default.setFullState();
     _this._onChange = _this._onChange.bind(_this);
     return _this;
   }
@@ -1852,17 +2563,27 @@ var ProfileView = function (_React$Component) {
   }, {
     key: '_onChange',
     value: function _onChange() {
-      this.setState(_exploreStore2.default.setProfileState());
-      console.log("updating state");
+      this.setState(_exploreStore2.default.setFullState());
     }
   }, {
     key: 'render',
     value: function render() {
-      console.log("state:");
-      console.log(this.state.profiles);
+      var profiles = this.state.profiles;
+      if (this.state.sortBy === 'random') {
+        profiles = shuffle(this.state.profiles);
+      } else if (this.state.sortBy === 'favorite' && this.state.sortHasChanged) {
+        profiles.sort(compareFavorites);
+      } else if (this.state.sortBy === 'rating' && this.state.sortHasChanged) {
+        profiles.sort(compareRating);
+      }
+      console.log(profiles);
+
       var that = this;
-      var profileCards = this.state.profiles.map(function (p) {
-        return _react2.default.createElement(_profileCard2.default, _extends({ key: p._id }, that.props, { photographer: p }));
+      var profileCards = profiles.map(function (p) {
+        //if {this.state.filters in p.specialities}
+        if (that.state.filters.length === 0 || contains(p.specialities, that.state.filters)) {
+          return _react2.default.createElement(_profileCard2.default, _extends({ key: p._id }, that.props, { photographer: p }));
+        }
       });
 
       return _react2.default.createElement(
@@ -1878,7 +2599,136 @@ var ProfileView = function (_React$Component) {
 
 exports.default = ProfileView;
 
-},{"../../actions/exploreActions":1,"../../stores/exploreStore":23,"./profileCard":14,"react":"react","react-dom":"react-dom"}],16:[function(require,module,exports){
+},{"../../actions/exploreActions":1,"../../stores/exploreStore":25,"./profileCard":15,"react":"react","react-dom":"react-dom"}],17:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+var _exploreActions = require('../../actions/exploreActions');
+
+var _exploreActions2 = _interopRequireDefault(_exploreActions);
+
+var _exploreStore = require('../../stores/exploreStore');
+
+var _exploreStore2 = _interopRequireDefault(_exploreStore);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Sorter = function (_React$Component) {
+  _inherits(Sorter, _React$Component);
+
+  function Sorter() {
+    _classCallCheck(this, Sorter);
+
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Sorter).call(this));
+
+    _this.state = _exploreStore2.default.getSortState();
+    // this._onChange = this._onChange.bind(this);
+    _this.sortBy = _this.sortBy.bind(_this);
+    return _this;
+  }
+
+  _createClass(Sorter, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.changeListener = this._onChange.bind(this);
+      _exploreStore2.default.addChangeListener(this.changeListener);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _exploreStore2.default.removeChangeListener(this.changeListener);
+    }
+  }, {
+    key: '_onChange',
+    value: function _onChange() {
+      this.setState(_exploreStore2.default.getSortState());
+    }
+
+    // This will be called when the user clicks on the login button
+
+  }, {
+    key: 'sortBy',
+    value: function sortBy(e) {
+      _exploreActions2.default.setSort(e.target.getAttribute('data-value'));
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'div',
+        { className: 'row sorting' },
+        _react2.default.createElement(
+          'div',
+          { className: 'medium-6 columns' },
+          _react2.default.createElement(
+            'p',
+            { className: 'show-for-medium' },
+            'Showing ',
+            _react2.default.createElement(
+              'em',
+              null,
+              'all'
+            ),
+            ' photographers'
+          )
+        ),
+        _react2.default.createElement(
+          'div',
+          { className: 'medium-6 columns' },
+          _react2.default.createElement(
+            'p',
+            { className: 'text-right' },
+            'Sort by: ',
+            _react2.default.createElement(
+              'a',
+              { 'data-value': 'rate', onClick: this.sortBy },
+              'Top Rated'
+            ),
+            ' | ',
+            _react2.default.createElement(
+              'a',
+              { 'data-value': 'favorite', onClick: this.sortBy },
+              'Most Favorited'
+            ),
+            ' | ',
+            _react2.default.createElement(
+              'a',
+              { 'data-value': 'random', onClick: this.sortBy },
+              'Random'
+            )
+          )
+        )
+      );
+    }
+  }]);
+
+  return Sorter;
+}(_react2.default.Component);
+
+exports.default = Sorter;
+
+// ReactMixin(Login.prototype, React.addons.LinkedStateMixin);
+
+},{"../../actions/exploreActions":1,"../../stores/exploreStore":25,"react":"react","react-dom":"react-dom"}],18:[function(require,module,exports){
 'use strict';
 
 var keyMirror = require('key-mirror');
@@ -1890,7 +2740,7 @@ module.exports = keyMirror({
   UPDATE_PHOTOS: 'UPDATE_PHOTOS'
 });
 
-},{"key-mirror":32}],17:[function(require,module,exports){
+},{"key-mirror":35}],19:[function(require,module,exports){
 'use strict';
 
 var keyMirror = require('key-mirror');
@@ -1899,7 +2749,7 @@ module.exports = keyMirror({
   GET_PHOTOGRAPHER: 'GET_PHOTOGRAPHER'
 });
 
-},{"key-mirror":32}],18:[function(require,module,exports){
+},{"key-mirror":35}],20:[function(require,module,exports){
 'use strict';
 
 var keyMirror = require('key-mirror');
@@ -1910,7 +2760,7 @@ module.exports = keyMirror({
   LOGIN_PHOTOGRAPHER: 'LOGIN_PHOTOGRAPHER'
 });
 
-},{"key-mirror":32}],19:[function(require,module,exports){
+},{"key-mirror":35}],21:[function(require,module,exports){
 'use strict';
 
 var Dispatcher = require('flux').Dispatcher;
@@ -1928,7 +2778,7 @@ var AppDispatcher = assign(new Dispatcher(), {
 
 module.exports = AppDispatcher;
 
-},{"flux":29,"react/lib/Object.assign":35}],20:[function(require,module,exports){
+},{"flux":32,"react/lib/Object.assign":38}],22:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -1953,7 +2803,7 @@ _reactDom2.default.render(_react2.default.createElement(
   _routes2.default
 ), document.getElementById('app'));
 
-},{"./routes":21,"react":"react","react-dom":"react-dom","react-router":"react-router"}],21:[function(require,module,exports){
+},{"./routes":23,"react":"react","react-dom":"react-dom","react-router":"react-router"}],23:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -1990,6 +2840,10 @@ var _profile = require('./components/photographer/profile');
 
 var _profile2 = _interopRequireDefault(_profile);
 
+var _accountInfo = require('./components/photographer/account-info');
+
+var _accountInfo2 = _interopRequireDefault(_accountInfo);
+
 var _apply = require('./components/photographer/apply');
 
 var _apply2 = _interopRequireDefault(_apply);
@@ -2000,7 +2854,9 @@ var _requireAuth2 = _interopRequireDefault(_requireAuth);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// Explore Page
+// Home Page
+
+// NavBar
 exports.default = _react2.default.createElement(
   _reactRouter.Route,
   { component: _app2.default },
@@ -2008,17 +2864,16 @@ exports.default = _react2.default.createElement(
   _react2.default.createElement(_reactRouter.Route, { path: '/login', component: _login2.default }),
   _react2.default.createElement(_reactRouter.Route, { path: '/signup', component: _signup2.default }),
   _react2.default.createElement(_reactRouter.Route, { path: '/home', component: _explore2.default, onEnter: _requireAuth2.default }),
-  _react2.default.createElement(_reactRouter.Route, { path: '/photographers/:id', component: _profile2.default, onEnter: _requireAuth2.default }),
-  _react2.default.createElement(_reactRouter.Route, { path: '/apply', component: _apply2.default })
+  _react2.default.createElement(_reactRouter.Route, { path: '/photographers/:id/public', component: _profile2.default, onEnter: _requireAuth2.default }),
+  _react2.default.createElement(_reactRouter.Route, { path: '/apply', component: _apply2.default }),
+  _react2.default.createElement(_reactRouter.Route, { path: '/photographers/:id/account', component: _accountInfo2.default })
 );
 
 //Authentication for Routing
 
-// Home Page
+// Explore Page
 
-// NavBar
-
-},{"./components/app":4,"./components/home":6,"./components/navbar/login":7,"./components/navbar/signup":9,"./components/photographer/apply":10,"./components/photographer/profile":11,"./components/user/explore":12,"./utils/requireAuth":26,"react":"react","react-router":"react-router"}],22:[function(require,module,exports){
+},{"./components/app":4,"./components/home":6,"./components/navbar/login":7,"./components/navbar/signup":9,"./components/photographer/account-info":10,"./components/photographer/apply":11,"./components/photographer/profile":12,"./components/user/explore":13,"./utils/requireAuth":28,"react":"react","react-router":"react-router"}],24:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -2082,7 +2937,7 @@ var BaseStore = function (_EventEmitter) {
 
 exports.default = BaseStore;
 
-},{"../dispatchers/appDispatcher":19,"events":27}],23:[function(require,module,exports){
+},{"../dispatchers/appDispatcher":21,"events":30}],25:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -2120,6 +2975,13 @@ var ExploreStore = function (_BaseStore) {
     });
     _this._location = null;
     _this._profiles = [];
+    _this._message = '';
+
+    _this._sortBy = null;
+    _this._prevSortBy = null; // some slight optimization to not rerun sorts
+    _this._sortHasChanged = false;
+
+    _this._filters = [];
     return _this;
   }
 
@@ -2128,6 +2990,12 @@ var ExploreStore = function (_BaseStore) {
     value: function _registerToActions(payload) {
       var action = payload.action;
       switch (action.actionType) {
+        case _exploreConstants.UPDATE_LOCATION:
+          console.log("UPDATE_LOCATION REACHED");
+          this._profiles = action.profiles;
+          console.log(this._profiles);
+          this.emitChange();
+          break;
         case _exploreConstants.UPDATE_PHOTOS:
           console.log("UPDATE_PHOTOS REACHED");
           console.log("updating photos");
@@ -2136,7 +3004,7 @@ var ExploreStore = function (_BaseStore) {
           this.emitChange();
           break;
         case _exploreConstants.UPDATE_FILTER:
-          console.log("setting store");
+          console.log("UPDATE_FILTER REACHED");
           this._lastName = action.data.lastName;
           this._firstName = action.data.firstName;
           this._email = action.data.email;
@@ -2147,11 +3015,12 @@ var ExploreStore = function (_BaseStore) {
 
           break;
         case _exploreConstants.UPDATE_SORT:
-          console.log("clearing store");
-          this._email = null;
-          this._firstName = null;
-          this._lastName = null;
-          this._isLoggedIn = false;
+          console.log("UPDATE_SORT REACHED");
+          this._sortBy = action.sortBy;
+          this._sortHasChanged = this._prevSortBy !== this._sortBy;
+          if (this._sortHasChanged) {
+            this._prevSortBy = this._sortBy;
+          }
           this.emitChange();
           break;
         default:
@@ -2159,17 +3028,29 @@ var ExploreStore = function (_BaseStore) {
       };
     }
   }, {
-    key: 'setProfileState',
-    value: function setProfileState() {
-      console.log('set profile states');
+    key: 'setFullState',
+    value: function setFullState() {
       return {
-        profiles: this._profiles
+        profiles: this._profiles,
+        location: this._location,
+        sortBy: this._sortBy,
+        sortHasChanged: this._sortHasChanged,
+        filters: this._filters
       };
     }
   }, {
-    key: 'getLocationState',
-    value: function getLocationState() {
-      return { location: this._location };
+    key: 'getSortState',
+    value: function getSortState() {
+      return {
+        sortBy: this._sortBy
+      };
+    }
+  }, {
+    key: 'getErrorState',
+    value: function getErrorState() {
+      return {
+        message: this._message
+      };
     }
   }, {
     key: 'isLoggedIn',
@@ -2191,6 +3072,11 @@ var ExploreStore = function (_BaseStore) {
     get: function get() {
       return this._email;
     }
+  }, {
+    key: 'location',
+    get: function get() {
+      return this._location;
+    }
   }]);
 
   return ExploreStore;
@@ -2198,7 +3084,7 @@ var ExploreStore = function (_BaseStore) {
 
 exports.default = new ExploreStore();
 
-},{"../constants/exploreConstants":16,"./baseStore":22,"react-router":"react-router"}],24:[function(require,module,exports){
+},{"../constants/exploreConstants":18,"./baseStore":24,"react-router":"react-router"}],26:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -2296,7 +3182,7 @@ var SessionStore = function (_BaseStore) {
 
 exports.default = new SessionStore();
 
-},{"../constants/photographerConstants":17,"./baseStore":22,"react-router":"react-router"}],25:[function(require,module,exports){
+},{"../constants/photographerConstants":19,"./baseStore":24,"react-router":"react-router"}],27:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -2401,7 +3287,7 @@ var SessionStore = function (_BaseStore) {
 
 exports.default = new SessionStore();
 
-},{"../constants/sessionConstants":18,"./baseStore":22,"react-router":"react-router"}],26:[function(require,module,exports){
+},{"../constants/sessionConstants":20,"./baseStore":24,"react-router":"react-router"}],28:[function(require,module,exports){
 'use strict';
 
 var _sessionStore = require('../stores/sessionStore');
@@ -2418,7 +3304,7 @@ function requireAuth(nextState, replace) {
   console.log("evoked requireAuth");
   console.log("in requireAuth, loggedin: ", _sessionStore2.default.isLoggedIn());
   if (is_server()) {
-    console.log("Have to authenticate on the server side...");
+    console.log("Have to authenticate on the server side... ");
   } else if (!_sessionStore2.default.isLoggedIn()) {
     replace({
       pathname: '/login',
@@ -2429,7 +3315,68 @@ function requireAuth(nextState, replace) {
 
 module.exports = requireAuth;
 
-},{"../stores/sessionStore":25}],27:[function(require,module,exports){
+},{"../stores/sessionStore":27}],29:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _reactDom = require('react-dom');
+
+var _reactDom2 = _interopRequireDefault(_reactDom);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var SpecTools = function () {
+
+  var specialitiesDict = {
+    "portrait": "Portrait",
+    "headshot": "Headshot",
+    "events": "Events",
+    "engagement": "Engagement",
+    "wedding": "Wedding",
+    "lifestyle": "Lifestyle/Candid",
+    "club": "Club/Nightlife",
+    "concert": "Concert/Performance",
+    "commercial": "Commercial",
+    "arch": "Real Estate",
+    "sports": "Sports",
+    "nature": "Nature"
+  };
+
+  var data = [{ id: "portrait", selected: false }, { id: "headshot", selected: false }, { id: "events", selected: false }, { id: "engagement", selected: false }, { id: "wedding", selected: false }, { id: "lifestyle", selected: false }, { id: "club", selected: false }, { id: "concert", selected: false }, { id: "commercial", selected: false }, { id: "arch", selected: false }, { id: "sports", selected: false }, { id: "nature", selected: false }];
+
+  return {
+    getCheckBoxes: function getCheckBoxes(updatedData, cb) {
+      var checks = updatedData.map(function (d) {
+        var WORDS = specialitiesDict[d.id];
+        return _react2.default.createElement(
+          'div',
+          null,
+          _react2.default.createElement('input', { key: d.id + 'input', id: d.id, checked: d.selected, type: 'checkbox', onChange: cb(d.id) }),
+          _react2.default.createElement(
+            'label',
+            { key: d.id + 'label', htmlFor: d.id },
+            WORDS
+          ),
+          _react2.default.createElement('br', null)
+        );
+      });
+      return checks;
+    },
+    idToString: specialitiesDict,
+    initCheckedState: data
+  };
+}();
+
+exports.default = SpecTools;
+
+},{"react":"react","react-dom":"react-dom"}],30:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -2729,7 +3676,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],28:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 // shim for using process in browser
 
 var process = module.exports = {};
@@ -2822,7 +3769,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],29:[function(require,module,exports){
+},{}],32:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -2834,7 +3781,7 @@ process.umask = function() { return 0; };
 
 module.exports.Dispatcher = require('./lib/Dispatcher');
 
-},{"./lib/Dispatcher":30}],30:[function(require,module,exports){
+},{"./lib/Dispatcher":33}],33:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -3068,7 +4015,7 @@ var Dispatcher = (function () {
 
 module.exports = Dispatcher;
 }).call(this,require('_process'))
-},{"_process":28,"fbjs/lib/invariant":31}],31:[function(require,module,exports){
+},{"_process":31,"fbjs/lib/invariant":34}],34:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -3120,7 +4067,7 @@ var invariant = function (condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":28}],32:[function(require,module,exports){
+},{"_process":31}],35:[function(require,module,exports){
 
 'use strict';
 
@@ -3145,7 +4092,7 @@ module.exports =
         return mirrored;
     };
 
-},{}],33:[function(require,module,exports){
+},{}],36:[function(require,module,exports){
 'use strict';
 
 exports.__esModule = true;
@@ -3426,9 +4373,9 @@ Dropzone.propTypes = {
 
 exports['default'] = Dropzone;
 module.exports = exports['default'];
-},{"attr-accept":34,"react":"react"}],34:[function(require,module,exports){
+},{"attr-accept":37,"react":"react"}],37:[function(require,module,exports){
 module.exports=function(t){function n(e){if(r[e])return r[e].exports;var o=r[e]={exports:{},id:e,loaded:!1};return t[e].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var r={};return n.m=t,n.c=r,n.p="",n(0)}([function(t,n,r){"use strict";n.__esModule=!0,r(8),r(9),n["default"]=function(t,n){if(t&&n){var r=function(){var r=n.split(","),e=t.name||"",o=t.type||"",i=o.replace(/\/.*$/,"");return{v:r.some(function(t){var n=t.trim();return"."===n.charAt(0)?e.toLowerCase().endsWith(n.toLowerCase()):/\/\*$/.test(n)?i===n.replace(/\/.*$/,""):o===n})}}();if("object"==typeof r)return r.v}return!0},t.exports=n["default"]},function(t,n){var r=t.exports={version:"1.2.2"};"number"==typeof __e&&(__e=r)},function(t,n){var r=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=r)},function(t,n,r){var e=r(2),o=r(1),i=r(4),u=r(19),c="prototype",f=function(t,n){return function(){return t.apply(n,arguments)}},s=function(t,n,r){var a,p,l,d,y=t&s.G,h=t&s.P,v=y?e:t&s.S?e[n]||(e[n]={}):(e[n]||{})[c],x=y?o:o[n]||(o[n]={});y&&(r=n);for(a in r)p=!(t&s.F)&&v&&a in v,l=(p?v:r)[a],d=t&s.B&&p?f(l,e):h&&"function"==typeof l?f(Function.call,l):l,v&&!p&&u(v,a,l),x[a]!=l&&i(x,a,d),h&&((x[c]||(x[c]={}))[a]=l)};e.core=o,s.F=1,s.G=2,s.S=4,s.P=8,s.B=16,s.W=32,t.exports=s},function(t,n,r){var e=r(5),o=r(18);t.exports=r(22)?function(t,n,r){return e.setDesc(t,n,o(1,r))}:function(t,n,r){return t[n]=r,t}},function(t,n){var r=Object;t.exports={create:r.create,getProto:r.getPrototypeOf,isEnum:{}.propertyIsEnumerable,getDesc:r.getOwnPropertyDescriptor,setDesc:r.defineProperty,setDescs:r.defineProperties,getKeys:r.keys,getNames:r.getOwnPropertyNames,getSymbols:r.getOwnPropertySymbols,each:[].forEach}},function(t,n){var r=0,e=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++r+e).toString(36))}},function(t,n,r){var e=r(20)("wks"),o=r(2).Symbol;t.exports=function(t){return e[t]||(e[t]=o&&o[t]||(o||r(6))("Symbol."+t))}},function(t,n,r){r(26),t.exports=r(1).Array.some},function(t,n,r){r(25),t.exports=r(1).String.endsWith},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n){var r={}.toString;t.exports=function(t){return r.call(t).slice(8,-1)}},function(t,n,r){var e=r(10);t.exports=function(t,n,r){if(e(t),void 0===n)return t;switch(r){case 1:return function(r){return t.call(n,r)};case 2:return function(r,e){return t.call(n,r,e)};case 3:return function(r,e,o){return t.call(n,r,e,o)}}return function(){return t.apply(n,arguments)}}},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n,r){t.exports=function(t){var n=/./;try{"/./"[t](n)}catch(e){try{return n[r(7)("match")]=!1,!"/./"[t](n)}catch(o){}}return!0}},function(t,n){t.exports=function(t){try{return!!t()}catch(n){return!0}}},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n,r){var e=r(16),o=r(11),i=r(7)("match");t.exports=function(t){var n;return e(t)&&(void 0!==(n=t[i])?!!n:"RegExp"==o(t))}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n,r){var e=r(2),o=r(4),i=r(6)("src"),u="toString",c=Function[u],f=(""+c).split(u);r(1).inspectSource=function(t){return c.call(t)},(t.exports=function(t,n,r,u){"function"==typeof r&&(o(r,i,t[n]?""+t[n]:f.join(String(n))),"name"in r||(r.name=n)),t===e?t[n]=r:(u||delete t[n],o(t,n,r))})(Function.prototype,u,function(){return"function"==typeof this&&this[i]||c.call(this)})},function(t,n,r){var e=r(2),o="__core-js_shared__",i=e[o]||(e[o]={});t.exports=function(t){return i[t]||(i[t]={})}},function(t,n,r){var e=r(17),o=r(13);t.exports=function(t,n,r){if(e(n))throw TypeError("String#"+r+" doesn't accept regex!");return String(o(t))}},function(t,n,r){t.exports=!r(15)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n){var r=Math.ceil,e=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?e:r)(t)}},function(t,n,r){var e=r(23),o=Math.min;t.exports=function(t){return t>0?o(e(t),9007199254740991):0}},function(t,n,r){"use strict";var e=r(3),o=r(24),i=r(21),u="endsWith",c=""[u];e(e.P+e.F*r(14)(u),"String",{endsWith:function(t){var n=i(this,t,u),r=arguments,e=r.length>1?r[1]:void 0,f=o(n.length),s=void 0===e?f:Math.min(o(e),f),a=String(t);return c?c.call(n,a,s):n.slice(s-a.length,s)===a}})},function(t,n,r){var e=r(5),o=r(3),i=r(1).Array||Array,u={},c=function(t,n){e.each.call(t.split(","),function(t){void 0==n&&t in i?u[t]=i[t]:t in[]&&(u[t]=r(12)(Function.call,[][t],n))})};c("pop,reverse,shift,keys,values,entries",1),c("indexOf,every,some,forEach,map,filter,find,findIndex,includes",3),c("join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill"),o(o.S,"Array",u)}]);
-},{}],35:[function(require,module,exports){
+},{}],38:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -3476,4 +4423,4 @@ function assign(target, sources) {
 }
 
 module.exports = assign;
-},{}]},{},[20]);
+},{}]},{},[22]);

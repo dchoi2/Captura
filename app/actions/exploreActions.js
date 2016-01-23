@@ -14,23 +14,27 @@ class ExploreActions{
       })
   }
 
-  static searchLocation(location) {
-    console.log("Logging in...")
-    console.log(UNAUTHORIZED)
-    return $.ajax({ type: 'POST', url: '/api/sessions', data: loginData })
+  static searchLocation(locData, cb) {
+    return $.ajax({ type: 'POST', url: '/api/photographers/location', data: locData })
     .done(function(data) {
       if (!data.success) {
         console.log("failure...");
-        console.log(UNAUTHORIZED)
-        AppDispatcher.handleViewAction({
-          actionType: UNAUTHORIZED,
-          message: data.message
-        })
+        cb(data)
       }
       else {
-        console.log("validCredentials!")
-        SessionActions.getUserInfo();
+        console.log("location submitted")
+        AppDispatcher.handleViewAction({
+          actionType: UPDATE_LOCATION,
+          profiles: data.profiles // should contain location
+        })
       }
+    })
+  }
+
+  static setSort(sortBy) {
+    AppDispatcher.handleViewAction({
+      actionType: UPDATE_SORT,
+      sortBy: sortBy
     })
   }
 

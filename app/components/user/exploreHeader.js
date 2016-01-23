@@ -7,7 +7,10 @@ import ExploreStore from '../../stores/exploreStore';
 class exploreHeader extends React.Component {
   constructor() {
     super()
+    this.state = {message: ''}
+    //this.state = {location: ExploreStore.location}
     this._onChange = this._onChange.bind(this);
+    this.submitLocation = this.submitLocation.bind(this)
   }
 
   componentDidMount() {
@@ -20,26 +23,39 @@ class exploreHeader extends React.Component {
   }
 
   _onChange() {
-    ReactDOM.findDOMNode(this.refs.focus).focus();
+    //ReactDOM.findDOMNode(this.refs.focus).focus();
+    this.setState(ExploreStore.getErrorState())
   }
 
   // This will be called when the user clicks on the login button
   submitLocation(e) {
     e.preventDefault();
-    ExploreActions.searchLocation(this.refs.focus.value)
+    var that = this;
+    var loc = this.refs.focus.value.split(',');
+    if (loc.length !== 2) {
+      this.setState({message: "Location must be of format: City, State"})
+      ReactDOM.findDOMNode(this.refs.focus).focus()
+    }
+    else {
+      var city = loc[0].trim()
+      var state = loc[1].trim()
+      var country = "US"
+      ExploreActions.searchLocation({city: city, state: state, country: country}, function(data) {
+        that.setState({message: data.message})
+      })
+    }
   }
 
   render() {
     return (
       <div className="callout hero small explore">
-        <div className="input-group small-centered location">
-          <form onSubmit={this.submitLocation}>
-          <input className="input-group-field" ref="focus" onChange={this.handleLocationChange} placeholder="Where is your next event?" type="text"></input>
-          <div className="input-group-button">
-            <input type="submit" className="button" value="Submit" onClick={this.submitLocation}></input>
-          </div>
-          </form>
-        </div>
+        <form className="location" onSubmit={this.submitLocation}>
+          <input ref="focus" onChange={this.handleLocationChange} value={this.props.location} placeholder="Where is your next event?" type="text"/>
+            {this.state.message ?
+              <p className="help-text">{this.state.message}</p> : null
+            }
+          <input type="submit" className="button" value="Search"/>
+        </form>
       </div>
     );
   }

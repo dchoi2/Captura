@@ -43,7 +43,8 @@
     "key-mirror": "~1.0.1",
     "react-dropzone": "~3.3.2",
     "async": "~1.5.2",
-    "jquery": "~2.2.0"
+    "jquery": "~2.2.0",
+    "geocoder": "~0.2.2"
   },
   "devDependencies": {
     "babel-loader": "~6.2.1",

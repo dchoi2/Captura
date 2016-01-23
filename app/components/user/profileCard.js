@@ -23,19 +23,32 @@ class profileCard extends React.Component {
     console.log("in cards")
     var photographer = this.props.photographer;
     var id = photographer._id;
-    var profileLink = '/photographer/'+id;
-    var coverImageLink = '/img/users/cover/'+photographer.coverImageLink;
-    var avatarImageLink = '/img/users/cover/' + photographer.avatarImageLink;
+    var profileLink = '/photographers/'+id;
+    var coverImageLink = photographer.coverUrl;
+    var avatarImageLink = photographer.avatarUrl;
     var name = photographer.firstName + " " + photographer.lastName;
-    var location = photographer.location;
+    var location = photographer.locationString;
 
-    var ratings = photographer.ratings;
+    var numReviews = photographer.numReviews
+
+    var totalStars = 5
+    var rating = photographer.rating;
+
     var stars = []
-    for (var i = 0; i < ratings; i++) {
-      stars.push(<i className="fa fa-star"></i>)
+    for (var i = 1; i <= rating; i++) {
+      stars.push(<i key = {i} className="fa fa-star"></i>)
     }
-    if (ratings - Math.floor(ratings) > 0.5) {
-      stars.push(<i className="fa fa-star-half-o"></i>)
+    if (rating - Math.floor(rating) >= 0.9) {
+      stars.push(<i key={rating} className="fa fa-star"></i>)
+    }
+    else if (rating - Math.floor(rating) >= 0.4) {
+      stars.push(<i key={rating} className="fa fa-star-half-o"></i>)
+    }
+    else {
+      stars.push(<i key={rating} className="fa fa-star-o"></i>)
+    }
+    for (var i = Math.ceil(rating)+1; i <= totalStars; i++) {
+      stars.push(<i key={i} className="fa fa-star-o"></i>)
     }
 
     var specialities = photographer.specialities;
@@ -48,12 +61,12 @@ class profileCard extends React.Component {
         <div className="profile-card">
           <Link to={profileLink}>
             <div className="container"><img src={coverImageLink}/></div>
-            <div className="avatar"><img src={avatarImageLink}/></div>
+            <div className="avatar small"><img src={avatarImageLink}/></div>
             <div className="profile-info">
               <h5>{name}</h5>
               <p><i className="fa fa-map-marker"></i>&nbsp; {location}&nbsp;&middot;
               <span className="rating">{stars}</span>
-              (81)</p>
+              ({numReviews})</p>
               <div className="specialty">
                 {labels}<span className="label">...</span>
               </div>

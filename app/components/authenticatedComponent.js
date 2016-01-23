@@ -8,6 +8,7 @@ export default (ComposedComponent) => {
     constructor() {
       super()
       this.state = this._getLoginState();
+      //this._checkLoggedIn();
     }
 
     _getLoginState() {
@@ -18,11 +19,11 @@ export default (ComposedComponent) => {
     }
 
     componentDidMount() {
-      this.changeListener = this._onChange.bind(this);
+      this.changeListener = this._checkLoggedIn.bind(this);
       SessionStore.addChangeListener(this.changeListener);
     }
 
-    _onChange() {
+    _checkLoggedIn() {
       var userLoggedInState = this._getLoginState();
       this.setState(userLoggedInState);
 

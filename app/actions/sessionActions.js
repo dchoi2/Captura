@@ -78,7 +78,9 @@ class SessionActions{
           if (cb) cb(data)
         }
         else {
-          SessionActions.photographerLogin(applyData);
+          console.log("success! ", data)
+
+          //SessionActions.photographerLogin(applyData);
         }
       })
       .fail(function(data) {
