@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SessionActions from '../../actions/sessionActions';
+import UserActions from '../../actions/userActions'
 import {browserHistory, Link} from 'react-router';
 
 class Signup extends React.Component {
@@ -48,7 +49,7 @@ class Signup extends React.Component {
       }
       var that = this;
 
-      SessionActions.signup(signupData, function(data) {
+      UserActions.signup(signupData, function(data) {
         that.setState({message: data.message})
         ReactDOM.findDOMNode(that.refs.firstName).focus();
       })
@@ -66,7 +67,7 @@ class Signup extends React.Component {
           <form role="form" onSubmit={this.signup}>
             <input type="text" ref="firstName"  className="form-control" name="firstname" id="firstname" placeholder="First name" />
             <input type="text" ref="lastName"  className="form-control" name="lastname" id="lastname" placeholder="Last name" />
-            <input type="text" ref="email"  className="form-control" name="email" id="email"  placeholder="Email" />
+            <input type="email" ref="email"  className="form-control" name="email" id="email"  placeholder="Email" />
             <input type="password" ref="password" className="form-control" id="password" placeholder="Password" />
             <input type="password" ref="confirm"  className="form-control" id="password" placeholder="Confirm password" />
 

@@ -1,7 +1,7 @@
 'use strict';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SessionActions from '../../actions/sessionActions';
+import PhotographerActions from '../../actions/photographerActions';
 import {browserHistory} from 'react-router';
 import Dropzone from 'react-dropzone';
 import SpecTools from '../../utils/specialitiesTools';
@@ -69,7 +69,7 @@ class Apply extends React.Component {
         portfolio: this.refs.portfolio.value,
       }
       var that = this;
-      SessionActions.applyFor(applyData, function(data) {
+      PhotographerActions.applyFor(applyData, function(data) {
         that.setState({message: data.message})
       })
     }
@@ -95,7 +95,7 @@ class Apply extends React.Component {
     var checkGroups = []
     for (var i = 0; i < checks.length; i+=3) {
       checkGroups.push(
-          <div className="large-3 columns">
+          <div key={i} className="large-3 columns">
             {checks[i]}
             {checks[i+1]}
             {checks[i+2]}

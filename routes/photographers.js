@@ -11,7 +11,7 @@ var MAX_DIST = 0//kilometers
   GET ALL ACCEPTED PHOTOGRAPHERS
   TODO: restrict the information that is returned
 **/
-router.get('/', function(request, response) {
+router.get('/', utils.loggedIn, function(request, response) {
   Photographer.find({status: true},
     '-password -status ')
     .populate('location review')
@@ -26,16 +26,30 @@ router.get('/', function(request, response) {
 /**
   GET FULL INFORMATION ON ONE PHOTOGRAPHER - for public profile page
 **/
-router.get('/:uid', utils.loggedIn, function(request, response) {
-  Photographer.find({_id: request.params.uid, status:true},
-    '-password -status -avatarBase -coverBase')
+router.get('/public/:uid', utils.loggedIn, function(request, response) {
+  Photographer.findOne({_id: request.params.uid, status:true},
+    '-password -status')
     .populate('location review')
-    .exec(function(err, docs) {
+    .exec(function(err, doc) {
       utils.handleError(err);
-      response.json({success: true, data: docs})
+      response.json({success: true, profile: doc})
     })
 })
-
+/**
+  GET FULL INFORMATION ON ONE PHOTOGRAPHER - for account page
+**/
+router.get('/account/:uid', utils.loggedIn, function(request, response) {
+  if (request.params.id !== request.user.id) {
+    response.status(401).send("Not Authorized")
+  }
+  Photographer.findOne({_id: request.params.uid, status:true},
+    '-password -status')
+    .populate('location review')
+    .exec(function(err, doc) {
+      utils.handleError(err);
+      response.json({success: true, profile: doc})
+    })
+})
 /** GET ACCOUNT RELEVANT INFORMATION...**/
 // router.get('/account', function(request, response) {
 
@@ -69,6 +83,7 @@ router.post('/', function(request, response) {
             firstName: request.body.firstName,
             lastName: request.body.lastName,
             businessName: request.body.businessName,
+            useBusiness: request.body.useBusiness,
             password: request.body.password,
             email: request.body.email,
             specialities: request.body.specialities,
@@ -145,6 +160,8 @@ router.post('/', function(request, response) {
     }
   })
 });
+
+
 
 /**
   GETS ALL PHOTOGRAPHERS *NEAR* THE QUERIED LOCATION

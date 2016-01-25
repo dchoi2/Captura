@@ -8,8 +8,24 @@ var userSchema = new mongoose.Schema( {
   favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Photographer'}],
   bookings: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Event'}],
   reviews: [{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}],
-  avatar: {type: String, default: "default"}
+  avatarBase: {type: String, default: "default.png"}
+},
+{
+  toObject: { virtuals: true },
+  toJSON: { virtuals: true }
 });
+
+userSchema.virtual('avatarUrl').get(function() {
+  return 'img/users/avatar/' + this.avatarBase;
+})
+
+userSchema.virtual('fullName').get(function() {
+  return this.firstName + " " + this.lastName
+})
+
+userSchema.virtual('firstLastInitial').get(function() {
+  return this.firstName + " " + this.lastName.charAt(0)
+})
 
 var user = mongoose.model('User', userSchema);
 

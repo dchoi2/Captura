@@ -28,6 +28,7 @@ class Navbar extends React.Component {
     SessionActions.logout();
   }
   render() {
+    console.log("in Navbar: ", this.state.user)
     return (
       <div className="top-bar" id="main-menu">
         <div className="top-bar-left">
@@ -45,8 +46,9 @@ class Navbar extends React.Component {
       return (
           <div className="top-bar-right">
             <ul className="menu align-right">
-              <li><Link to='/login' data-open="login-modal" > <i className="fi-lock"></i> Log In</Link></li>
+              <li><Link to='/login' data-open="login-modal" > <i className="fa fa-lock"></i> Log In</Link></li>
               <li><Link to='/signup' data-open="signup-modal" >Sign Up</Link></li>
+              <li><Link to="/photographers">Become a Photographer</Link></li>
             </ul>
           </div>
       )
@@ -55,7 +57,8 @@ class Navbar extends React.Component {
       return(
           <div className="top-bar-right">
             <ul className="menu align-right">
-            <li><a href="" onClick={this.logout}>Logout</a></li>
+            <li><a onClick={this.logout}>Logout</a></li>
+            <li><Link to={'/users/'+this.state.user._id}> <i className="fa fa-lock"></i>{this.state.user.firstName}</Link></li>
             </ul>
           </div>
       )

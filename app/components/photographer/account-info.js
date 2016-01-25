@@ -215,6 +215,8 @@ class AccountInfo extends React.Component {
   }
 }
 
+export default AccountInfo
+
     //     <div>
     //   <div className="callout hero small photographer">
     //     <h3>Capture for Captura</h3>

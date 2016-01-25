@@ -10,11 +10,14 @@ import Signup from './components/navbar/signup';
 import Home from './components/home';
 
 // Explore Page
-import Explore from './components/user/explore';
+import Explore from './components/explore/explore';
 
-import PhotographerProfile from './components/photographer/profile'
+import PhotographerHome from './components/photographerHome'
+
+import PhotographerProfile from './components/profile/profile'
 
 import PhotographerAccount from './components/photographer/account-info'
+import UserAccount from './components/user/account'
 
 import Apply from './components/photographer/apply'
 
@@ -27,8 +30,10 @@ export default (
     <Route path='/login' component={Login}/>
     <Route path='/signup' component={Signup}/>
     <Route path='/home' component={Explore} onEnter={requireAuth}/>
-    <Route path='/photographers/:id/public' component={PhotographerProfile} onEnter={requireAuth}/>
+    <Route path='/photographers' component={PhotographerHome} />
+    <Route path='/photographers/profile/:id' component={PhotographerProfile} />
     <Route path='/apply' component={Apply}/>
-    <Route path='/photographers/:id/account' component={PhotographerAccount}/>
+    <Route path='/photographers/account/:id' component={PhotographerAccount}/>
+    <Route path='/users/:id' component={UserAccount}/>
   </Route>
 );

@@ -41,7 +41,8 @@ var Router = function(passport) {
         user: {
           firstName: request.user.firstName,
           lastName:  request.user.lastName,
-          email:     request.user.email
+          email:     request.user.email,
+          _id:       request.user._id
         }
       })
     }

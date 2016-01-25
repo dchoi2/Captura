@@ -11,6 +11,27 @@ router.get('/', utils.loggedIn, function(request, response) {
   });
 });
 
+router.get('/account/:id', function(request, response) {
+  // if (request.params.id !== request.user.id) {
+  //   response.status(401).send("Not Authorized")
+  // }
+  User.findOne({_id:request.params.id})
+  .populate('photographer event review favorites')
+  .exec(function(err, user) {
+    utils.handleError(err);
+    User.populate(user, {
+      path: 'favorites.location',
+      model: 'Location'
+    }, function(err, user) {
+      if (err) {
+        console.log(err)
+        response.json({success:false, message: "error in mongodb"})
+      }
+      response.json({success: true, user: user});
+    })
+  })
+})
+
 router.post('/', function(request, response) {
   User.findOne({email: request.body.email}, function(err, doc) {
     if (err) {
@@ -47,6 +68,50 @@ router.post('/', function(request, response) {
     }
   });
 });
+
+router.put('/account/:id', function(request, response) {
+  User.findOne({_id: request.params.id}, function(err, user) {
+    if (err) {
+      response.send(err)
+    }
+    else if (!user) {
+      response.send({success:false, message: "User with that id doesn't exist..."})
+    }
+    else if (user.email !== request.body.email) {
+      console.log(user)
+      console.log(request.body.email)
+      response.send({success:false, message: "Email doesn't match database... something fishy"})
+    }
+    else if (user.password !== request.body.oldPassword) {
+      response.send({success:false, message: "You entered the incorrect password for your account."})
+    }
+    else if (!request.body.password || request.body.password.length < 8) {
+      response.json({success:false, message: "Password must be at least 8 characters"});
+    }
+    else if (request.body.password !== request.body.confirm) {
+      response.send({success:false, message: "Passwords don't match"})
+    }
+    else {
+      console.log("here! ", user)
+      user.firstName = request.body.firstName;
+      user.lastName = request.body.lastName;
+      user.password = request.body.password;
+      if (request.body.avatarBase) {
+        user.avatarBase = request.body.avatarBase;
+      }
+      user.updated = Date.now()
+      user.save(function(err, updatedUser) {
+        if (err) {
+          console.log("Error when saving user: ", err)
+          response.send({success:false, message: "Something went wrong with MongoDB"})
+        }
+        else {
+          response.send({success:true, user: updatedUser, message: "You've successfully updated your information."})
+        }
+      })
+    }
+  })
+})
 
 //each user will only get to edit their own favorites
 router.post('/favorite', function(request, response) {

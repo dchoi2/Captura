@@ -34,17 +34,7 @@ class SessionActions{
     })
   }
 
-  static signup(signupData, cb) {
-    $.ajax({type: 'POST', url: '/api/users', data: signupData})
-      .done(function(data) {
-        if (!data.success) {
-          if (cb) cb(data)
-        }
-        else {
-          SessionActions.userLogin(signupData);
-        }
-      })
-  }
+
 
   static getPhotographerInfo(){
     $.ajax({type: 'GET', url: '/api/sessions/photographer'})
@@ -68,24 +58,6 @@ class SessionActions{
         SessionActions.getPhotographerInfo();
       }
     })
-  }
-
-  static applyFor(applyData, cb) {
-    $.ajax({type: 'POST', url: '/api/photographers', data: applyData})
-      .done(function(data) {
-        console.log("sent Post")
-        if (!data.success) {
-          if (cb) cb(data)
-        }
-        else {
-          console.log("success! ", data)
-
-          //SessionActions.photographerLogin(applyData);
-        }
-      })
-      .fail(function(data) {
-        console.log("error happend", data)
-      })
   }
 
   static logout() {

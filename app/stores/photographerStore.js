@@ -1,9 +1,9 @@
-import {GET_PHOTOGRAPHER} from '../constants/photographerConstants';
+import {GET_PHOTOGRAPHER_ACCOUNT, APPLIED_FOR} from '../constants/photographerConstants.js';
 import BaseStore from './baseStore';
 import {browserHistory} from 'react-router';
 
 
-class SessionStore extends BaseStore {
+class PhotographerStore extends BaseStore {
 
   constructor() {
     super();
@@ -12,12 +12,13 @@ class SessionStore extends BaseStore {
     this._lastName = null;
     this._email = null
     this._isLoggedIn = false;
+    this._profile = null;
   }
 
   _registerToActions(payload) {
     var action = payload.action;
     switch(action.actionType) {
-      case GET_PHOTOGRAPHER:
+      case GET_PHOTOGRAPHER_ACCOUNT:
         this._lastName = action.data.lastName
         this._firstName = action.data.firstName
         this._email = action.data.email
@@ -40,20 +41,9 @@ class SessionStore extends BaseStore {
     }
   }
 
-  get firstName() {
-    return this._firstName;
-  }
-
-  get lastName() {
-    return this._lastName;
-  }
-  get email() {
-    return this._email;
-  }
-
   isLoggedIn() {
     return !!this._email;
   }
 }
 
-export default new SessionStore();
+export default new PhotographerStore();

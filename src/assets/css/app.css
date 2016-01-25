@@ -26,6 +26,9 @@ h5 {
 	.reveal-overlay {
 		background-color: rgba(10, 10, 10, 0.65);
 	}
+#request-modal {
+	max-width: 600px;
+}
 
 /* Buttons*/
 .button {
@@ -73,6 +76,10 @@ h5 {
   border: 0;
   text-align: center;
 }
+	.hero.photographer-main {
+		background: url("../img/hero-apply.jpg") no-repeat center center;
+  	background-size: cover;
+	}
 	.hero h1{
 		padding-top: 6vh;
 		color: #fff;
@@ -203,6 +210,21 @@ h5 {
 		margin-left: 1em;
 	}
 
+/* Photographer Login */
+.callout.photographer-login {
+	border-width: 1px 0;
+	border-color: #DDD;
+	margin: 0;
+	background-color: #fff;
+	text-align: center;
+	padding: 2em 30% 2em 30%;
+	color: #666; 
+}
+	@media only screen and (max-width: 40em) {
+		.callout.photographer-login {
+			padding: 2em 20% 2em 20%;
+		} }
+
 /* Footer */
 .footer {
 	background-color: #333;
@@ -302,7 +324,6 @@ h5 {
 	.sorting a:hover {
 		color: #1585cf;
 	}
-
 
 /*  Photographer Profile & Card */
 .callout.profile {
@@ -423,6 +444,10 @@ h5 {
 	}
 .review-text {
 	display: inline;
+}
+
+.review hr {
+	border-bottom: 1px dotted #cacaca;
 }
 
 .profile-info {
@@ -573,6 +598,84 @@ h5 {
 	margin-top: 3em;
 }
 
+/* Event Card */
+.event-card {
+	background-color: #fff;
+	border: 1px solid #e8e8e8;
+	border-radius: 5px;
+	padding: 0;
+	margin: 1em 0;
+	width: 100%;
+}
+	.event-card.archived {
+		background-color: #f8f8f8;
+	}
+
+.event-status {
+	background-color: #eee;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	color: #bbb;
+	font-size: 0.8rem;
+	padding: 0.4rem;
+}
+	.event-status.active {
+		background-color: #DC4E41;
+		color: #fff;
+	}
+	.event-status.success {
+		background-color: #52bf7a;
+		color: #fff;
+	}
+
+.event-user img,
+.event-photographer img {
+	border-radius: 50%;
+  border: 2px solid #DDD;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  float: left;
+  margin: 0 1rem 0 0;
+}
+
+.event-user h5,
+.event-photographer h5 {
+	font-size: 1.1rem;
+	color: #666;
+	font-weight: 700;
+	font-family: 'Open Sans', sans-serif;
+	margin: 0;
+}
+	.event-photographer a h5:hover {
+		color: #2199e8;
+	}
+
+.event-user p,
+.event-photographer p {
+	font-size: 0.8rem;
+	color: #999;
+}
+
+.event-info {
+	padding: 1rem;
+}
+
+.event-details {
+	color: #666;
+	font-size: 0.8rem;
+	line-height: 1.5rem;
+}
+
+.event-action {
+	border-top: 1px solid #eee;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	color: #666;
+	font-size: 0.8rem;
+	padding: 1rem;
+}
+
 
 /* Forms */
 [type='text'], [type='password'], [type='date'], [type='datetime'], [type='datetime-local'], [type='month'], [type='week'], [type='email'], [type='number'], [type='search'], [type='tel'], [type='time'], [type='url'], [type='color'],
@@ -588,7 +691,7 @@ textarea {
 	font-weight: 400;
 	background-color: transparent;
 }
-	.about textarea {
+	textarea[class="textbox"] {
 		border-style: none;
 		border: 2px solid rgba(100, 100, 100, 0.2);
 		box-shadow: none;
@@ -620,7 +723,7 @@ textarea:focus {
 	border-bottom: 2px solid rgba(33, 153, 232, 1);
 	background-color: transparent;
 }
-	.about textarea:focus {
+	textarea[class="textbox"]:focus {
 		border-style: none;
 		box-shadow: none;
 		border: 2px solid rgba(33, 153, 232, 1);
