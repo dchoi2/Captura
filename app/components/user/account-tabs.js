@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router'
 import AccountInfo from './account-info'
 import AccountFavorites from './account-favorites'
-// import AccountRequests from './account-requests'
+import AccountRequests from './account-requests'
 
 class AccountTabTypes extends React.Component {
   onClick(item) {
@@ -51,7 +51,7 @@ class AccountTabs extends React.Component {
     super()
     this.state = {
       tabs: [
-        {title: 'My Requests', content: <AccountInfo/>, id:"requests"},
+        {title: 'My Requests', content: <AccountRequests/>, id:"requests"},
         {title: 'Favorites', content: <AccountFavorites/>, id:"favorites"},
         {title: 'Edit Info', content: <AccountInfo/>, id:"edit"}
       ],

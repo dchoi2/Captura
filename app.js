@@ -61,11 +61,13 @@ var users = require('./routes/users');
 var photographers = require('./routes/photographers');
 var sessions = require('./routes/sessions')(passport);
 var events = require('./routes/events');
+var reviews = require('./routes/reviews')
 
 app.use('/api/users', users);
 app.use('/api/photographers', photographers);
 app.use('/api/sessions', sessions);
 app.use('/api/events', events);
+app.use('/api/reviews', reviews);
 
 var hist = require('history')
 

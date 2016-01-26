@@ -43,6 +43,7 @@ class PhotographerProfile extends React.Component {
                         officialName={this.state.officialName}
                         numFavorites={this.state.numFavorites}
                         rating={this.state.rating}
+                        numReviews={this.state.numReviews}
                         locationString={this.state.locationString}
                         favorited={this.state.favorited}
                         portfolio={this.state.portfolio}

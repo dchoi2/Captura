@@ -70,8 +70,6 @@ class AccountInfo extends React.Component {
         :null
         }
         <form id="edit-profile-form" onSubmit={this.updateAccount} name="edit-profile-form" >
-          <legend>Profile Picture</legend>
-          <input type="submit" value="Upload" className="button"/>
           <legend>First Name</legend><input type="text" ref="firstName" name="firstname" id="firstname" placeholder="First name" required/>
           <legend>Last Name</legend><input type="text" ref="lastName" name="lastname" id="lastname" placeholder="Last name" required/>
           <legend>Email Address</legend><input type="email" ref="email" name="email" id="email" placeholder="Email address" disabled/>

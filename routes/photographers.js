@@ -25,13 +25,24 @@ router.get('/', utils.loggedIn, function(request, response) {
 /**
   GET FULL INFORMATION ON ONE PHOTOGRAPHER - for public profile page
 **/
-router.get('/public/:uid', utils.loggedIn, function(request, response) {
+  // }
+
+router.get('/public/:uid',  function(request, response) {
   Photographer.findOne({_id: request.params.uid, status:true},
     '-password -status')
-    .populate('location review')
+    .populate('location review user')
     .exec(function(err, doc) {
       utils.handleError(err);
-      response.json({success: true, profile: doc})
+      Photographer.populate(doc, {
+        path: 'reviews.writer',
+        model: 'User'
+      }, function(err, doc) {
+        if (err) {
+          console.log(err)
+          response.json({success:false, message: "error in mongodb"})
+        }
+        response.json({success: true, profile: doc})
+      })
     })
 })
 /**

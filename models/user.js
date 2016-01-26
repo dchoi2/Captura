@@ -16,7 +16,7 @@ var userSchema = new mongoose.Schema( {
 });
 
 userSchema.virtual('avatarUrl').get(function() {
-  return 'img/users/avatar/' + this.avatarBase;
+  return '../../../../../img/users/avatar/' + this.avatarBase;
 })
 
 userSchema.virtual('fullName').get(function() {

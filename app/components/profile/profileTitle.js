@@ -12,6 +12,7 @@ class PhotographerTitle extends React.Component {
   render() {
     var totalStars = 5
     var rating = this.props.rating;
+    console.log("in title: ",rating)
 
     var stars = []
     for (var i = 1; i <= rating; i++) {

@@ -68,6 +68,7 @@ class ProfileStore extends BaseStore {
         this._flickr = action.profile.links.flickr
         this._numFavorites = action.profile.favorites
         this._rating = action.profile.rating;
+        console.log("rating: ", action.profile.rating)
         this._updated = true;
         this._specialities = action.profile.specialities;
         this._reviews = action.profile.reviews

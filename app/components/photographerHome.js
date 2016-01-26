@@ -4,13 +4,20 @@ import {Link, browserHistory} from 'react-router'
 class PhotographerHome extends React.Component {
   constructor() {
     super()
-    console.log("here in Home")
+    this.submitForm = this.submitForm.bind(this);
+    this.state = {message:''}
   }
 
   componentDidMount() {
     if (this.props.userLoggedIn) {
       browserHistory.push('/home')
     }
+  }
+
+  submitForm(e) {
+    e.preventDefault()
+    this.setState({message:"Invalid Credentials. If you've submitted an application, we'll get back to you soon!"})
+
   }
 
   render() {
@@ -43,10 +50,12 @@ class PhotographerHome extends React.Component {
         <div id="login" className="callout medium photographer-login">
           <h3>Already have an account? Log In Here.</h3>
           <br/>
+          {this.state.message ?
           <div className="callout alert">
-            <p>Oh no! Something went wrong!</p>
+            <p>{this.state.message}</p>
           </div>
-          <form id="login-form" name="login-form" action="#">
+          : null}
+          <form id="login-form" name="login-form" onSubmit={this.submitForm}>
             <input type="text" name="email" id="email" placeholder="Email address"/>
             <input type="password" name="password" id="password" placeholder="Password"/>
             <input type="submit" value="Log In" className="expanded button"/>

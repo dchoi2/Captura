@@ -63,11 +63,11 @@ photographerSchema.virtual('locationString').get(function() {
 })
 
 photographerSchema.virtual('avatarUrl').get(function() {
-  return 'img/users/avatar/' + this.avatarBase;
+  return '../../../../../img/users/avatar/' + this.avatarBase;
 })
 
 photographerSchema.virtual('coverUrl').get(function() {
-  return 'img/users/cover/' + this.coverBase;
+  return '../../../../../img/users/cover/' + this.coverBase;
 })
 
 var photographer = mongoose.model('Photographer', photographerSchema);
