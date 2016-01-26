@@ -34,7 +34,6 @@ class Sorter extends React.Component {
     return (
       <div className="row sorting">
         <div className="medium-6 columns">
-          <p className="show-for-medium">Showing <em>all</em> photographers</p>
         </div>
         <div className="medium-6 columns">
           <p className="text-right">Sort by: <a data-value='rate' onClick={this.sortBy}>Top Rated</a> | <a data-value='favorite' onClick={this.sortBy}>Most Favorited</a> | <a data-value='random' onClick={this.sortBy}>Random</a></p>

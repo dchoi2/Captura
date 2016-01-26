@@ -1,6 +1,7 @@
 import {LOGIN_USER, LOGOUT_USER, LOGIN_PHOTOGRAPHER} from '../constants/sessionConstants';
 import BaseStore from './baseStore';
 import {browserHistory} from 'react-router';
+import {UPDATE_FAVORITE} from '../constants/profileConstants';
 
 class SessionStore extends BaseStore {
 
@@ -32,6 +33,10 @@ class SessionStore extends BaseStore {
         this._user = null;
         this.emitChange();
         break;
+      case UPDATE_FAVORITE:
+        this._user = action.user
+        localStorage.setItem('user', JSON.stringify(this._user))
+        this.emitChange();
       default:
         break;
     };

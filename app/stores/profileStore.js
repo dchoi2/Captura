@@ -1,4 +1,4 @@
-import {GET_PHOTOGRAPHER_PROFILE} from '../constants/profileConstants.js';
+import {GET_PHOTOGRAPHER_PROFILE, UPDATE_FAVORITE} from '../constants/profileConstants.js';
 import BaseStore from './baseStore';
 import {browserHistory} from 'react-router';
 
@@ -8,6 +8,7 @@ class ProfileStore extends BaseStore {
     super();
     this.subscribe(() => this._registerToActions.bind(this))
     this._firstName = '';
+    this._id = '';
     this._lastName = '';
     this._isLoggedIn = false;
     this._coverUrl = null;
@@ -30,6 +31,7 @@ class ProfileStore extends BaseStore {
   }
 
   clearState(){
+    this._id = ''
     this._firstName = '';
     this._lastName = '';
     this._isLoggedIn = false;
@@ -74,8 +76,15 @@ class ProfileStore extends BaseStore {
         this._reviews = action.profile.reviews
         this._numReviews = action.profile.numReviews
         this._aboutMe = action.profile.aboutMe;
+        this._id = action.profile._id;
         this.emitChange();
         break;
+      case UPDATE_FAVORITE:
+        console.log("in UPDATE_FAVORITES")
+        this._numFavorites = action.profile.favorites;
+        console.log(action.profile.favorites)
+        console.log("in favorites: ", this._numFavorites)
+        this.emitChange();
       default:
         break;
     };
@@ -86,6 +95,7 @@ class ProfileStore extends BaseStore {
       // profile header
       coverUrl: this._coverUrl,
       // profile title
+      id: this._id,
       avatarUrl: this._avatarUrl,
       officialName: this._officialName,
       locationString: this._locationString,

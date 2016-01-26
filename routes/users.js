@@ -116,7 +116,8 @@ router.put('/account/:id', function(request, response) {
 //each user will only get to edit their own favorites
 router.post('/favorite', function(request, response) {
   //reques.user is always initialized in here, since checked that user is logged in
-  User.findOne({id: request.user._id}, function(err, user) {
+  console.log("user: ", request.user)
+  User.findOne({_id: request.user._id}, function(err, user) {
     utils.handleError(err);
     if (!user) {
       response.json({
@@ -125,7 +126,7 @@ router.post('/favorite', function(request, response) {
       })
       return;
     }
-    Photographer.findOne({email: request.body.email2}, function(err, photographer) {
+    Photographer.findById(request.body.id, function(err, photographer) {
       utils.handleError(err);
       if (!photographer) {
         response.json({
@@ -134,19 +135,27 @@ router.post('/favorite', function(request, response) {
         })
         return;
       }
-      User.update({email: request.body.email},
-        {$addToSet: {favorites: photographer._id}},
-        function(err) {
-          utils.handleError(err);
-          response.json({success:true});
+      console.log("photographer:", photographer)
+      photographer.favorites += 1
+      photographer.save(function(err, updatedPhotographer) {
+        if (err) {
+          response.json({success:false})
         }
-      );
+        else {
+          user.favorites.addToSet(photographer._id)
+          user.save(function(err, userUpdated) {
+              utils.handleError(err);
+              console.log("user updated: ", userUpdated)
+              response.json({success:true, user: userUpdated, profile: updatedPhotographer});
+          });
+        }
+      })
     })
   });
 });
 
 router.delete('/favorite/:id', function(request, response) {
-  User.findOne({email: request.body.email}, function(err, user) {
+  User.findOne({_id: request.user._id}, function(err, user) {
     utils.handleError(err);
     if (!user) {
       response.json({
@@ -155,7 +164,7 @@ router.delete('/favorite/:id', function(request, response) {
       })
       return;
     }
-    Photographer.findOne({email: request.body.email2}, function(err, photographer) {
+    Photographer.findById(request.params.id, function(err, photographer) {
       utils.handleError(err);
       if(!photographer) {
         response.json({
@@ -164,11 +173,20 @@ router.delete('/favorite/:id', function(request, response) {
         })
         return;
       }
-      User.update({email: request.body.email},
-        { $pull: {favorites: photographer._id}}, function (err) {
-        utils.handleError(err);
-        response.json({success:true});
-      });
+      photographer.favorites -= 1
+      photographer.save(function(err, updatedPhotographer) {
+        if (err) {
+          response.json({success:false})
+        }
+        else {
+          user.favorites.pull(photographer._id);
+          user.save(function (err, user) {
+            utils.handleError(err);
+            response.json({success:true, user: user, profile: updatedPhotographer});
+          });
+        }
+      })
+
     });
   });
 });

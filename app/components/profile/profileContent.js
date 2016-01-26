@@ -3,44 +3,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ProfileActions from '../../actions/profileActions'
 
-// class PhotographerReviews extends React.Component {
-//   constructor() {
-//     super()
-//   }
-
-//   render() {
-//     return (
-//     <div className="row" id="reviews">
-//       <div className="medium-8 columns">
-//         <div className="profile-info">
-//           <hr>
-//           <h4>Reviews</h4>
-//           <p>No reviews yet.</p>
-//           <div className="review">
-//             <div className="review-avatar small">
-//               <img src="{this.state.reviews}" />
-//               <p><b></b></p>
-//             </div>
-//             <div className="review-text">
-//               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a ipsum consequat, gravida ipsum eget, tristique risus. Vestibulum vel placerat erat, at convallis sapien. Maecenas lacus dolor, volutpat in venenatis ut, aliquet non orci.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a ipsum consequat, gravida ipsum eget, tristique risus. Vestibulum vel placerat erat, at convallis sapien. Maecenas lacus dolor, volutpat in venenatis ut, aliquet non orci.</p>
-//             </div>
-//           </div>
-//           <div className="review">
-//             <div className="review-avatar small">
-//               <img src="img/users/avatar/default.png" />
-//               <p><b>Michael C.</b></p>
-//             </div>
-//             <div className="review-text">
-//               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a ipsum consequat, gravida ipsum eget, tristique risus. Vestibulum vel placerat erat, at convallis sapien. Maecenas lacus dolor, volutpat in venenatis ut, aliquet non orci.</p>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//     )
-//   }
-// }
-
 class PhotographerContent extends React.Component {
   constructor() {
     super()
@@ -62,23 +24,22 @@ class PhotographerContent extends React.Component {
       var review = reviews[r]
       var rating = review.rating;
       rating = 3
-      console.log("rating: ", rating)
 
       var stars = []
       for (var i = 1; i <= rating; i++) {
-        stars.push(<i key = {i} className="fa fa-star"></i>)
+        stars.push(<i key = {i + r} className="fa fa-star"></i>)
       }
       if (rating - Math.floor(rating) >= 0.9) {
-        stars.push(<i key={rating + "stars"} className="fa fa-star"></i>)
+        stars.push(<i key={rating + r + 1} className="fa fa-star"></i>)
       }
       else if (rating - Math.floor(rating) >= 0.4) {
-        stars.push(<i key={rating} className="fa fa-star-half-o"></i>)
+        stars.push(<i key={rating + r + 2} className="fa fa-star-half-o"></i>)
       }
-      else {
-        stars.push(<i key={rating} className="fa fa-star-o"></i>)
+      else if (rating - Math.floor(rating) > 0) {
+        stars.push(<i key={rating + r + 3} className="fa fa-star-o"></i>)
       }
       for (var i = Math.ceil(rating)+1; i <= totalStars; i++) {
-        stars.push(<i key={i} className="fa fa-star-o"></i>)
+        stars.push(<i key={i + r} className="fa fa-star-o"></i>)
       }
 
       reviewBoxes.push(

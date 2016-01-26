@@ -39,7 +39,8 @@ class PhotographerProfile extends React.Component {
         <div className="container cover">
           <img src={this.state.coverUrl}/>
         </div>
-        <ProfileTitle   avatarUrl={this.state.avatarUrl}
+        <ProfileTitle   id={this.state.id}
+                        avatarUrl={this.state.avatarUrl}
                         officialName={this.state.officialName}
                         numFavorites={this.state.numFavorites}
                         rating={this.state.rating}

@@ -176,6 +176,36 @@ var ProfileActions = function () {
         // getReviewDetails(userData.profile.reviews)
       });
     }
+  }, {
+    key: 'sendFavorite',
+    value: function sendFavorite(id) {
+      $.ajax({ type: 'POST', url: '/api/users/favorite/', data: { id: id } }).done(function (data) {
+        if (data.success) {
+          _appDispatcher2.default.handleViewAction({
+            actionType: _profileConstants.UPDATE_FAVORITE,
+            profile: data.profile,
+            user: data.user
+          });
+        } else {
+          console.log("failed: ", data.message);
+        }
+      });
+    }
+  }, {
+    key: 'unFavorite',
+    value: function unFavorite(id) {
+      $.ajax({ type: 'DELETE', url: '/api/users/favorite/' + id }).done(function (data) {
+        if (data.success) {
+          _appDispatcher2.default.handleViewAction({
+            actionType: _profileConstants.UPDATE_FAVORITE,
+            profile: data.profile,
+            user: data.user
+          });
+        } else {
+          console.log("failed: ", data.message);
+        }
+      });
+    }
   }]);
 
   return ProfileActions;
@@ -1040,7 +1070,7 @@ var profileCard = function (_React$Component) {
         stars.push(_react2.default.createElement('i', { key: rating, className: 'fa fa-star' }));
       } else if (rating - Math.floor(rating) >= 0.4) {
         stars.push(_react2.default.createElement('i', { key: rating, className: 'fa fa-star-half-o' }));
-      } else {
+      } else if (rating - Math.floor(rating) > 0) {
         stars.push(_react2.default.createElement('i', { key: rating, className: 'fa fa-star-o' }));
       }
       for (var i = Math.ceil(rating) + 1; i <= totalStars; i++) {
@@ -1328,21 +1358,7 @@ var Sorter = function (_React$Component) {
       return _react2.default.createElement(
         'div',
         { className: 'row sorting' },
-        _react2.default.createElement(
-          'div',
-          { className: 'medium-6 columns' },
-          _react2.default.createElement(
-            'p',
-            { className: 'show-for-medium' },
-            'Showing ',
-            _react2.default.createElement(
-              'em',
-              null,
-              'all'
-            ),
-            ' photographers'
-          )
-        ),
+        _react2.default.createElement('div', { className: 'medium-6 columns' }),
         _react2.default.createElement(
           'div',
           { className: 'medium-6 columns' },
@@ -3130,7 +3146,8 @@ var PhotographerProfile = function (_React$Component) {
           { className: 'container cover' },
           _react2.default.createElement('img', { src: this.state.coverUrl })
         ),
-        _react2.default.createElement(_profileTitle2.default, { avatarUrl: this.state.avatarUrl,
+        _react2.default.createElement(_profileTitle2.default, { id: this.state.id,
+          avatarUrl: this.state.avatarUrl,
           officialName: this.state.officialName,
           numFavorites: this.state.numFavorites,
           rating: this.state.rating,
@@ -3182,44 +3199,6 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-// class PhotographerReviews extends React.Component {
-//   constructor() {
-//     super()
-//   }
-
-//   render() {
-//     return (
-//     <div className="row" id="reviews">
-//       <div className="medium-8 columns">
-//         <div className="profile-info">
-//           <hr>
-//           <h4>Reviews</h4>
-//           <p>No reviews yet.</p>
-//           <div className="review">
-//             <div className="review-avatar small">
-//               <img src="{this.state.reviews}" />
-//               <p><b></b></p>
-//             </div>
-//             <div className="review-text">
-//               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a ipsum consequat, gravida ipsum eget, tristique risus. Vestibulum vel placerat erat, at convallis sapien. Maecenas lacus dolor, volutpat in venenatis ut, aliquet non orci.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a ipsum consequat, gravida ipsum eget, tristique risus. Vestibulum vel placerat erat, at convallis sapien. Maecenas lacus dolor, volutpat in venenatis ut, aliquet non orci.</p>
-//             </div>
-//           </div>
-//           <div className="review">
-//             <div className="review-avatar small">
-//               <img src="img/users/avatar/default.png" />
-//               <p><b>Michael C.</b></p>
-//             </div>
-//             <div className="review-text">
-//               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent a ipsum consequat, gravida ipsum eget, tristique risus. Vestibulum vel placerat erat, at convallis sapien. Maecenas lacus dolor, volutpat in venenatis ut, aliquet non orci.</p>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </div>
-//     )
-//   }
-// }
-
 var PhotographerContent = function (_React$Component) {
   _inherits(PhotographerContent, _React$Component);
 
@@ -3251,21 +3230,20 @@ var PhotographerContent = function (_React$Component) {
         var review = reviews[r];
         var rating = review.rating;
         rating = 3;
-        console.log("rating: ", rating);
 
         var stars = [];
         for (var i = 1; i <= rating; i++) {
-          stars.push(_react2.default.createElement('i', { key: i, className: 'fa fa-star' }));
+          stars.push(_react2.default.createElement('i', { key: i + r, className: 'fa fa-star' }));
         }
         if (rating - Math.floor(rating) >= 0.9) {
-          stars.push(_react2.default.createElement('i', { key: rating + "stars", className: 'fa fa-star' }));
+          stars.push(_react2.default.createElement('i', { key: rating + r + 1, className: 'fa fa-star' }));
         } else if (rating - Math.floor(rating) >= 0.4) {
-          stars.push(_react2.default.createElement('i', { key: rating, className: 'fa fa-star-half-o' }));
-        } else {
-          stars.push(_react2.default.createElement('i', { key: rating, className: 'fa fa-star-o' }));
+          stars.push(_react2.default.createElement('i', { key: rating + r + 2, className: 'fa fa-star-half-o' }));
+        } else if (rating - Math.floor(rating) > 0) {
+          stars.push(_react2.default.createElement('i', { key: rating + r + 3, className: 'fa fa-star-o' }));
         }
         for (var i = Math.ceil(rating) + 1; i <= totalStars; i++) {
-          stars.push(_react2.default.createElement('i', { key: i, className: 'fa fa-star-o' }));
+          stars.push(_react2.default.createElement('i', { key: i + r, className: 'fa fa-star-o' }));
         }
 
         reviewBoxes.push(_react2.default.createElement(
@@ -3395,6 +3373,10 @@ var _profileActions2 = _interopRequireDefault(_profileActions);
 
 var _reactRouter = require('react-router');
 
+var _sessionStore = require('../../stores/sessionStore');
+
+var _sessionStore2 = _interopRequireDefault(_sessionStore);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -3409,15 +3391,50 @@ var PhotographerTitle = function (_React$Component) {
   function PhotographerTitle() {
     _classCallCheck(this, PhotographerTitle);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(PhotographerTitle).call(this));
+    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PhotographerTitle).call(this));
+
+    _this.state = _sessionStore2.default.getState();
+    _this.favorite = _this.favorite.bind(_this);
+    return _this;
   }
 
   _createClass(PhotographerTitle, [{
+    key: 'componentDidMount',
+    value: function componentDidMount() {
+      this.changeListener = this._onChange.bind(this);
+      _sessionStore2.default.addChangeListener(this.changeListener);
+    }
+  }, {
+    key: 'componentWillUnmount',
+    value: function componentWillUnmount() {
+      _sessionStore2.default.removeChangeListener(this.changeListener);
+    }
+  }, {
+    key: '_onChange',
+    value: function _onChange() {
+      this.setState(_sessionStore2.default.getState());
+    }
+  }, {
+    key: 'favorite',
+    value: function favorite(e) {
+      e.preventDefault();
+      console.log(this.props);
+      _profileActions2.default.sendFavorite(this.props.id);
+    }
+  }, {
+    key: 'unFavorite',
+    value: function unFavorite(e) {
+      e.preventDefault();
+      console.log("calling unfavorite");
+      _profileActions2.default.unFavorite(this.props.id);
+    }
+  }, {
     key: 'render',
     value: function render() {
       var totalStars = 5;
       var rating = this.props.rating;
       console.log("in title: ", rating);
+      rating = 4.3;
 
       var stars = [];
       for (var i = 1; i <= rating; i++) {
@@ -3427,14 +3444,24 @@ var PhotographerTitle = function (_React$Component) {
         stars.push(_react2.default.createElement('i', { key: rating, className: 'fa fa-star' }));
       } else if (rating - Math.floor(rating) >= 0.4) {
         stars.push(_react2.default.createElement('i', { key: rating, className: 'fa fa-star-half-o' }));
-      } else {
+      } else if (rating - Math.floor(rating) > 0) {
         stars.push(_react2.default.createElement('i', { key: rating, className: 'fa fa-star-o' }));
       }
       for (var i = Math.ceil(rating) + 1; i <= totalStars; i++) {
         stars.push(_react2.default.createElement('i', { key: i, className: 'fa fa-star-o' }));
       }
 
-      console.log(this.props);
+      var favorites = this.state.user.favorites;
+      var id = this.props.id;
+      var favorited = true;
+
+      console.log("state: ", this.state);
+      console.log("favorites: ", favorites);
+      if (favorites.indexOf(id) === -1) {
+        favorited = false;
+      }
+
+      // if (SessionStore.)
 
       var externalLinks = [];
 
@@ -3527,14 +3554,14 @@ var PhotographerTitle = function (_React$Component) {
               { to: '/request', className: 'expanded button' },
               'Request Quote'
             ),
-            this.props.favorited ? _react2.default.createElement(
+            favorited ? _react2.default.createElement(
               'a',
-              { className: 'expanded alert button' },
+              { className: 'expanded alert button', onClick: this.unFavorite.bind(this) },
               _react2.default.createElement('i', { className: 'fa fa-heart' }),
               ' Favorited'
             ) : _react2.default.createElement(
               'a',
-              { className: 'expanded hollow button' },
+              { className: 'expanded hollow button', onClick: this.favorite },
               _react2.default.createElement('i', { className: 'fa fa-heart-o' }),
               ' Favorite'
             )
@@ -3549,7 +3576,7 @@ var PhotographerTitle = function (_React$Component) {
 
 exports.default = PhotographerTitle;
 
-},{"../../actions/profileActions":3,"react":"react","react-dom":"react-dom","react-router":"react-router"}],24:[function(require,module,exports){
+},{"../../actions/profileActions":3,"../../stores/sessionStore":42,"react":"react","react-dom":"react-dom","react-router":"react-router"}],24:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -4807,7 +4834,8 @@ module.exports = keyMirror({
 var keyMirror = require('key-mirror');
 
 module.exports = keyMirror({
-  GET_PHOTOGRAPHER_PROFILE: 'GET_PHOTOGRAPHER_PROFILE'
+  GET_PHOTOGRAPHER_PROFILE: 'GET_PHOTOGRAPHER_PROFILE',
+  UPDATE_FAVORITE: 'UPDATE_FAVORITE'
 });
 
 },{"key-mirror":51}],34:[function(require,module,exports){
@@ -4946,11 +4974,11 @@ exports.default = _react2.default.createElement(
   _react2.default.createElement(_reactRouter.Route, { path: 'signup', component: _signup2.default }),
   _react2.default.createElement(_reactRouter.Route, { path: 'home', component: _explore2.default, onEnter: _requireAuth2.default }),
   _react2.default.createElement(_reactRouter.Route, { path: 'photographers', component: _photographerHome2.default }),
-  _react2.default.createElement(_reactRouter.Route, { path: 'photographers/profile/:id', component: _profile2.default }),
+  _react2.default.createElement(_reactRouter.Route, { path: 'photographers/profile/:id', component: _profile2.default, onEnter: _requireAuth2.default }),
   _react2.default.createElement(_reactRouter.Route, { path: 'apply', component: _apply2.default }),
   _react2.default.createElement(_reactRouter.Route, { path: 'request', component: _quoteRequest2.default }),
-  _react2.default.createElement(_reactRouter.Route, { path: 'photographers/account/:id', component: _accountInfo2.default }),
-  _react2.default.createElement(_reactRouter.Route, { path: 'users/:id', component: _account2.default })
+  _react2.default.createElement(_reactRouter.Route, { path: 'photographers/account/:id', component: _accountInfo2.default, onEnter: _requireAuth2.default }),
+  _react2.default.createElement(_reactRouter.Route, { path: 'users/:id', component: _account2.default, onEnter: _requireAuth2.default })
 );
 
 //Authentication for Routing
@@ -5213,6 +5241,7 @@ var ProfileStore = function (_BaseStore) {
       return _this._registerToActions.bind(_this);
     });
     _this._firstName = '';
+    _this._id = '';
     _this._lastName = '';
     _this._isLoggedIn = false;
     _this._coverUrl = null;
@@ -5238,6 +5267,7 @@ var ProfileStore = function (_BaseStore) {
   _createClass(ProfileStore, [{
     key: 'clearState',
     value: function clearState() {
+      this._id = '';
       this._firstName = '';
       this._lastName = '';
       this._isLoggedIn = false;
@@ -5283,8 +5313,15 @@ var ProfileStore = function (_BaseStore) {
           this._reviews = action.profile.reviews;
           this._numReviews = action.profile.numReviews;
           this._aboutMe = action.profile.aboutMe;
+          this._id = action.profile._id;
           this.emitChange();
           break;
+        case _profileConstants.UPDATE_FAVORITE:
+          console.log("in UPDATE_FAVORITES");
+          this._numFavorites = action.profile.favorites;
+          console.log(action.profile.favorites);
+          console.log("in favorites: ", this._numFavorites);
+          this.emitChange();
         default:
           break;
       };
@@ -5296,6 +5333,7 @@ var ProfileStore = function (_BaseStore) {
         // profile header
         coverUrl: this._coverUrl,
         // profile title
+        id: this._id,
         avatarUrl: this._avatarUrl,
         officialName: this._officialName,
         locationString: this._locationString,
@@ -5344,6 +5382,8 @@ var _baseStore2 = _interopRequireDefault(_baseStore);
 
 var _reactRouter = require('react-router');
 
+var _profileConstants = require('../constants/profileConstants');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -5390,6 +5430,10 @@ var SessionStore = function (_BaseStore) {
           this._user = null;
           this.emitChange();
           break;
+        case _profileConstants.UPDATE_FAVORITE:
+          this._user = action.user;
+          localStorage.setItem('user', JSON.stringify(this._user));
+          this.emitChange();
         default:
           break;
       };
@@ -5431,7 +5475,7 @@ var SessionStore = function (_BaseStore) {
 
 exports.default = new SessionStore();
 
-},{"../constants/sessionConstants":34,"./baseStore":39,"react-router":"react-router"}],43:[function(require,module,exports){
+},{"../constants/profileConstants":33,"../constants/sessionConstants":34,"./baseStore":39,"react-router":"react-router"}],43:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();

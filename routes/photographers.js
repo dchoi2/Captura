@@ -30,7 +30,7 @@ router.get('/', utils.loggedIn, function(request, response) {
 router.get('/public/:uid',  function(request, response) {
   Photographer.findOne({_id: request.params.uid, status:true},
     '-password -status')
-    .populate('location review user')
+    .populate('location reviews user')
     .exec(function(err, doc) {
       utils.handleError(err);
       Photographer.populate(doc, {

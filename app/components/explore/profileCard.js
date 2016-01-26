@@ -45,7 +45,7 @@ class profileCard extends React.Component {
     else if (rating - Math.floor(rating) >= 0.4) {
       stars.push(<i key={rating} className="fa fa-star-half-o"></i>)
     }
-    else {
+    else if (rating - Math.floor(rating) > 0) {
       stars.push(<i key={rating} className="fa fa-star-o"></i>)
     }
     for (var i = Math.ceil(rating)+1; i <= totalStars; i++) {

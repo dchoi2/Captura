@@ -32,10 +32,10 @@ export default (
     <Route path='signup' component={Signup}/>
     <Route path='home' component={Explore} onEnter={requireAuth}/>
     <Route path='photographers' component={PhotographerHome} />
-    <Route path='photographers/profile/:id' component={PhotographerProfile} />
+    <Route path='photographers/profile/:id' component={PhotographerProfile} onEnter={requireAuth}/>
     <Route path='apply' component={Apply}/>
     <Route path='request' component={QuoteRequest}/>
-    <Route path='photographers/account/:id' component={PhotographerAccount}/>
-    <Route path='users/:id' component={UserAccount}/>
+    <Route path='photographers/account/:id' component={PhotographerAccount} onEnter={requireAuth}/>
+    <Route path='users/:id' component={UserAccount} onEnter={requireAuth}/>
   </Route>
 );

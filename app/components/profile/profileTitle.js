@@ -3,16 +3,45 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ProfileActions from '../../actions/profileActions'
 import {Link} from 'react-router'
+import SessionStore from '../../stores/sessionStore'
 
 class PhotographerTitle extends React.Component {
   constructor() {
     super()
+    this.state = SessionStore.getState()
+    this.favorite = this.favorite.bind(this)
+  }
+
+  componentDidMount() {
+    this.changeListener = this._onChange.bind(this)
+    SessionStore.addChangeListener(this.changeListener);
+  }
+
+  componentWillUnmount() {
+    SessionStore.removeChangeListener(this.changeListener);
+  }
+
+  _onChange() {
+    this.setState(SessionStore.getState());
+  }
+
+  favorite(e) {
+    e.preventDefault()
+    console.log(this.props)
+    ProfileActions.sendFavorite(this.props.id)
+  }
+
+  unFavorite(e) {
+    e.preventDefault()
+    console.log("calling unfavorite");
+    ProfileActions.unFavorite(this.props.id)
   }
 
   render() {
     var totalStars = 5
     var rating = this.props.rating;
     console.log("in title: ",rating)
+    rating = 4.3
 
     var stars = []
     for (var i = 1; i <= rating; i++) {
@@ -24,14 +53,24 @@ class PhotographerTitle extends React.Component {
     else if (rating - Math.floor(rating) >= 0.4) {
       stars.push(<i key={rating} className="fa fa-star-half-o"></i>)
     }
-    else {
+    else if (rating - Math.floor(rating) > 0) {
       stars.push(<i key={rating} className="fa fa-star-o"></i>)
     }
     for (var i = Math.ceil(rating)+1; i <= totalStars; i++) {
       stars.push(<i key={i} className="fa fa-star-o"></i>)
     }
 
-    console.log(this.props)
+    var favorites = this.state.user.favorites
+    var id = this.props.id;
+    var favorited = true;
+
+    console.log("state: ", this.state)
+    console.log("favorites: ", favorites)
+    if (favorites.indexOf(id) === -1) {
+      favorited = false;
+    }
+
+    // if (SessionStore.)
 
     var externalLinks =[]
 
@@ -59,10 +98,10 @@ class PhotographerTitle extends React.Component {
 
           <div className="medium-4 columns">
             <Link to='/request' className="expanded button">Request Quote</Link>
-            {this.props.favorited ?
-            <a className="expanded alert button"><i className="fa fa-heart"></i> Favorited</a>
+            {favorited ?
+            <a className="expanded alert button" onClick={this.unFavorite.bind(this)}><i className="fa fa-heart"></i> Favorited</a>
             :
-            <a className="expanded hollow button"><i className="fa fa-heart-o"></i> Favorite</a>
+            <a className="expanded hollow button" onClick={this.favorite}><i className="fa fa-heart-o"></i> Favorite</a>
             }
           </div>
         </div>
