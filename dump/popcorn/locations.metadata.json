@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":1,"key":{"_id":1},"name":"_id_","ns":"popcorn.locations"},{"v":1,"key":{"loc":"2d"},"name":"loc_2d","ns":"popcorn.locations","background":true},{"v":1,"key":{"loc":"2dsphere"},"name":"loc_2dsphere","ns":"popcorn.locations","background":true,"2dsphereIndexVersion":2}]}
