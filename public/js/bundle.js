@@ -4448,13 +4448,9 @@ var AccountRequests = function (_React$Component) {
               { className: 'event-photographer' },
               _react2.default.createElement('img', { src: '../img/users/avatar/001.jpg' }),
               _react2.default.createElement(
-                'a',
-                { href: 'profile.html' },
-                _react2.default.createElement(
-                  'h5',
-                  null,
-                  'John Smith'
-                )
+                'h5',
+                null,
+                'John Smith'
               ),
               _react2.default.createElement(
                 'p',

@@ -50,7 +50,7 @@ class AccountRequests extends React.Component {
               <div className="event-info">
                 <div className="event-photographer">
                   <img src="../img/users/avatar/001.jpg" />
-                  <a href="profile.html"><h5>John Smith</h5></a>
+                  <h5>John Smith</h5>
                   <p><i className="fa fa-map-marker"></i>&nbsp; San Francisco, CA</p>
                 </div>
                 <div className="event-details">
