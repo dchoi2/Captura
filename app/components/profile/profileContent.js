@@ -84,6 +84,7 @@ class PhotographerContent extends React.Component {
               <hr/>
               <h4>Reviews</h4>
               {reviewBoxes}
+              <hr/>
             </div>
           </div>
         </div>

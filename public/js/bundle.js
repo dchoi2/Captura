@@ -3346,7 +3346,8 @@ var PhotographerContent = function (_React$Component) {
                 null,
                 'Reviews'
               ),
-              reviewBoxes
+              reviewBoxes,
+              _react2.default.createElement('hr', null)
             )
           )
         )
