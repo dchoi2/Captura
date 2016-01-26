@@ -168,10 +168,14 @@ var ProfileActions = function () {
     key: 'getPhotographerProfileInfo',
     value: function getPhotographerProfileInfo(id) {
       $.ajax({ type: 'GET', url: '/api/photographers/public/' + id }).done(function (userData) {
-        _appDispatcher2.default.handleViewAction({
-          actionType: _profileConstants.GET_PHOTOGRAPHER_PROFILE,
-          profile: userData.profile
-        });
+        if (userData.success) {
+          _appDispatcher2.default.handleViewAction({
+            actionType: _profileConstants.GET_PHOTOGRAPHER_PROFILE,
+            profile: userData.profile
+          });
+        } else {
+          _reactRouter.browserHistory.push('/');
+        }
 
         // getReviewDetails(userData.profile.reviews)
       });
@@ -326,6 +330,8 @@ var _sessionActions = require('./sessionActions');
 
 var _sessionActions2 = _interopRequireDefault(_sessionActions);
 
+var _reactRouter = require('react-router');
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -364,11 +370,14 @@ var UserActions = function () {
     key: 'getUserAccountInfo',
     value: function getUserAccountInfo(uid) {
       $.ajax({ type: 'GET', url: '/api/users/account/' + uid }).done(function (userData) {
-        _appDispatcher2.default.handleViewAction({
-          actionType: _userConstants.GET_USER_INFO,
-          user: userData.user
-        });
-        //localStorage.setItem('user', userData.email)
+        if (userData.success) {
+          _appDispatcher2.default.handleViewAction({
+            actionType: _userConstants.GET_USER_INFO,
+            user: userData.user
+          });
+        } else {
+          _reactRouter.browserHistory.push('/');
+        }
       });
     }
   }, {
@@ -394,7 +403,7 @@ var UserActions = function () {
 
 exports.default = UserActions;
 
-},{"../constants/userConstants.js":35,"../dispatchers/appDispatcher.js":36,"./sessionActions":4}],6:[function(require,module,exports){
+},{"../constants/userConstants.js":35,"../dispatchers/appDispatcher.js":36,"./sessionActions":4,"react-router":"react-router"}],6:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -3434,7 +3443,7 @@ var PhotographerTitle = function (_React$Component) {
       var totalStars = 5;
       var rating = this.props.rating;
       console.log("in title: ", rating);
-      rating = 4.3;
+      // rating = 4.3
 
       var stars = [];
       for (var i = 1; i <= rating; i++) {
@@ -3451,14 +3460,16 @@ var PhotographerTitle = function (_React$Component) {
         stars.push(_react2.default.createElement('i', { key: i, className: 'fa fa-star-o' }));
       }
 
-      var favorites = this.state.user.favorites;
-      var id = this.props.id;
-      var favorited = true;
+      if (this.state.user) {
+        var favorites = this.state.user.favorites;
+        var id = this.props.id;
+        var favorited = true;
 
-      console.log("state: ", this.state);
-      console.log("favorites: ", favorites);
-      if (favorites.indexOf(id) === -1) {
-        favorited = false;
+        console.log("state: ", this.state);
+        console.log("favorites: ", favorites);
+        if (favorites.indexOf(id) === -1) {
+          favorited = false;
+        }
       }
 
       // if (SessionStore.)
@@ -4749,16 +4760,16 @@ var UserAccount = function (_React$Component) {
     return _this;
   }
 
+  // componentWillMount() {
+  //   UserActions.getUserAccountInfo(this.props.params.id);
+  // }
+
   _createClass(UserAccount, [{
-    key: 'componentWillMount',
-    value: function componentWillMount() {
-      _userActions2.default.getUserAccountInfo(this.props.params.id);
-    }
-  }, {
     key: 'componentDidMount',
     value: function componentDidMount() {
       this.changeListener = this._onChange.bind(this);
       _userStore2.default.addChangeListener(this.changeListener);
+      _userActions2.default.getUserAccountInfo(this.props.params.id);
     }
   }, {
     key: 'componentWillUnmount',

@@ -14,13 +14,15 @@ class UserAccount extends React.Component {
     console.log("here in UserAccount")
   }
 
-  componentWillMount() {
-    UserActions.getUserAccountInfo(this.props.params.id);
-  }
+  // componentWillMount() {
+  //   UserActions.getUserAccountInfo(this.props.params.id);
+  // }
 
   componentDidMount() {
     this.changeListener = this._onChange.bind(this)
     UserStore.addChangeListener(this.changeListener);
+    UserActions.getUserAccountInfo(this.props.params.id);
+
   }
 
   componentWillUnmount() {

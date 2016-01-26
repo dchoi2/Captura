@@ -8,10 +8,15 @@ class ProfileActions{
   static getPhotographerProfileInfo(id){
     $.ajax({type: 'GET', url: '/api/photographers/public/'+id})
       .done(function(userData) {
-        AppDispatcher.handleViewAction({
-          actionType: GET_PHOTOGRAPHER_PROFILE,
-          profile: userData.profile
-        });
+        if (userData.success) {
+          AppDispatcher.handleViewAction({
+            actionType: GET_PHOTOGRAPHER_PROFILE,
+            profile: userData.profile
+          });
+        }
+        else {
+          browserHistory.push('/')
+        }
 
         // getReviewDetails(userData.profile.reviews)
       })

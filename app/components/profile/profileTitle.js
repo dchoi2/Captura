@@ -41,7 +41,7 @@ class PhotographerTitle extends React.Component {
     var totalStars = 5
     var rating = this.props.rating;
     console.log("in title: ",rating)
-    rating = 4.3
+    // rating = 4.3
 
     var stars = []
     for (var i = 1; i <= rating; i++) {
@@ -60,15 +60,19 @@ class PhotographerTitle extends React.Component {
       stars.push(<i key={i} className="fa fa-star-o"></i>)
     }
 
-    var favorites = this.state.user.favorites
-    var id = this.props.id;
-    var favorited = true;
+    if (this.state.user) {
+      var favorites = this.state.user.favorites
+      var id = this.props.id;
+      var favorited = true;
 
-    console.log("state: ", this.state)
-    console.log("favorites: ", favorites)
-    if (favorites.indexOf(id) === -1) {
-      favorited = false;
+      console.log("state: ", this.state)
+      console.log("favorites: ", favorites)
+      if (favorites.indexOf(id) === -1) {
+        favorited = false;
+      }
     }
+
+
 
     // if (SessionStore.)
 

@@ -1,6 +1,7 @@
 import AppDispatcher from '../dispatchers/appDispatcher.js';
 import {GET_USER_INFO, UPDATE_USER_INFO} from '../constants/userConstants.js';
 import SessionActions from './sessionActions'
+import {browserHistory} from 'react-router'
 
 class UserActions{
 
@@ -33,11 +34,15 @@ class UserActions{
   static getUserAccountInfo(uid){
     $.ajax({type: 'GET', url: '/api/users/account/'+uid})
       .done(function(userData) {
-        AppDispatcher.handleViewAction({
-          actionType: GET_USER_INFO,
-          user: userData.user
-        });
-        //localStorage.setItem('user', userData.email)
+        if (userData.success) {
+          AppDispatcher.handleViewAction({
+            actionType: GET_USER_INFO,
+            user: userData.user
+          });
+        }
+        else {
+          browserHistory.push('/')
+        }
       })
   }
 

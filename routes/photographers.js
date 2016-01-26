@@ -6,7 +6,7 @@ var utils = require('../utils');
 var {Loc, Geocoder} = require('../models/location')
 
 var MAX_NUMB = 30
-var MAX_DIST = 0//kilometers
+var MAX_DIST = 30//kilometers
 /**
   GET ALL ACCEPTED PHOTOGRAPHERS
   TODO: restrict the information that is returned
@@ -16,8 +16,11 @@ router.get('/', utils.loggedIn, function(request, response) {
     '-password -status ')
     .populate('location review')
     .exec(function(err, docs) {
-      utils.handleError(err);
-      response.json(docs);
+      if (err) {
+        response.json({success:false})
+      } else {
+        response.json(docs);
+      }
     }
   );
 });
@@ -32,17 +35,26 @@ router.get('/public/:uid',  function(request, response) {
     '-password -status')
     .populate('location reviews user')
     .exec(function(err, doc) {
-      utils.handleError(err);
-      Photographer.populate(doc, {
-        path: 'reviews.writer',
-        model: 'User'
-      }, function(err, doc) {
-        if (err) {
-          console.log(err)
-          response.json({success:false, message: "error in mongodb"})
-        }
-        response.json({success: true, profile: doc})
-      })
+      if (err) {
+        response.json({success:false})
+      }
+      else {
+        Photographer.populate(doc, {
+          path: 'reviews.writer',
+          model: 'User'
+        }, function(err, doc) {
+          if (err) {
+            console.log(err)
+            response.json({success:false, message: "error in mongodb"})
+          }
+          else if (!doc) {
+            response.json({success:false, message: "stop accessing arbitray profiles"})
+          }
+          else {
+            response.json({success: true, profile: doc})
+          }
+        })
+      }
     })
 })
 /**
@@ -56,8 +68,12 @@ router.get('/account/:uid', utils.loggedIn, function(request, response) {
     '-password -status')
     .populate('location review')
     .exec(function(err, doc) {
-      utils.handleError(err);
-      response.json({success: true, profile: doc})
+      if (err) {
+        response.json({success:false})
+      }
+      else {
+        response.json({success: true, profile: doc})
+      }
     })
 })
 /** GET ACCOUNT RELEVANT INFORMATION...**/

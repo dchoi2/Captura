@@ -18,7 +18,10 @@ router.get('/account/:id', function(request, response) {
   User.findOne({_id:request.params.id})
   .populate('photographer event review favorites')
   .exec(function(err, user) {
-    utils.handleError(err);
+    if (err) {
+      response.json({success:false})
+      return
+    }
     User.populate(user, {
       path: 'favorites.location',
       model: 'Location'
@@ -118,7 +121,10 @@ router.post('/favorite', function(request, response) {
   //reques.user is always initialized in here, since checked that user is logged in
   console.log("user: ", request.user)
   User.findOne({_id: request.user._id}, function(err, user) {
-    utils.handleError(err);
+    if (err) {
+      response.json({success:false})
+      return;
+    }
     if (!user) {
       response.json({
         success: false,
@@ -156,7 +162,10 @@ router.post('/favorite', function(request, response) {
 
 router.delete('/favorite/:id', function(request, response) {
   User.findOne({_id: request.user._id}, function(err, user) {
-    utils.handleError(err);
+    if (err) {
+        response.json({success:false})
+        return
+    }
     if (!user) {
       response.json({
         success: false,
