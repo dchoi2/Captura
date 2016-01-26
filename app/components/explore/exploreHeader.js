@@ -8,6 +8,7 @@ class exploreHeader extends React.Component {
   constructor() {
     super()
     this.state = {message: ''}
+    this.state = ExploreStore.getLocation()
     //this.state = {location: ExploreStore.location}
     this._onChange = this._onChange.bind(this);
     this.submitLocation = this.submitLocation.bind(this)
@@ -23,8 +24,8 @@ class exploreHeader extends React.Component {
   }
 
   _onChange() {
-    //ReactDOM.findDOMNode(this.refs.focus).focus();
-    this.setState(ExploreStore.getErrorState())
+    this.setState(ExploreStore.getLocation())
+    // ReactDOM.findDOMNode(this.refs.focus).focus()
   }
 
   // This will be called when the user clicks on the login button
@@ -50,7 +51,7 @@ class exploreHeader extends React.Component {
     return (
       <div className="callout hero small explore">
         <form className="location" onSubmit={this.submitLocation}>
-          <input ref="focus" onChange={this.handleLocationChange} value={this.props.location} placeholder="Where is your next event?" type="text"/>
+          <input ref="focus" onChange={this.handleLocationChange}  placeholder="Where is your next event?" type="text"/>
             {this.state.message ?
               <p className="help-text">{this.state.message}</p> : null
             }

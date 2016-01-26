@@ -5,12 +5,13 @@ import ProfileActions from '../../actions/profileActions';
 import ProfileStore from '../../stores/profileStore';
 import ProfileTitle from './profileTitle'
 import ProfileContent from './profileContent'
+import AuthenticatedComponent from '../authenticatedComponent';
+
 
 class PhotographerProfile extends React.Component {
   constructor() {
     super()
     this.state = ProfileStore.getProfileState();
-    console.log("in constructor: ", this.state)
     this._onChange = this._onChange.bind(this);
   }
 
@@ -56,4 +57,4 @@ class PhotographerProfile extends React.Component {
   }
 }
 
-export default PhotographerProfile;
+export default AuthenticatedComponent(PhotographerProfile);

@@ -59,22 +59,29 @@ class Signup extends React.Component {
 
   render() {
     return (
-      <div className="login jumbotron center-block">
+    <div>
+      <div className="callout small hero">
         <h1>Sign Up</h1>
-          <h2>
-            {this.state.message}
-          </h2>
-          <form role="form" onSubmit={this.signup}>
-            <input type="text" ref="firstName"  className="form-control" name="firstname" id="firstname" placeholder="First name" />
-            <input type="text" ref="lastName"  className="form-control" name="lastname" id="lastname" placeholder="Last name" />
-            <input type="email" ref="email"  className="form-control" name="email" id="email"  placeholder="Email" />
-            <input type="password" ref="password" className="form-control" id="password" placeholder="Password" />
-            <input type="password" ref="confirm"  className="form-control" id="password" placeholder="Confirm password" />
-
-            <input type="submit" value="Sign Up" className="expanded button"/>
-          </form>
-          <p>{'Already have an account\u003F'} <Link to='/login'>Log in</Link></p>
       </div>
+      <div id="login" className="callout medium photographer-login">
+        {this.state.message ?
+        <div className="callout alert">
+          <p>{this.state.message}</p>
+        </div> : null }
+        <p>Want to sign up as a photographer? <Link to='/apply'>Apply Here</Link></p>
+        <form id="signup-form" name="signup-form" onSubmit={this.signup}>
+          <input type="text" ref="firstName" name="firstname" id="firstname" placeholder="First name"/>
+          <input type="text" ref="lastName" name="lastname" id="lastname" placeholder="Last name"/>
+          <input type="text" ref="email" name="email" id="email" placeholder="Email address"/>
+          <input type="password" ref="password" name="password" id="password" placeholder="Password"/>
+          <input type="password" ref="confirm" name="password" id="password" placeholder="Confirm Password"/>
+          <input type="submit" value="Sign Up" className="expanded button"/>
+        </form>
+        <br/>
+        <p>Already have an account? <Link to='/login'>Log in</Link></p>
+      </div>
+    </div>
+
     );
   }
 }

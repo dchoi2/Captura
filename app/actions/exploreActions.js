@@ -25,9 +25,19 @@ class ExploreActions{
         console.log("location submitted")
         AppDispatcher.handleViewAction({
           actionType: UPDATE_LOCATION,
-          profiles: data.profiles // should contain location
+          profiles: data.profiles, // should contain location
+          locString: locData.city + ", " + locData.state,
+          message: data.message
         })
       }
+    })
+  }
+
+  static setFilters(filterList) {
+    console.log("setting filters in exploreActions")
+    AppDispatcher.handleViewAction({
+      actionType: UPDATE_FILTER,
+      filters: filterList // should contain location
     })
   }
 

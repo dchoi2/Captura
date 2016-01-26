@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import ProfileActions from '../../actions/profileActions'
+import {Link} from 'react-router'
 
 class PhotographerTitle extends React.Component {
   constructor() {
@@ -56,7 +57,7 @@ class PhotographerTitle extends React.Component {
           </div>
 
           <div className="medium-4 columns">
-            <a className="expanded button">Request Quote</a>
+            <Link to='/request' className="expanded button">Request Quote</Link>
             {this.props.favorited ?
             <a className="expanded alert button"><i className="fa fa-heart"></i> Favorited</a>
             :

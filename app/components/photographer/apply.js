@@ -13,6 +13,7 @@ class Apply extends React.Component {
     this.signup = this.signup.bind(this);
     this.useBusinessCheck = this.useBusinessCheck.bind(this)
   }
+
   resetState() {
     return {
       useBusiness: false,
@@ -159,98 +160,5 @@ class Apply extends React.Component {
     );
   }
 }
-        //   <div className="columns">
-        //     <legend>specialities</legend>
-        //     <p className="help-text" id="specialtyHelpText">Select at least one.</p>
-        //   </div>
-        // </div>
-        // <div className="row">
-        //   <div className="large-3 columns">
-        //     <input id="portrait" type="checkbox"/><label htmlFor="portrait">Portrait</label><br/>
-        //     <input id="headshot" type="checkbox"/><label htmlFor="headshot">Headshot</label><br/>
-        //     <input id="events" type="checkbox"/><label htmlFor="events">Events</label>
-        //   </div>
-        //   <div className="large-3 columns">
-        //     <input id="engagement" type="checkbox"/><label htmlFor="engagement">Engagement</label><br/>
-        //     <input id="wedding" type="checkbox"/><label htmlFor="wedding">Wedding</label><br/>
-        //     <input id="lifestyle" type="checkbox"/><label htmlFor="lifestyle">Lifestyle/Candid</label>
-        //   </div>
-        //   <div className="large-3 columns">
-        //     <input id="club" type="checkbox"/><label htmlFor="club">Club/Nightlife</label><br/>
-        //     <input id="concert" type="checkbox"/><label htmlFor="concert">Concert/Performance</label><br/>
-        //     <input id="commercial" type="checkbox"/><label htmlFor="commercial">Commercial</label>
-        //   </div>
-        //   <div className="large-3 columns">
-        //     <input id="arch" type="checkbox"/><label htmlFor="arch">Real Estate/Architecture</label><br/>
-        //     <input id="sports" type="checkbox"/><label htmlFor="sports">Sports</label><br/>
-        //     <input id="nature" type="checkbox"/><label htmlFor="nature">Nature</label>
-        //   </div>
-        // </div>
+
 export default Apply;
-
-  // onDrop(files) {
-  //   console.log(files)
-  //   if (files[0].type !== 'image/jpeg') {
-  //     console.log("file is not jpg")
-  //   }
-  //   this.setState({
-  //     files: files
-  //   })
-  // }
-
-  // onOpenClick() {
-  //   this.refs.dropzone.open();
-  // }
-      // <div className="login jumbotron center-block">
-      //   <h1>Apply to be a Photographer!</h1>
-      //     <h2>
-      //       {this.state.message}
-      //     </h2>
-      //     <form role="form" onSubmit={this.signup}>
-      //       <input type="text" ref="firstName" className="form-control" name="firstname" id="firstname" placeholder="First name" />
-      //       <input type="text" ref="lastName" className="form-control" name="lastname" id="lastname" placeholder="Last name" />
-      //       <input type="text" ref="businessName" className="form-control" name="businessName" id="businessName" placeholder="Business name" />
-      //       <input type="text"  ref = "email" className="form-control" name="email" id="email"  placeholder="Email" />
-      //       <input type="password" className="form-control" id="password" ref="password" placeholder="Password" />
-      //       <input type="password"  className="form-control" id="confirm" ref="confirm" placeholder="Confirm password" />
-      //       <input type="text"  className="form-control" id="website" ref="website" placeholder="Portfolio Link" />
-      //       <input type="text" className="form-control" id="facebook" ref="facebook" placeholder="Facebook Page"/>
-      //       <input type="text" className="form-control" id="twitter" ref="twitter" placeholder="Twitter Page"/>
-      //       <input type="text" className="form-control" id="instagram" ref="instagram" placeholder="Instagram Page"/>
-      //       <input type="text" className="form-control" id="flickr" ref="flickr" placeholder="Flickr Page"/>
-      //       <fieldset className="fieldset">
-      //         <legend>specialities:</legend>
-      //         <div className="large-3 columns">
-      //           <input id="portrait" type="checkbox" onClick={this.test} ref="sP"/><label htmlhtmlFor="portrait">Portrait</label><br/>
-      //           <input id="headshot" type="checkbox" ref="sH"/><label htmlhtmlFor="headshot">Headshot</label><br/>
-      //           <input id="events" type="checkbox"  ref="sEv"/><label htmlhtmlFor="events">Events</label>
-      //         </div>
-      //         <div className="large-3 columns">
-      //           <input id="engagement" type="checkbox" ref="sEn"/><label htmlhtmlFor="engagement">Engagement</label><br/>
-      //           <input id="wedding" type="checkbox" ref="sW"/><label htmlhtmlFor="wedding">Wedding</label><br/>
-      //           <input id="lifestyle" type="checkbox" ref="sL"/><label htmlhtmlFor="lifestyle">Lifestyle/Candid</label>
-      //         </div>
-      //         <div className="large-3 columns">
-      //           <input id="club" type="checkbox" ref="sCl"/><label htmlhtmlFor="club">Club/Nightlife</label><br/>
-      //           <input id="concert" type="checkbox" ref="sCon"/><label htmlhtmlFor="concert">Concert/Performance</label><br/>
-      //           <input id="commercial" type="checkbox" ref="sCom"/><label htmlhtmlFor="commercial">Commercial</label>
-      //         </div>
-      //         <div className="large-3 columns">
-      //           <input id="arch" type="checkbox" ref="sA"/><label htmlhtmlFor="arch">Real Estate/Architecture</label><br/>
-      //           <input id="sports" type="checkbox" ref="sSp"/><label htmlhtmlFor="sports">Sports</label><br/>
-      //           <input id="nature" type="checkbox" ref="sN"/><label htmlhtmlFor="nature">Nature</label>
-      //         </div>
-      //       </fieldset>
-      //       <Dropzone ref="dropzone" onDrop={this.onDrop}>
-      //           <div>Try dropping some files here, or click to select files to upload.</div>
-      //       </Dropzone>
-      //       <button type="button" onClick={this.onOpenClick}>
-      //           Open Dropzone
-      //       </button>
-      //       {this.state.files.length > 0 ? <div>
-      //       <h2>Uploading {this.state.files.length} files...</h2>
-      //       <div>{this.state.files.map((file) => <img src={file.preview} /> )}</div>
-      //       </div> : null}
-      //       <input type="submit" value="Sign Up" className="expanded button"/>
-      //     </form>
-      // </div>

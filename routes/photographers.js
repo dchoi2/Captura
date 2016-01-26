@@ -17,7 +17,6 @@ router.get('/', utils.loggedIn, function(request, response) {
     .populate('location review')
     .exec(function(err, docs) {
       utils.handleError(err);
-      console.log("Photographers: ",docs)
       response.json(docs);
     }
   );
@@ -79,6 +78,13 @@ router.post('/', function(request, response) {
         }
         else {
           console.log("successfully got this far")
+          var avatarBase, coverBase;
+          if (request.body.avatarBase) {
+            avatarBase = request.body.avatarBase
+          }
+          if (request.body.coverBase) {
+            coverBase = request.body.coverBase
+          }
           var newPhotographer = new Photographer({
             firstName: request.body.firstName,
             lastName: request.body.lastName,
@@ -94,8 +100,11 @@ router.post('/', function(request, response) {
               // instagram: request.body.instagramUrl,
               // flickr: request.body.flickrUrl
             },
+            avatarBase: avatarBase,
+            coverBase: coverBase,
             reviews: [],
-            bookings: []
+            bookings: [],
+            aboutMe: request.body.aboutMe
           })
           newPhotographer.save(function(err, photographer) {
             if (err) { //MONGODB ERROR; need to log somewhere
@@ -201,7 +210,7 @@ router.post('/location', function(request, response) {
                 photographers.push(p)
               }
             }
-            response.json({success: true, pinpoint: pinpoint, profiles: photographers})
+            response.json({success: true, pinpoint: pinpoint, profiles: photographers, message: ''})
           }
         }
       })

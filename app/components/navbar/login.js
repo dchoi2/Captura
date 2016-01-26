@@ -56,18 +56,28 @@ class Login extends React.Component {
 
   render() {
     return (
-      <div className="login jumbotron center-block">
-        <h1>Login</h1>
-          <h2>
-            {this.state.message}
-          </h2>
-          <form id="signup-form" name="signup-form" role="form" onSubmit={this.login}>
-            <input type="text" ref="focus" onChange={this.handleEmailChange} value={this.state.email} name="email" id="email" placeholder="Email Address" />
-            <input type="password" onChange={this.handlePwdChange} value={this.state.password} name="password" id="password" ref="password" placeholder="Password" />
-            <input type="submit" value="Log In" className="expanded button"/>
-          </form>
-          <p>{'Don\u0027t have an account yet\u003F'} <Link to='/signup'>Sign Up</Link></p>
+
+  <div>
+    <div className="callout small hero">
+      <h1>Log In</h1>
+    </div>
+
+    <div id="login" className="callout medium photographer-login">
+      {this.state.message ?
+      <div className="callout alert">
+        <p>{this.state.message}</p>
       </div>
+      : null}
+      <form id="login-form" name="login-form" onSubmit={this.login}>
+        <input type="text" ref="focus" onChange={this.handleEmailChange} value={this.state.email} name="email" id="email" placeholder="Email Address" />
+        <input type="password" onChange={this.handlePwdChange} value={this.state.password} name="password" id="password" ref="password" placeholder="Password"/>
+        <input type="submit" value="Log In" className="expanded button"/>
+      </form>
+      <br/>
+      <p>Don{'\u0027'}t have an account yet? <Link to='/signup'>Sign Up</Link></p>
+    </div>
+  </div>
+
     );
   }
 }

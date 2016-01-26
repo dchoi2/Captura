@@ -5,7 +5,7 @@ import ExploreHeader from './exploreHeader'
 import ExploreStore from '../../stores/exploreStore'
 import ExploreActions from '../../actions/exploreActions'
 import Sorter from './sorter'
-//import Filter from './filter'
+import Filter from './filter'
 import ProfileView from './profileView'
 
 class Explore extends React.Component {
@@ -28,14 +28,16 @@ class Explore extends React.Component {
 
   _onChange() {
     this.setState(ExploreStore.setFullState())
+    console.log("setting full state")
   }
 
   render() {
-    console.log("explore: ",this.state)
+    console.log("in explore, location = ", this.state.location)
     return (
       <div>
         <ExploreHeader location={this.state.location}/>
         <Sorter/>
+        <Filter location={this.state.location}/>
         <ProfileView/>
       </div>
     )

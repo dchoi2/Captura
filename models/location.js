@@ -69,7 +69,7 @@ var geocoder = {
       }
       else {
         var results = data['results']
-        cb(false, {data: results})
+        cb(false, {success: true, data: results})
       }
     })
   }

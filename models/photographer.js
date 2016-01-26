@@ -20,7 +20,7 @@ var photographerSchema = new mongoose.Schema({
     flickr: String
   },
   avatarBase: {type: String, default: "default.png"},
-  coverBase: {type: String, default: "default.png"},
+  coverBase: {type: String, default: "default.jpg"},
   reviews: [{type: mongoose.Schema.Types.ObjectId, ref: 'Review'}],
   bookings: [{type: mongoose.Schema.Types.ObjectId, ref: 'Event'}],
   status: {type: Boolean, default: false},

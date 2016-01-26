@@ -25,7 +25,10 @@ class ExploreStore extends BaseStore {
       case UPDATE_LOCATION:
         console.log("UPDATE_LOCATION REACHED");
         this._profiles = action.profiles
+        this._location = action.locString
+        this._message = action.message
         console.log(this._profiles)
+        console.log(this._location)
         this.emitChange();
         break;
       case UPDATE_PHOTOS:
@@ -37,14 +40,9 @@ class ExploreStore extends BaseStore {
         break;
       case UPDATE_FILTER:
         console.log("UPDATE_FILTER REACHED")
-        this._lastName = action.data.lastName
-        this._firstName = action.data.firstName
-        this._email = action.data.email
-        this._isLoggedIn = true;
+        this._filters = action.filters;
 
-        this.emitChange();
-        browserHistory.push('/');
-
+        this.emitChange()
         break;
       case UPDATE_SORT:
         console.log("UPDATE_SORT REACHED");
@@ -67,6 +65,13 @@ class ExploreStore extends BaseStore {
       sortBy: this._sortBy,
       sortHasChanged: this._sortHasChanged,
       filters: this._filters
+    }
+  }
+
+  getLocation() {
+    return {
+      location: this._location,
+      message: this._message
     }
   }
 

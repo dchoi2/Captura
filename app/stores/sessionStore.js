@@ -60,7 +60,6 @@ class SessionStore extends BaseStore {
   }
 
   isLoggedIn() {
-    console.log("calling isLoggedIn")
     return !!this._user
   }
 }

@@ -1,5 +1,7 @@
 import SessionStore from '../stores/sessionStore';
 
+
+console.log("in requireAuth")
 function is_server() {
    return ! (typeof window != 'undefined' && window.document);
 }
