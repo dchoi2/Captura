@@ -16,7 +16,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // MongoDB/Mongoose Connection Code
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
-var connectionString = process.env.OPENSHIFT_MONGODB_DB_URL || 'mongodb://localhost:27017/popcorn';
+var connectionString = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/popcorn';
 mongoose.connect(connectionString);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
