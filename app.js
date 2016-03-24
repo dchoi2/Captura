@@ -124,5 +124,4 @@ app.use(function(err, req, res, next) {
   res.send('CSRF blocked; session has expired or form tampered with');
 })
 
-app.listen(process.env.OPENSHIFT_NODEJS_PORT || 8080,
-  process.env.OPENSHIFT_NODEJS_IP);
+app.listen(process.env.PORT || 8080);
