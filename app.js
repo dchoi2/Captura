@@ -17,8 +17,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 var mongo = require('mongodb');
 var mongoose = require('mongoose');
 var connectionString = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/popcorn';
-console.log(connectionString);
-console.log(process.env.MONGOLAB_URI);
+//console.log(connectionString);
+//console.log(process.env.MONGOLAB_URI);
 mongoose.connect(connectionString);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -45,11 +45,6 @@ app.use(session({
 // Passport Session Initialization
 app.use(passport.initialize());
 app.use(passport.session());
-
-//app.set('views', path.join(__dirname, 'views'));
-//app.engine('html', require('ejs').renderFile);
-//app.set('view engine', 'html');
-
 
 require('babel-register');
 var swig = require('swig');
@@ -82,11 +77,11 @@ var hist = require('history')
 // React URL Routing
 app.use(function(req, res) {
   var state = {state: req.user}
-  console.log("req.user ", req.user)
-  console.log("req.session ", req.session)
-  console.log("req.url ", req.url)
-  console.log("req.path", req.path)
-  console.log("routes.default ", routes.default)
+  // console.log("req.user ", req.user)
+  // console.log("req.session ", req.session)
+  // console.log("req.url ", req.url)
+  // console.log("req.path", req.path)
+  // console.log("routes.default ", routes.default)
   Router.match({ routes: routes.default, location: req.url }, function(err, redirectLocation, renderProps) {
     if (err) {
       res.status(500).send(err.message)

@@ -1,3 +1,5 @@
+var bcrypt = require('bcrypt');
+
 var loggedIn = function(request, response, next) {
   if (request.user) {
     next();

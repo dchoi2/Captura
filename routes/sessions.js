@@ -8,21 +8,16 @@ var Router = function(passport) {
 
   //Use passport.js to handle authentication.
   router.post('/users', function(request, response) {
+    // second parameter to authenticate = 'done'
     passport.authenticate('local', function(err, user, info) {
-      if (err) {
-        utils.handleError(err);
-      }
+      if (err) utils.handleError(err);
       if (!user) {
-        response.json(info);
-        return;
+        return response.json(info);
       }
 
       request.logIn(user, function(err) {
-        if (err) {
-          utils.handleError(err);
-        }
+        if (err) utils.handleError(err);
 
-        // set the message
         response.json({success: true, message: 'Login successful'});
         return;
       })

@@ -11,6 +11,20 @@ router.get('/', utils.loggedIn, function(request, response) {
   });
 });
 
+router.post('/', (request, response) => {
+  var newUser = new User({
+    firstName: request.body.firstName,
+    lastName: request.body.lastName,
+    password: request.body.password,
+    email: request.body.email
+  });
+  newUser.save( (err) => {
+    // Mongoose will throw validation errors
+    if (err) response.json({success:false, message: err.errors[Object.keys(err.errors)[0]].message});
+    else response.json({success: true});
+  })
+});
+
 router.get('/account/:id', function(request, response) {
   // if (request.params.id !== request.user.id) {
   //   response.status(401).send("Not Authorized")
@@ -35,42 +49,6 @@ router.get('/account/:id', function(request, response) {
   })
 })
 
-router.post('/', function(request, response) {
-  User.findOne({email: request.body.email}, function(err, doc) {
-    if (err) {
-      response.send(err);
-    }
-    else if (doc) {
-      response.json({success:false, message: "Account with that email already exists"});
-    }
-    else if (!request.body.email) {
-      response.json({success:false, message: "Need to specify email"});
-    }
-    else if (!request.body.password || request.body.password.length < 8) {
-      response.json({success:false, message: "Password must be at least 8 characters"});
-    }
-    else {
-      //console.log(request.body);
-      var newUser = new User({
-        firstName: request.body.firstName,
-        lastName: request.body.lastName,
-        password: request.body.password,
-        email: request.body.email,
-        favorites: [],
-        bookings: [],
-        review: []
-      });
-      newUser.save(function(err) {
-        if (err) {
-          response.send(err);
-        }
-        else {
-          response.json({success: true});
-        }
-      });
-    }
-  });
-});
 
 router.put('/account/:id', function(request, response) {
   User.findOne({_id: request.params.id}, function(err, user) {
