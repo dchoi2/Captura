@@ -2606,7 +2606,7 @@ exports.default = AccountInfo;
 //   </form>
 // </div>
 
-},{"../../utils/specialitiesTools":45,"react":"react","react-dom":"react-dom","react-dropzone":52,"react-router":"react-router"}],19:[function(require,module,exports){
+},{"../../utils/specialitiesTools":45,"react":"react","react-dom":"react-dom","react-dropzone":53,"react-router":"react-router"}],19:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -2889,7 +2889,7 @@ var Apply = function (_React$Component) {
 
 exports.default = Apply;
 
-},{"../../actions/photographerActions":2,"../../utils/specialitiesTools":45,"react":"react","react-dom":"react-dom","react-dropzone":52,"react-router":"react-router"}],20:[function(require,module,exports){
+},{"../../actions/photographerActions":2,"../../utils/specialitiesTools":45,"react":"react","react-dom":"react-dom","react-dropzone":53,"react-router":"react-router"}],20:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -3954,7 +3954,7 @@ var QuoteRequest = function (_React$Component) {
 
 exports.default = QuoteRequest;
 
-},{"../../actions/photographerActions":2,"../../stores/sessionStore":42,"react":"react","react-dom":"react-dom","react-dropzone":52,"react-router":"react-router"}],25:[function(require,module,exports){
+},{"../../actions/photographerActions":2,"../../stores/sessionStore":42,"react":"react","react-dom":"react-dom","react-dropzone":53,"react-router":"react-router"}],25:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -4872,7 +4872,7 @@ module.exports = keyMirror({
 'use strict';
 
 var Dispatcher = require('flux').Dispatcher;
-var assign = require('react/lib/Object.assign');
+var assign = require('object-assign');
 
 var AppDispatcher = assign(new Dispatcher(), {
   handleViewAction: function handleViewAction(action) {
@@ -4886,7 +4886,7 @@ var AppDispatcher = assign(new Dispatcher(), {
 
 module.exports = AppDispatcher;
 
-},{"flux":48,"react/lib/Object.assign":53}],37:[function(require,module,exports){
+},{"flux":48,"object-assign":51}],37:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -6056,7 +6056,7 @@ var invariant = function (condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":51}],48:[function(require,module,exports){
+},{"_process":52}],48:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -6302,7 +6302,7 @@ var Dispatcher = (function () {
 
 module.exports = Dispatcher;
 }).call(this,require('_process'))
-},{"_process":51,"fbjs/lib/invariant":47}],50:[function(require,module,exports){
+},{"_process":52,"fbjs/lib/invariant":47}],50:[function(require,module,exports){
 
 'use strict';
 
@@ -6328,6 +6328,34 @@ module.exports =
     };
 
 },{}],51:[function(require,module,exports){
+'use strict';
+
+function ToObject(val) {
+	if (val == null) {
+		throw new TypeError('Object.assign cannot be called with null or undefined');
+	}
+
+	return Object(val);
+}
+
+module.exports = Object.assign || function (target, source) {
+	var from;
+	var keys;
+	var to = ToObject(target);
+
+	for (var s = 1; s < arguments.length; s++) {
+		from = arguments[s];
+		keys = Object.keys(Object(from));
+
+		for (var i = 0; i < keys.length; i++) {
+			to[keys[i]] = from[keys[i]];
+		}
+	}
+
+	return to;
+};
+
+},{}],52:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -6509,7 +6537,7 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],52:[function(require,module,exports){
+},{}],53:[function(require,module,exports){
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
 		module.exports = factory(require("react"));
@@ -6917,52 +6945,4 @@ return /******/ (function(modules) { // webpackBootstrap
 });
 ;
 
-},{"react":"react"}],53:[function(require,module,exports){
-/**
- * Copyright 2014-2015, Facebook, Inc.
- * All rights reserved.
- *
- * This source code is licensed under the BSD-style license found in the
- * LICENSE file in the root directory of this source tree. An additional grant
- * of patent rights can be found in the PATENTS file in the same directory.
- *
- * @providesModule Object.assign
- */
-
-// https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object.assign
-
-'use strict';
-
-function assign(target, sources) {
-  if (target == null) {
-    throw new TypeError('Object.assign target cannot be null or undefined');
-  }
-
-  var to = Object(target);
-  var hasOwnProperty = Object.prototype.hasOwnProperty;
-
-  for (var nextIndex = 1; nextIndex < arguments.length; nextIndex++) {
-    var nextSource = arguments[nextIndex];
-    if (nextSource == null) {
-      continue;
-    }
-
-    var from = Object(nextSource);
-
-    // We don't currently support accessors nor proxies. Therefore this
-    // copy cannot throw. If we ever supported this then we must handle
-    // exceptions and side-effects. We don't support symbols so they won't
-    // be transferred.
-
-    for (var key in from) {
-      if (hasOwnProperty.call(from, key)) {
-        to[key] = from[key];
-      }
-    }
-  }
-
-  return to;
-}
-
-module.exports = assign;
-},{}]},{},[37]);
+},{"react":"react"}]},{},[37]);

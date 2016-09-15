@@ -76,7 +76,7 @@ var hist = require('history')
 
 // React URL Routing
 app.use(function(req, res) {
-  var state = {state: req.user}
+  //var state = {state: req.user}
   // console.log("req.user ", req.user)
   // console.log("req.session ", req.session)
   // console.log("req.url ", req.url)
@@ -89,10 +89,9 @@ app.use(function(req, res) {
       res.status(302).redirect(redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
       renderProps.context = "hi"
-      console.log("renderProps: ", renderProps)
       var html = ReactDOM.renderToString(
                     React.createElement(
-                      Router.RoutingContext,
+                      Router.RouterContext,
                       renderProps));
       var page = swig.renderFile('public/index.html', { html: html });
       res.status(200).send(page);

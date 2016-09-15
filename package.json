@@ -43,7 +43,7 @@
     "mongoose": "^4.6.0",
     "mongoose-unique-validator": "^1.0.2",
     "mongoose-validators": "^0.1.0",
-    "node-gyp": "^3.4.0", // Native Node
+    "node-gyp": "^3.4.0",
     "passport": "~0.3.2",
     "passport-local": "~1.0.0",
     "react": "^15.3.1",
