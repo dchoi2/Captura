@@ -1,11 +1,11 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _appDispatcher = require('../dispatchers/appDispatcher.js');
 
@@ -78,11 +78,11 @@ exports.default = ExploreActions;
 },{"../constants/exploreConstants.js":31,"../dispatchers/appDispatcher.js":36}],2:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _appDispatcher = require('../dispatchers/appDispatcher.js');
 
@@ -139,11 +139,11 @@ exports.default = PhotographerActions;
 },{"../constants/photographerConstants.js":32,"../dispatchers/appDispatcher.js":36,"react-router":"react-router"}],3:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _appDispatcher = require('../dispatchers/appDispatcher.js');
 
@@ -220,11 +220,11 @@ exports.default = ProfileActions;
 },{"../constants/profileConstants.js":33,"../dispatchers/appDispatcher.js":36,"react-router":"react-router"}],4:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _appDispatcher = require('../dispatchers/appDispatcher.js');
 
@@ -314,11 +314,11 @@ exports.default = SessionActions;
 },{"../constants/sessionConstants.js":34,"../dispatchers/appDispatcher.js":36,"react-router":"react-router"}],5:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _appDispatcher = require('../dispatchers/appDispatcher.js');
 
@@ -406,11 +406,11 @@ exports.default = UserActions;
 },{"../constants/userConstants.js":35,"../dispatchers/appDispatcher.js":36,"./sessionActions":4,"react-router":"react-router"}],6:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -438,7 +438,7 @@ var App = function (_React$Component) {
   function App() {
     _classCallCheck(this, App);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(App).call(this));
+    var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 
     _this.state = _this._getLoginState();
     console.log("in app.js", _this.state);
@@ -490,13 +490,13 @@ exports.default = App;
 },{"../stores/sessionStore":42,"./navbar/navbar.js":16,"react":"react"}],7:[function(require,module,exports){
 'use strict';
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -527,7 +527,7 @@ exports.default = function (ComposedComponent) {
     function AuthenticatedComponent() {
       _classCallCheck(this, AuthenticatedComponent);
 
-      var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AuthenticatedComponent).call(this));
+      var _this = _possibleConstructorReturn(this, (AuthenticatedComponent.__proto__ || Object.getPrototypeOf(AuthenticatedComponent)).call(this));
 
       _this.state = _this._getLoginState();
       //this._checkLoggedIn();
@@ -590,11 +590,11 @@ exports.default = function (ComposedComponent) {
 },{"../actions/sessionActions":4,"../stores/sessionStore":42,"react":"react","react-router":"react-router"}],8:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -644,7 +644,7 @@ var Explore = function (_React$Component) {
   function Explore() {
     _classCallCheck(this, Explore);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Explore).call(this));
+    var _this = _possibleConstructorReturn(this, (Explore.__proto__ || Object.getPrototypeOf(Explore)).call(this));
 
     _this.state = _exploreStore2.default.setFullState();
     // this._onChange = this._onChange.bind(this);
@@ -693,11 +693,11 @@ exports.default = (0, _authenticatedComponent2.default)(Explore);
 },{"../../actions/exploreActions":1,"../../stores/exploreStore":40,"../authenticatedComponent":7,"./exploreHeader":9,"./filter":10,"./profileView":12,"./sorter":13,"react":"react","react-router":"react-router"}],9:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -729,7 +729,7 @@ var exploreHeader = function (_React$Component) {
   function exploreHeader() {
     _classCallCheck(this, exploreHeader);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(exploreHeader).call(this));
+    var _this = _possibleConstructorReturn(this, (exploreHeader.__proto__ || Object.getPrototypeOf(exploreHeader)).call(this));
 
     _this.state = { message: '' };
     _this.state = _exploreStore2.default.getLocation();
@@ -806,11 +806,11 @@ exports.default = exploreHeader;
 },{"../../actions/exploreActions":1,"../../stores/exploreStore":40,"react":"react","react-dom":"react-dom"}],10:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -846,7 +846,7 @@ var Filter = function (_React$Component) {
   function Filter() {
     _classCallCheck(this, Filter);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Filter).call(this));
+    var _this = _possibleConstructorReturn(this, (Filter.__proto__ || Object.getPrototypeOf(Filter)).call(this));
 
     _this.state = _this.resetFilteredState();
     _this._onChange = _this._onChange.bind(_this);
@@ -1002,11 +1002,11 @@ exports.default = Filter;
 },{"../../actions/exploreActions":1,"../../stores/exploreStore":40,"../../utils/specialitiesTools":45,"react":"react","react-dom":"react-dom"}],11:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -1040,7 +1040,7 @@ var profileCard = function (_React$Component) {
   function profileCard() {
     _classCallCheck(this, profileCard);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(profileCard).call(this));
+    return _possibleConstructorReturn(this, (profileCard.__proto__ || Object.getPrototypeOf(profileCard)).call(this));
   }
 
   // componentDidMount() {
@@ -1052,6 +1052,7 @@ var profileCard = function (_React$Component) {
   // }
 
   // This will be called when the user clicks on the login button
+
 
   _createClass(profileCard, [{
     key: 'render',
@@ -1169,13 +1170,13 @@ exports.default = profileCard;
 },{"../../actions/exploreActions":1,"../../stores/exploreStore":40,"react":"react","react-dom":"react-dom","react-router":"react-router"}],12:[function(require,module,exports){
 'use strict';
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -1235,7 +1236,7 @@ var ProfileView = function (_React$Component) {
   function ProfileView() {
     _classCallCheck(this, ProfileView);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ProfileView).call(this));
+    var _this = _possibleConstructorReturn(this, (ProfileView.__proto__ || Object.getPrototypeOf(ProfileView)).call(this));
 
     _this.state = _exploreStore2.default.setFullState();
     _this._onChange = _this._onChange.bind(_this);
@@ -1293,11 +1294,11 @@ exports.default = ProfileView;
 },{"../../actions/exploreActions":1,"../../stores/exploreStore":40,"./profileCard":11,"react":"react","react-dom":"react-dom"}],13:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -1329,7 +1330,7 @@ var Sorter = function (_React$Component) {
   function Sorter() {
     _classCallCheck(this, Sorter);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Sorter).call(this));
+    var _this = _possibleConstructorReturn(this, (Sorter.__proto__ || Object.getPrototypeOf(Sorter)).call(this));
 
     _this.state = _exploreStore2.default.getSortState();
     // this._onChange = this._onChange.bind(this);
@@ -1408,11 +1409,11 @@ exports.default = Sorter;
 },{"../../actions/exploreActions":1,"../../stores/exploreStore":40,"react":"react","react-dom":"react-dom"}],14:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -1438,7 +1439,7 @@ var Home = function (_React$Component) {
   function Home() {
     _classCallCheck(this, Home);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Home).call(this));
+    var _this = _possibleConstructorReturn(this, (Home.__proto__ || Object.getPrototypeOf(Home)).call(this));
 
     console.log("here in Home");
     return _this;
@@ -1572,11 +1573,11 @@ exports.default = (0, _authenticatedComponent2.default)(Home);
 },{"./authenticatedComponent":7,"react":"react","react-router":"react-router"}],15:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -1606,7 +1607,7 @@ var Login = function (_React$Component) {
   function Login() {
     _classCallCheck(this, Login);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Login).call(this));
+    var _this = _possibleConstructorReturn(this, (Login.__proto__ || Object.getPrototypeOf(Login)).call(this));
 
     _this.state = _this.getInputState();
     _this.handleEmailChange = _this.handleEmailChange.bind(_this);
@@ -1724,11 +1725,11 @@ exports.default = Login;
 },{"../../actions/sessionActions":4,"react":"react","react-dom":"react-dom","react-router":"react-router"}],16:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -1760,7 +1761,7 @@ var Navbar = function (_React$Component) {
   function Navbar() {
     _classCallCheck(this, Navbar);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Navbar).call(this));
+    var _this = _possibleConstructorReturn(this, (Navbar.__proto__ || Object.getPrototypeOf(Navbar)).call(this));
 
     _this.state = _sessionStore2.default.getState();
     _this._onChange = _this._onChange.bind(_this);
@@ -1897,11 +1898,11 @@ exports.default = Navbar;
 },{"../../actions/sessionActions":4,"../../stores/sessionStore":42,"react":"react","react-router":"react-router"}],17:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -1935,7 +1936,7 @@ var Signup = function (_React$Component) {
   function Signup() {
     _classCallCheck(this, Signup);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Signup).call(this));
+    var _this = _possibleConstructorReturn(this, (Signup.__proto__ || Object.getPrototypeOf(Signup)).call(this));
 
     _this.state = _this.resetState();
     _this.signup = _this.signup.bind(_this);
@@ -2062,11 +2063,11 @@ exports.default = Signup;
 },{"../../actions/sessionActions":4,"../../actions/userActions":5,"react":"react","react-dom":"react-dom","react-router":"react-router"}],18:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -2100,7 +2101,7 @@ var AccountInfo = function (_React$Component) {
   function AccountInfo() {
     _classCallCheck(this, AccountInfo);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AccountInfo).call(this));
+    var _this = _possibleConstructorReturn(this, (AccountInfo.__proto__ || Object.getPrototypeOf(AccountInfo)).call(this));
 
     _this.state = _this.resetState();
     _this.signup = _this.signup.bind(_this);
@@ -2605,14 +2606,14 @@ exports.default = AccountInfo;
 //   </form>
 // </div>
 
-},{"../../utils/specialitiesTools":45,"react":"react","react-dom":"react-dom","react-dropzone":53,"react-router":"react-router"}],19:[function(require,module,exports){
+},{"../../utils/specialitiesTools":45,"react":"react","react-dom":"react-dom","react-dropzone":52,"react-router":"react-router"}],19:[function(require,module,exports){
 'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -2650,7 +2651,7 @@ var Apply = function (_React$Component) {
   function Apply() {
     _classCallCheck(this, Apply);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Apply).call(this));
+    var _this = _possibleConstructorReturn(this, (Apply.__proto__ || Object.getPrototypeOf(Apply)).call(this));
 
     _this.state = _this.resetState();
     _this.signup = _this.signup.bind(_this);
@@ -2888,14 +2889,14 @@ var Apply = function (_React$Component) {
 
 exports.default = Apply;
 
-},{"../../actions/photographerActions":2,"../../utils/specialitiesTools":45,"react":"react","react-dom":"react-dom","react-dropzone":53,"react-router":"react-router"}],20:[function(require,module,exports){
+},{"../../actions/photographerActions":2,"../../utils/specialitiesTools":45,"react":"react","react-dom":"react-dom","react-dropzone":52,"react-router":"react-router"}],20:[function(require,module,exports){
 'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -2917,7 +2918,7 @@ var PhotographerHome = function (_React$Component) {
   function PhotographerHome() {
     _classCallCheck(this, PhotographerHome);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PhotographerHome).call(this));
+    var _this = _possibleConstructorReturn(this, (PhotographerHome.__proto__ || Object.getPrototypeOf(PhotographerHome)).call(this));
 
     _this.submitForm = _this.submitForm.bind(_this);
     _this.state = { message: '' };
@@ -3068,11 +3069,11 @@ exports.default = PhotographerHome;
 },{"react":"react","react-router":"react-router"}],21:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -3116,7 +3117,7 @@ var PhotographerProfile = function (_React$Component) {
   function PhotographerProfile() {
     _classCallCheck(this, PhotographerProfile);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PhotographerProfile).call(this));
+    var _this = _possibleConstructorReturn(this, (PhotographerProfile.__proto__ || Object.getPrototypeOf(PhotographerProfile)).call(this));
 
     _this.state = _profileStore2.default.getProfileState();
     _this._onChange = _this._onChange.bind(_this);
@@ -3182,11 +3183,11 @@ exports.default = (0, _authenticatedComponent2.default)(PhotographerProfile);
 },{"../../actions/profileActions":3,"../../stores/profileStore":41,"../authenticatedComponent":7,"./profileContent":22,"./profileTitle":23,"react":"react","react-dom":"react-dom"}],22:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -3214,7 +3215,7 @@ var PhotographerContent = function (_React$Component) {
   function PhotographerContent() {
     _classCallCheck(this, PhotographerContent);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(PhotographerContent).call(this));
+    return _possibleConstructorReturn(this, (PhotographerContent.__proto__ || Object.getPrototypeOf(PhotographerContent)).call(this));
   }
 
   _createClass(PhotographerContent, [{
@@ -3363,11 +3364,11 @@ exports.default = PhotographerContent;
 },{"../../actions/profileActions":3,"react":"react","react-dom":"react-dom"}],23:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -3401,7 +3402,7 @@ var PhotographerTitle = function (_React$Component) {
   function PhotographerTitle() {
     _classCallCheck(this, PhotographerTitle);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(PhotographerTitle).call(this));
+    var _this = _possibleConstructorReturn(this, (PhotographerTitle.__proto__ || Object.getPrototypeOf(PhotographerTitle)).call(this));
 
     _this.state = _sessionStore2.default.getState();
     _this.favorite = _this.favorite.bind(_this);
@@ -3591,11 +3592,11 @@ exports.default = PhotographerTitle;
 },{"../../actions/profileActions":3,"../../stores/sessionStore":42,"react":"react","react-dom":"react-dom","react-router":"react-router"}],24:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -3633,7 +3634,7 @@ var QuoteRequest = function (_React$Component) {
   function QuoteRequest() {
     _classCallCheck(this, QuoteRequest);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(QuoteRequest).call(this));
+    var _this = _possibleConstructorReturn(this, (QuoteRequest.__proto__ || Object.getPrototypeOf(QuoteRequest)).call(this));
 
     _this.state = _this.resetState();
     _this.requestQuote = _this.requestQuote.bind(_this);
@@ -3953,14 +3954,14 @@ var QuoteRequest = function (_React$Component) {
 
 exports.default = QuoteRequest;
 
-},{"../../actions/photographerActions":2,"../../stores/sessionStore":42,"react":"react","react-dom":"react-dom","react-dropzone":53,"react-router":"react-router"}],25:[function(require,module,exports){
+},{"../../actions/photographerActions":2,"../../stores/sessionStore":42,"react":"react","react-dom":"react-dom","react-dropzone":52,"react-router":"react-router"}],25:[function(require,module,exports){
 'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -3990,7 +3991,7 @@ var AccountFavorites = function (_React$Component) {
   function AccountFavorites() {
     _classCallCheck(this, AccountFavorites);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AccountFavorites).call(this));
+    var _this = _possibleConstructorReturn(this, (AccountFavorites.__proto__ || Object.getPrototypeOf(AccountFavorites)).call(this));
 
     _this.state = _userStore2.default.getFavorites();
     _this._onChange = _this._onChange.bind(_this);
@@ -4077,11 +4078,11 @@ exports.default = AccountFavorites;
 },{"../../stores/userStore":43,"react":"react","react-dom":"react-dom","react-router":"react-router"}],26:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -4113,7 +4114,7 @@ var AccountHeader = function (_React$Component) {
   function AccountHeader() {
     _classCallCheck(this, AccountHeader);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AccountHeader).call(this));
+    var _this = _possibleConstructorReturn(this, (AccountHeader.__proto__ || Object.getPrototypeOf(AccountHeader)).call(this));
 
     _this.logout = _this.logout.bind(_this);
     return _this;
@@ -4174,11 +4175,11 @@ exports.default = AccountHeader;
 },{"../../actions/sessionActions":4,"../../stores/userStore":43,"react":"react","react-dom":"react-dom"}],27:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -4210,7 +4211,7 @@ var AccountInfo = function (_React$Component) {
   function AccountInfo() {
     _classCallCheck(this, AccountInfo);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AccountInfo).call(this));
+    var _this = _possibleConstructorReturn(this, (AccountInfo.__proto__ || Object.getPrototypeOf(AccountInfo)).call(this));
 
     _this.state = _userStore2.default.getAccountInfo();
     _this.updateAccount = _this.updateAccount.bind(_this);
@@ -4335,11 +4336,11 @@ exports.default = AccountInfo;
 },{"../../actions/userActions":5,"../../stores/userStore":43,"react":"react","react-dom":"react-dom"}],28:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -4369,7 +4370,7 @@ var AccountRequests = function (_React$Component) {
   function AccountRequests() {
     _classCallCheck(this, AccountRequests);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(AccountRequests).call(this));
+    var _this = _possibleConstructorReturn(this, (AccountRequests.__proto__ || Object.getPrototypeOf(AccountRequests)).call(this));
 
     _this.state = _userStore2.default.getFavorites();
     _this._onChange = _this._onChange.bind(_this);
@@ -4548,11 +4549,11 @@ exports.default = AccountRequests;
 },{"../../stores/userStore":43,"react":"react","react-dom":"react-dom","react-router":"react-router"}],29:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -4586,7 +4587,7 @@ var AccountTabTypes = function (_React$Component) {
   function AccountTabTypes() {
     _classCallCheck(this, AccountTabTypes);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(AccountTabTypes).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AccountTabTypes.__proto__ || Object.getPrototypeOf(AccountTabTypes)).apply(this, arguments));
   }
 
   _createClass(AccountTabTypes, [{
@@ -4629,7 +4630,7 @@ var AccountTabContent = function (_React$Component2) {
   function AccountTabContent() {
     _classCallCheck(this, AccountTabContent);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(AccountTabContent).apply(this, arguments));
+    return _possibleConstructorReturn(this, (AccountTabContent.__proto__ || Object.getPrototypeOf(AccountTabContent)).apply(this, arguments));
   }
 
   _createClass(AccountTabContent, [{
@@ -4660,7 +4661,7 @@ var AccountTabs = function (_React$Component3) {
   function AccountTabs() {
     _classCallCheck(this, AccountTabs);
 
-    var _this3 = _possibleConstructorReturn(this, Object.getPrototypeOf(AccountTabs).call(this));
+    var _this3 = _possibleConstructorReturn(this, (AccountTabs.__proto__ || Object.getPrototypeOf(AccountTabs)).call(this));
 
     _this3.state = {
       tabs: [{ title: 'My Requests', content: _react2.default.createElement(_accountRequests2.default, null), id: "requests" }, { title: 'Favorites', content: _react2.default.createElement(_accountFavorites2.default, null), id: "favorites" }, { title: 'Edit Info', content: _react2.default.createElement(_accountInfo2.default, null), id: "edit" }],
@@ -4707,11 +4708,11 @@ exports.default = AccountTabs;
 },{"./account-favorites":25,"./account-info":27,"./account-requests":28,"react":"react","react-router":"react-router"}],30:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _react = require('react');
 
@@ -4753,7 +4754,7 @@ var UserAccount = function (_React$Component) {
   function UserAccount() {
     _classCallCheck(this, UserAccount);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserAccount).call(this));
+    var _this = _possibleConstructorReturn(this, (UserAccount.__proto__ || Object.getPrototypeOf(UserAccount)).call(this));
 
     _this.state = _userStore2.default.setFullState();
 
@@ -4826,7 +4827,7 @@ module.exports = keyMirror({
   UPDATE_PHOTOS: 'UPDATE_PHOTOS'
 });
 
-},{"key-mirror":51}],32:[function(require,module,exports){
+},{"key-mirror":50}],32:[function(require,module,exports){
 'use strict';
 
 var keyMirror = require('key-mirror');
@@ -4836,7 +4837,7 @@ module.exports = keyMirror({
   APPLIED_FOR: 'APPLIED_FOR'
 });
 
-},{"key-mirror":51}],33:[function(require,module,exports){
+},{"key-mirror":50}],33:[function(require,module,exports){
 'use strict';
 
 var keyMirror = require('key-mirror');
@@ -4846,7 +4847,7 @@ module.exports = keyMirror({
   UPDATE_FAVORITE: 'UPDATE_FAVORITE'
 });
 
-},{"key-mirror":51}],34:[function(require,module,exports){
+},{"key-mirror":50}],34:[function(require,module,exports){
 'use strict';
 
 var keyMirror = require('key-mirror');
@@ -4857,7 +4858,7 @@ module.exports = keyMirror({
   LOGIN_PHOTOGRAPHER: 'LOGIN_PHOTOGRAPHER'
 });
 
-},{"key-mirror":51}],35:[function(require,module,exports){
+},{"key-mirror":50}],35:[function(require,module,exports){
 'use strict';
 
 var keyMirror = require('key-mirror');
@@ -4867,7 +4868,7 @@ module.exports = keyMirror({
   UPDATE_USER_INFO: 'UPDATE_USER_INFO'
 });
 
-},{"key-mirror":51}],36:[function(require,module,exports){
+},{"key-mirror":50}],36:[function(require,module,exports){
 'use strict';
 
 var Dispatcher = require('flux').Dispatcher;
@@ -4885,7 +4886,7 @@ var AppDispatcher = assign(new Dispatcher(), {
 
 module.exports = AppDispatcher;
 
-},{"flux":49,"react/lib/Object.assign":54}],37:[function(require,module,exports){
+},{"flux":48,"react/lib/Object.assign":53}],37:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -4991,18 +4992,20 @@ exports.default = _react2.default.createElement(
 
 //Authentication for Routing
 
+
 // Home Page
+
 
 // NavBar
 
 },{"./components/app":6,"./components/explore/explore":8,"./components/home":14,"./components/navbar/login":15,"./components/navbar/signup":17,"./components/photographer/account-info":18,"./components/photographer/apply":19,"./components/photographerHome":20,"./components/profile/profile":21,"./components/profile/quoteRequest":24,"./components/user/account":30,"./utils/requireAuth":44,"react":"react","react-router":"react-router"}],39:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _events = require('events');
 
@@ -5024,7 +5027,7 @@ var BaseStore = function (_EventEmitter) {
   function BaseStore() {
     _classCallCheck(this, BaseStore);
 
-    return _possibleConstructorReturn(this, Object.getPrototypeOf(BaseStore).call(this));
+    return _possibleConstructorReturn(this, (BaseStore.__proto__ || Object.getPrototypeOf(BaseStore)).call(this));
   }
 
   _createClass(BaseStore, [{
@@ -5059,14 +5062,14 @@ var BaseStore = function (_EventEmitter) {
 
 exports.default = BaseStore;
 
-},{"../dispatchers/appDispatcher":36,"events":47}],40:[function(require,module,exports){
+},{"../dispatchers/appDispatcher":36,"events":46}],40:[function(require,module,exports){
 'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _exploreConstants = require('../constants/exploreConstants');
 
@@ -5090,7 +5093,7 @@ var ExploreStore = function (_BaseStore) {
   function ExploreStore() {
     _classCallCheck(this, ExploreStore);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ExploreStore).call(this));
+    var _this = _possibleConstructorReturn(this, (ExploreStore.__proto__ || Object.getPrototypeOf(ExploreStore)).call(this));
 
     _this.subscribe(function () {
       return _this._registerToActions.bind(_this);
@@ -5215,11 +5218,11 @@ exports.default = new ExploreStore();
 },{"../constants/exploreConstants":31,"./baseStore":39,"react-router":"react-router"}],41:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _profileConstants = require('../constants/profileConstants.js');
 
@@ -5243,7 +5246,7 @@ var ProfileStore = function (_BaseStore) {
   function ProfileStore() {
     _classCallCheck(this, ProfileStore);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(ProfileStore).call(this));
+    var _this = _possibleConstructorReturn(this, (ProfileStore.__proto__ || Object.getPrototypeOf(ProfileStore)).call(this));
 
     _this.subscribe(function () {
       return _this._registerToActions.bind(_this);
@@ -5376,11 +5379,11 @@ exports.default = new ProfileStore();
 },{"../constants/profileConstants.js":33,"./baseStore":39,"react-router":"react-router"}],42:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _sessionConstants = require('../constants/sessionConstants');
 
@@ -5406,7 +5409,7 @@ var SessionStore = function (_BaseStore) {
   function SessionStore() {
     _classCallCheck(this, SessionStore);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SessionStore).call(this));
+    var _this = _possibleConstructorReturn(this, (SessionStore.__proto__ || Object.getPrototypeOf(SessionStore)).call(this));
 
     _this.subscribe(function () {
       return _this._registerToActions.bind(_this);
@@ -5486,11 +5489,11 @@ exports.default = new SessionStore();
 },{"../constants/profileConstants":33,"../constants/sessionConstants":34,"./baseStore":39,"react-router":"react-router"}],43:[function(require,module,exports){
 'use strict';
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 var _userConstants = require('../constants/userConstants');
 
@@ -5514,7 +5517,7 @@ var UserStore = function (_BaseStore) {
   function UserStore() {
     _classCallCheck(this, UserStore);
 
-    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(UserStore).call(this));
+    var _this = _possibleConstructorReturn(this, (UserStore.__proto__ || Object.getPrototypeOf(UserStore)).call(this));
 
     _this.subscribe(function () {
       return _this._registerToActions.bind(_this);
@@ -5698,8 +5701,6 @@ var SpecTools = function () {
 exports.default = SpecTools;
 
 },{"react":"react","react-dom":"react-dom"}],46:[function(require,module,exports){
-module.exports=function(t){function n(e){if(r[e])return r[e].exports;var o=r[e]={exports:{},id:e,loaded:!1};return t[e].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var r={};return n.m=t,n.c=r,n.p="",n(0)}([function(t,n,r){"use strict";n.__esModule=!0,r(8),r(9),n["default"]=function(t,n){if(t&&n){var r=function(){var r=n.split(","),e=t.name||"",o=t.type||"",i=o.replace(/\/.*$/,"");return{v:r.some(function(t){var n=t.trim();return"."===n.charAt(0)?e.toLowerCase().endsWith(n.toLowerCase()):/\/\*$/.test(n)?i===n.replace(/\/.*$/,""):o===n})}}();if("object"==typeof r)return r.v}return!0},t.exports=n["default"]},function(t,n){var r=t.exports={version:"1.2.2"};"number"==typeof __e&&(__e=r)},function(t,n){var r=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=r)},function(t,n,r){var e=r(2),o=r(1),i=r(4),u=r(19),c="prototype",f=function(t,n){return function(){return t.apply(n,arguments)}},s=function(t,n,r){var a,p,l,d,y=t&s.G,h=t&s.P,v=y?e:t&s.S?e[n]||(e[n]={}):(e[n]||{})[c],x=y?o:o[n]||(o[n]={});y&&(r=n);for(a in r)p=!(t&s.F)&&v&&a in v,l=(p?v:r)[a],d=t&s.B&&p?f(l,e):h&&"function"==typeof l?f(Function.call,l):l,v&&!p&&u(v,a,l),x[a]!=l&&i(x,a,d),h&&((x[c]||(x[c]={}))[a]=l)};e.core=o,s.F=1,s.G=2,s.S=4,s.P=8,s.B=16,s.W=32,t.exports=s},function(t,n,r){var e=r(5),o=r(18);t.exports=r(22)?function(t,n,r){return e.setDesc(t,n,o(1,r))}:function(t,n,r){return t[n]=r,t}},function(t,n){var r=Object;t.exports={create:r.create,getProto:r.getPrototypeOf,isEnum:{}.propertyIsEnumerable,getDesc:r.getOwnPropertyDescriptor,setDesc:r.defineProperty,setDescs:r.defineProperties,getKeys:r.keys,getNames:r.getOwnPropertyNames,getSymbols:r.getOwnPropertySymbols,each:[].forEach}},function(t,n){var r=0,e=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++r+e).toString(36))}},function(t,n,r){var e=r(20)("wks"),o=r(2).Symbol;t.exports=function(t){return e[t]||(e[t]=o&&o[t]||(o||r(6))("Symbol."+t))}},function(t,n,r){r(26),t.exports=r(1).Array.some},function(t,n,r){r(25),t.exports=r(1).String.endsWith},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n){var r={}.toString;t.exports=function(t){return r.call(t).slice(8,-1)}},function(t,n,r){var e=r(10);t.exports=function(t,n,r){if(e(t),void 0===n)return t;switch(r){case 1:return function(r){return t.call(n,r)};case 2:return function(r,e){return t.call(n,r,e)};case 3:return function(r,e,o){return t.call(n,r,e,o)}}return function(){return t.apply(n,arguments)}}},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n,r){t.exports=function(t){var n=/./;try{"/./"[t](n)}catch(e){try{return n[r(7)("match")]=!1,!"/./"[t](n)}catch(o){}}return!0}},function(t,n){t.exports=function(t){try{return!!t()}catch(n){return!0}}},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n,r){var e=r(16),o=r(11),i=r(7)("match");t.exports=function(t){var n;return e(t)&&(void 0!==(n=t[i])?!!n:"RegExp"==o(t))}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n,r){var e=r(2),o=r(4),i=r(6)("src"),u="toString",c=Function[u],f=(""+c).split(u);r(1).inspectSource=function(t){return c.call(t)},(t.exports=function(t,n,r,u){"function"==typeof r&&(o(r,i,t[n]?""+t[n]:f.join(String(n))),"name"in r||(r.name=n)),t===e?t[n]=r:(u||delete t[n],o(t,n,r))})(Function.prototype,u,function(){return"function"==typeof this&&this[i]||c.call(this)})},function(t,n,r){var e=r(2),o="__core-js_shared__",i=e[o]||(e[o]={});t.exports=function(t){return i[t]||(i[t]={})}},function(t,n,r){var e=r(17),o=r(13);t.exports=function(t,n,r){if(e(n))throw TypeError("String#"+r+" doesn't accept regex!");return String(o(t))}},function(t,n,r){t.exports=!r(15)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n){var r=Math.ceil,e=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?e:r)(t)}},function(t,n,r){var e=r(23),o=Math.min;t.exports=function(t){return t>0?o(e(t),9007199254740991):0}},function(t,n,r){"use strict";var e=r(3),o=r(24),i=r(21),u="endsWith",c=""[u];e(e.P+e.F*r(14)(u),"String",{endsWith:function(t){var n=i(this,t,u),r=arguments,e=r.length>1?r[1]:void 0,f=o(n.length),s=void 0===e?f:Math.min(o(e),f),a=String(t);return c?c.call(n,a,s):n.slice(s-a.length,s)===a}})},function(t,n,r){var e=r(5),o=r(3),i=r(1).Array||Array,u={},c=function(t,n){e.each.call(t.split(","),function(t){void 0==n&&t in i?u[t]=i[t]:t in[]&&(u[t]=r(12)(Function.call,[][t],n))})};c("pop,reverse,shift,keys,values,entries",1),c("indexOf,every,some,forEach,map,filter,find,findIndex,includes",3),c("join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill"),o(o.S,"Array",u)}]);
-},{}],47:[function(require,module,exports){
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -5759,8 +5760,12 @@ EventEmitter.prototype.emit = function(type) {
       er = arguments[1];
       if (er instanceof Error) {
         throw er; // Unhandled 'error' event
+      } else {
+        // At least give some kind of context to the user
+        var err = new Error('Uncaught, unspecified "error" event. (' + er + ')');
+        err.context = er;
+        throw err;
       }
-      throw TypeError('Uncaught, unspecified "error" event.');
     }
   }
 
@@ -5999,7 +6004,7 @@ function isUndefined(arg) {
   return arg === void 0;
 }
 
-},{}],48:[function(require,module,exports){
+},{}],47:[function(require,module,exports){
 (function (process){
 /**
  * Copyright 2013-2015, Facebook, Inc.
@@ -6051,7 +6056,7 @@ var invariant = function (condition, format, a, b, c, d, e, f) {
 
 module.exports = invariant;
 }).call(this,require('_process'))
-},{"_process":52}],49:[function(require,module,exports){
+},{"_process":51}],48:[function(require,module,exports){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
  * All rights reserved.
@@ -6063,7 +6068,7 @@ module.exports = invariant;
 
 module.exports.Dispatcher = require('./lib/Dispatcher');
 
-},{"./lib/Dispatcher":50}],50:[function(require,module,exports){
+},{"./lib/Dispatcher":49}],49:[function(require,module,exports){
 (function (process){
 /**
  * Copyright (c) 2014-2015, Facebook, Inc.
@@ -6297,7 +6302,7 @@ var Dispatcher = (function () {
 
 module.exports = Dispatcher;
 }).call(this,require('_process'))
-},{"_process":52,"fbjs/lib/invariant":48}],51:[function(require,module,exports){
+},{"_process":51,"fbjs/lib/invariant":47}],50:[function(require,module,exports){
 
 'use strict';
 
@@ -6322,16 +6327,105 @@ module.exports =
         return mirrored;
     };
 
-},{}],52:[function(require,module,exports){
+},{}],51:[function(require,module,exports){
 // shim for using process in browser
-
 var process = module.exports = {};
+
+// cached from whatever global is present so that test runners that stub it
+// don't break things.  But we need to wrap it in a try catch in case it is
+// wrapped in strict mode code which doesn't define any globals.  It's inside a
+// function because try/catches deoptimize in certain engines.
+
+var cachedSetTimeout;
+var cachedClearTimeout;
+
+function defaultSetTimout() {
+    throw new Error('setTimeout has not been defined');
+}
+function defaultClearTimeout () {
+    throw new Error('clearTimeout has not been defined');
+}
+(function () {
+    try {
+        if (typeof setTimeout === 'function') {
+            cachedSetTimeout = setTimeout;
+        } else {
+            cachedSetTimeout = defaultSetTimout;
+        }
+    } catch (e) {
+        cachedSetTimeout = defaultSetTimout;
+    }
+    try {
+        if (typeof clearTimeout === 'function') {
+            cachedClearTimeout = clearTimeout;
+        } else {
+            cachedClearTimeout = defaultClearTimeout;
+        }
+    } catch (e) {
+        cachedClearTimeout = defaultClearTimeout;
+    }
+} ())
+function runTimeout(fun) {
+    if (cachedSetTimeout === setTimeout) {
+        //normal enviroments in sane situations
+        return setTimeout(fun, 0);
+    }
+    // if setTimeout wasn't available but was latter defined
+    if ((cachedSetTimeout === defaultSetTimout || !cachedSetTimeout) && setTimeout) {
+        cachedSetTimeout = setTimeout;
+        return setTimeout(fun, 0);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedSetTimeout(fun, 0);
+    } catch(e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't trust the global object when called normally
+            return cachedSetTimeout.call(null, fun, 0);
+        } catch(e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error
+            return cachedSetTimeout.call(this, fun, 0);
+        }
+    }
+
+
+}
+function runClearTimeout(marker) {
+    if (cachedClearTimeout === clearTimeout) {
+        //normal enviroments in sane situations
+        return clearTimeout(marker);
+    }
+    // if clearTimeout wasn't available but was latter defined
+    if ((cachedClearTimeout === defaultClearTimeout || !cachedClearTimeout) && clearTimeout) {
+        cachedClearTimeout = clearTimeout;
+        return clearTimeout(marker);
+    }
+    try {
+        // when when somebody has screwed with setTimeout but no I.E. maddness
+        return cachedClearTimeout(marker);
+    } catch (e){
+        try {
+            // When we are in I.E. but the script has been evaled so I.E. doesn't  trust the global object when called normally
+            return cachedClearTimeout.call(null, marker);
+        } catch (e){
+            // same as above but when it's a version of I.E. that must have the global object for 'this', hopfully our context correct otherwise it will throw a global error.
+            // Some versions of I.E. have different rules for clearTimeout vs setTimeout
+            return cachedClearTimeout.call(this, marker);
+        }
+    }
+
+
+
+}
 var queue = [];
 var draining = false;
 var currentQueue;
 var queueIndex = -1;
 
 function cleanUpNextTick() {
+    if (!draining || !currentQueue) {
+        return;
+    }
     draining = false;
     if (currentQueue.length) {
         queue = currentQueue.concat(queue);
@@ -6347,7 +6441,7 @@ function drainQueue() {
     if (draining) {
         return;
     }
-    var timeout = setTimeout(cleanUpNextTick);
+    var timeout = runTimeout(cleanUpNextTick);
     draining = true;
 
     var len = queue.length;
@@ -6364,7 +6458,7 @@ function drainQueue() {
     }
     currentQueue = null;
     draining = false;
-    clearTimeout(timeout);
+    runClearTimeout(timeout);
 }
 
 process.nextTick = function (fun) {
@@ -6376,7 +6470,7 @@ process.nextTick = function (fun) {
     }
     queue.push(new Item(fun, args));
     if (queue.length === 1 && !draining) {
-        setTimeout(drainQueue, 0);
+        runTimeout(drainQueue);
     }
 };
 
@@ -6415,288 +6509,415 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}],53:[function(require,module,exports){
-'use strict';
+},{}],52:[function(require,module,exports){
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory(require("react"));
+	else if(typeof define === 'function' && define.amd)
+		define(["react"], factory);
+	else if(typeof exports === 'object')
+		exports["Dropzone"] = factory(require("react"));
+	else
+		root["Dropzone"] = factory(root["react"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
+return /******/ (function(modules) { // webpackBootstrap
+/******/ 	// The module cache
+/******/ 	var installedModules = {};
+/******/
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/
+/******/ 		// Check if module is in cache
+/******/ 		if(installedModules[moduleId])
+/******/ 			return installedModules[moduleId].exports;
+/******/
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = installedModules[moduleId] = {
+/******/ 			exports: {},
+/******/ 			id: moduleId,
+/******/ 			loaded: false
+/******/ 		};
+/******/
+/******/ 		// Execute the module function
+/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+/******/
+/******/ 		// Flag the module as loaded
+/******/ 		module.loaded = true;
+/******/
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/
+/******/
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = modules;
+/******/
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = installedModules;
+/******/
+/******/ 	// __webpack_public_path__
+/******/ 	__webpack_require__.p = "";
+/******/
+/******/ 	// Load entry module and return exports
+/******/ 	return __webpack_require__(0);
+/******/ })
+/************************************************************************/
+/******/ ([
+/* 0 */
+/***/ function(module, exports, __webpack_require__) {
 
-exports.__esModule = true;
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _attrAccept = __webpack_require__(1);
+	
+	var _attrAccept2 = _interopRequireDefault(_attrAccept);
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } /* eslint prefer-template: 0 */
+	
+	var supportMultiple = typeof document !== 'undefined' && document && document.createElement ? 'multiple' in document.createElement('input') : true;
+	
+	var Dropzone = function (_React$Component) {
+	  _inherits(Dropzone, _React$Component);
+	
+	  function Dropzone(props, context) {
+	    _classCallCheck(this, Dropzone);
+	
+	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(Dropzone).call(this, props, context));
+	
+	    _this.onClick = _this.onClick.bind(_this);
+	    _this.onDragStart = _this.onDragStart.bind(_this);
+	    _this.onDragEnter = _this.onDragEnter.bind(_this);
+	    _this.onDragLeave = _this.onDragLeave.bind(_this);
+	    _this.onDragOver = _this.onDragOver.bind(_this);
+	    _this.onDrop = _this.onDrop.bind(_this);
+	
+	    _this.state = {
+	      isDragActive: false
+	    };
+	    return _this;
+	  }
+	
+	  _createClass(Dropzone, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.enterCounter = 0;
+	    }
+	  }, {
+	    key: 'onDragStart',
+	    value: function onDragStart(e) {
+	      if (this.props.onDragStart) {
+	        this.props.onDragStart.call(this, e);
+	      }
+	    }
+	  }, {
+	    key: 'onDragEnter',
+	    value: function onDragEnter(e) {
+	      e.preventDefault();
+	
+	      // Count the dropzone and any children that are entered.
+	      ++this.enterCounter;
+	
+	      // This is tricky. During the drag even the dataTransfer.files is null
+	      // But Chrome implements some drag store, which is accesible via dataTransfer.items
+	      var dataTransferItems = e.dataTransfer && e.dataTransfer.items ? e.dataTransfer.items : [];
+	
+	      // Now we need to convert the DataTransferList to Array
+	      var allFilesAccepted = this.allFilesAccepted(Array.prototype.slice.call(dataTransferItems));
+	
+	      this.setState({
+	        isDragActive: allFilesAccepted,
+	        isDragReject: !allFilesAccepted
+	      });
+	
+	      if (this.props.onDragEnter) {
+	        this.props.onDragEnter.call(this, e);
+	      }
+	    }
+	  }, {
+	    key: 'onDragOver',
+	    value: function onDragOver(e) {
+	      e.preventDefault();
+	      e.stopPropagation();
+	      e.dataTransfer.dropEffect = 'copy'; // eslint-disable-line no-param-reassign
+	      return false;
+	    }
+	  }, {
+	    key: 'onDragLeave',
+	    value: function onDragLeave(e) {
+	      e.preventDefault();
+	
+	      // Only deactivate once the dropzone and all children was left.
+	      if (--this.enterCounter > 0) {
+	        return;
+	      }
+	
+	      this.setState({
+	        isDragActive: false,
+	        isDragReject: false
+	      });
+	
+	      if (this.props.onDragLeave) {
+	        this.props.onDragLeave.call(this, e);
+	      }
+	    }
+	  }, {
+	    key: 'onDrop',
+	    value: function onDrop(e) {
+	      e.preventDefault();
+	
+	      // Reset the counter along with the drag on a drop.
+	      this.enterCounter = 0;
+	
+	      this.setState({
+	        isDragActive: false,
+	        isDragReject: false
+	      });
+	
+	      var droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
+	      var max = this.props.multiple ? droppedFiles.length : Math.min(droppedFiles.length, 1);
+	      var files = [];
+	
+	      for (var i = 0; i < max; i++) {
+	        var file = droppedFiles[i];
+	        // We might want to disable the preview creation to support big files
+	        if (!this.props.disablePreview) {
+	          file.preview = window.URL.createObjectURL(file);
+	        }
+	        files.push(file);
+	      }
+	
+	      if (this.allFilesAccepted(files) && this.allFilesMatchSize(files)) {
+	        if (this.props.onDrop) {
+	          this.props.onDrop.call(this, files, e);
+	        }
+	
+	        if (this.props.onDropAccepted) {
+	          this.props.onDropAccepted.call(this, files, e);
+	        }
+	      } else {
+	        if (this.props.onDropRejected) {
+	          this.props.onDropRejected.call(this, files, e);
+	        }
+	      }
+	    }
+	  }, {
+	    key: 'onClick',
+	    value: function onClick() {
+	      if (!this.props.disableClick) {
+	        this.open();
+	      }
+	    }
+	  }, {
+	    key: 'allFilesAccepted',
+	    value: function allFilesAccepted(files) {
+	      var _this2 = this;
+	
+	      return files.every(function (file) {
+	        return (0, _attrAccept2.default)(file, _this2.props.accept);
+	      });
+	    }
+	  }, {
+	    key: 'allFilesMatchSize',
+	    value: function allFilesMatchSize(files) {
+	      var _this3 = this;
+	
+	      return files.every(function (file) {
+	        return file.size <= _this3.props.maxSize && file.size >= _this3.props.minSize;
+	      });
+	    }
+	  }, {
+	    key: 'open',
+	    value: function open() {
+	      this.fileInputEl.value = null;
+	      this.fileInputEl.click();
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this4 = this;
+	
+	      var _props = this.props;
+	      var accept = _props.accept;
+	      var activeClassName = _props.activeClassName;
+	      var inputProps = _props.inputProps;
+	      var multiple = _props.multiple;
+	      var name = _props.name;
+	      var rejectClassName = _props.rejectClassName;
+	
+	      var rest = _objectWithoutProperties(_props, ['accept', 'activeClassName', 'inputProps', 'multiple', 'name', 'rejectClassName']);
+	
+	      var activeStyle = rest.activeStyle;
+	      var className = rest.className;
+	      var rejectStyle = rest.rejectStyle;
+	      var style = rest.style;
+	
+	      var props = _objectWithoutProperties(rest, ['activeStyle', 'className', 'rejectStyle', 'style']);
+	
+	      var _state = this.state;
+	      var isDragActive = _state.isDragActive;
+	      var isDragReject = _state.isDragReject;
+	
+	
+	      className = className || '';
+	
+	      if (isDragActive && activeClassName) {
+	        className += ' ' + activeClassName;
+	      }
+	      if (isDragReject && rejectClassName) {
+	        className += ' ' + rejectClassName;
+	      }
+	
+	      if (!className && !style && !activeStyle && !rejectStyle) {
+	        style = {
+	          width: 200,
+	          height: 200,
+	          borderWidth: 2,
+	          borderColor: '#666',
+	          borderStyle: 'dashed',
+	          borderRadius: 5
+	        };
+	        activeStyle = {
+	          borderStyle: 'solid',
+	          backgroundColor: '#eee'
+	        };
+	        rejectStyle = {
+	          borderStyle: 'solid',
+	          backgroundColor: '#ffdddd'
+	        };
+	      }
+	
+	      var appliedStyle = void 0;
+	      if (activeStyle && isDragActive) {
+	        appliedStyle = _extends({}, style, activeStyle);
+	      } else if (rejectStyle && isDragReject) {
+	        appliedStyle = _extends({}, style, rejectStyle);
+	      } else {
+	        appliedStyle = _extends({}, style);
+	      }
+	
+	      var inputAttributes = {
+	        accept: accept,
+	        type: 'file',
+	        style: { display: 'none' },
+	        multiple: supportMultiple && multiple,
+	        ref: function ref(el) {
+	          return _this4.fileInputEl = el;
+	        }, // eslint-disable-line
+	        onChange: this.onDrop
+	      };
+	
+	      if (name && name.length) {
+	        inputAttributes.name = name;
+	      }
+	
+	      // Remove custom properties before passing them to the wrapper div element
+	      var customProps = ['disablePreview', 'disableClick', 'onDropAccepted', 'onDropRejected', 'maxSize', 'minSize'];
+	      var divProps = _extends({}, props);
+	      customProps.forEach(function (prop) {
+	        return delete divProps[prop];
+	      });
+	
+	      return _react2.default.createElement(
+	        'div',
+	        _extends({
+	          className: className,
+	          style: appliedStyle
+	        }, divProps /* expand user provided props first so event handlers are never overridden */, {
+	          onClick: this.onClick,
+	          onDragStart: this.onDragStart,
+	          onDragEnter: this.onDragEnter,
+	          onDragOver: this.onDragOver,
+	          onDragLeave: this.onDragLeave,
+	          onDrop: this.onDrop
+	        }),
+	        this.props.children,
+	        _react2.default.createElement('input', _extends({}, inputProps /* expand user provided inputProps first so inputAttributes override them */, inputAttributes))
+	      );
+	    }
+	  }]);
+	
+	  return Dropzone;
+	}(_react2.default.Component);
+	
+	Dropzone.defaultProps = {
+	  disablePreview: false,
+	  disableClick: false,
+	  multiple: true,
+	  maxSize: Infinity,
+	  minSize: 0
+	};
+	
+	Dropzone.propTypes = {
+	  // Overriding drop behavior
+	  onDrop: _react2.default.PropTypes.func,
+	  onDropAccepted: _react2.default.PropTypes.func,
+	  onDropRejected: _react2.default.PropTypes.func,
+	
+	  // Overriding drag behavior
+	  onDragStart: _react2.default.PropTypes.func,
+	  onDragEnter: _react2.default.PropTypes.func,
+	  onDragLeave: _react2.default.PropTypes.func,
+	
+	  children: _react2.default.PropTypes.node, // Contents of the dropzone
+	  style: _react2.default.PropTypes.object, // CSS styles to apply
+	  activeStyle: _react2.default.PropTypes.object, // CSS styles to apply when drop will be accepted
+	  rejectStyle: _react2.default.PropTypes.object, // CSS styles to apply when drop will be rejected
+	  className: _react2.default.PropTypes.string, // Optional className
+	  activeClassName: _react2.default.PropTypes.string, // className for accepted state
+	  rejectClassName: _react2.default.PropTypes.string, // className for rejected state
+	
+	  disablePreview: _react2.default.PropTypes.bool, // Enable/disable preview generation
+	  disableClick: _react2.default.PropTypes.bool, // Disallow clicking on the dropzone container to open file dialog
+	
+	  inputProps: _react2.default.PropTypes.object, // Pass additional attributes to the <input type="file"/> tag
+	  multiple: _react2.default.PropTypes.bool, // Allow dropping multiple files
+	  accept: _react2.default.PropTypes.string, // Allow specific types of files. See https://github.com/okonet/attr-accept for more information
+	  name: _react2.default.PropTypes.string, // name attribute for the input tag
+	  maxSize: _react2.default.PropTypes.number,
+	  minSize: _react2.default.PropTypes.number
+	};
+	
+	exports.default = Dropzone;
+	module.exports = exports['default'];
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+/***/ },
+/* 1 */
+/***/ function(module, exports) {
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
+	module.exports=function(t){function n(e){if(r[e])return r[e].exports;var o=r[e]={exports:{},id:e,loaded:!1};return t[e].call(o.exports,o,o.exports,n),o.loaded=!0,o.exports}var r={};return n.m=t,n.c=r,n.p="",n(0)}([function(t,n,r){"use strict";n.__esModule=!0,r(8),r(9),n["default"]=function(t,n){if(t&&n){var r=function(){var r=n.split(","),e=t.name||"",o=t.type||"",i=o.replace(/\/.*$/,"");return{v:r.some(function(t){var n=t.trim();return"."===n.charAt(0)?e.toLowerCase().endsWith(n.toLowerCase()):/\/\*$/.test(n)?i===n.replace(/\/.*$/,""):o===n})}}();if("object"==typeof r)return r.v}return!0},t.exports=n["default"]},function(t,n){var r=t.exports={version:"1.2.2"};"number"==typeof __e&&(__e=r)},function(t,n){var r=t.exports="undefined"!=typeof window&&window.Math==Math?window:"undefined"!=typeof self&&self.Math==Math?self:Function("return this")();"number"==typeof __g&&(__g=r)},function(t,n,r){var e=r(2),o=r(1),i=r(4),u=r(19),c="prototype",f=function(t,n){return function(){return t.apply(n,arguments)}},s=function(t,n,r){var a,p,l,d,y=t&s.G,h=t&s.P,v=y?e:t&s.S?e[n]||(e[n]={}):(e[n]||{})[c],x=y?o:o[n]||(o[n]={});y&&(r=n);for(a in r)p=!(t&s.F)&&v&&a in v,l=(p?v:r)[a],d=t&s.B&&p?f(l,e):h&&"function"==typeof l?f(Function.call,l):l,v&&!p&&u(v,a,l),x[a]!=l&&i(x,a,d),h&&((x[c]||(x[c]={}))[a]=l)};e.core=o,s.F=1,s.G=2,s.S=4,s.P=8,s.B=16,s.W=32,t.exports=s},function(t,n,r){var e=r(5),o=r(18);t.exports=r(22)?function(t,n,r){return e.setDesc(t,n,o(1,r))}:function(t,n,r){return t[n]=r,t}},function(t,n){var r=Object;t.exports={create:r.create,getProto:r.getPrototypeOf,isEnum:{}.propertyIsEnumerable,getDesc:r.getOwnPropertyDescriptor,setDesc:r.defineProperty,setDescs:r.defineProperties,getKeys:r.keys,getNames:r.getOwnPropertyNames,getSymbols:r.getOwnPropertySymbols,each:[].forEach}},function(t,n){var r=0,e=Math.random();t.exports=function(t){return"Symbol(".concat(void 0===t?"":t,")_",(++r+e).toString(36))}},function(t,n,r){var e=r(20)("wks"),o=r(2).Symbol;t.exports=function(t){return e[t]||(e[t]=o&&o[t]||(o||r(6))("Symbol."+t))}},function(t,n,r){r(26),t.exports=r(1).Array.some},function(t,n,r){r(25),t.exports=r(1).String.endsWith},function(t,n){t.exports=function(t){if("function"!=typeof t)throw TypeError(t+" is not a function!");return t}},function(t,n){var r={}.toString;t.exports=function(t){return r.call(t).slice(8,-1)}},function(t,n,r){var e=r(10);t.exports=function(t,n,r){if(e(t),void 0===n)return t;switch(r){case 1:return function(r){return t.call(n,r)};case 2:return function(r,e){return t.call(n,r,e)};case 3:return function(r,e,o){return t.call(n,r,e,o)}}return function(){return t.apply(n,arguments)}}},function(t,n){t.exports=function(t){if(void 0==t)throw TypeError("Can't call method on  "+t);return t}},function(t,n,r){t.exports=function(t){var n=/./;try{"/./"[t](n)}catch(e){try{return n[r(7)("match")]=!1,!"/./"[t](n)}catch(o){}}return!0}},function(t,n){t.exports=function(t){try{return!!t()}catch(n){return!0}}},function(t,n){t.exports=function(t){return"object"==typeof t?null!==t:"function"==typeof t}},function(t,n,r){var e=r(16),o=r(11),i=r(7)("match");t.exports=function(t){var n;return e(t)&&(void 0!==(n=t[i])?!!n:"RegExp"==o(t))}},function(t,n){t.exports=function(t,n){return{enumerable:!(1&t),configurable:!(2&t),writable:!(4&t),value:n}}},function(t,n,r){var e=r(2),o=r(4),i=r(6)("src"),u="toString",c=Function[u],f=(""+c).split(u);r(1).inspectSource=function(t){return c.call(t)},(t.exports=function(t,n,r,u){"function"==typeof r&&(o(r,i,t[n]?""+t[n]:f.join(String(n))),"name"in r||(r.name=n)),t===e?t[n]=r:(u||delete t[n],o(t,n,r))})(Function.prototype,u,function(){return"function"==typeof this&&this[i]||c.call(this)})},function(t,n,r){var e=r(2),o="__core-js_shared__",i=e[o]||(e[o]={});t.exports=function(t){return i[t]||(i[t]={})}},function(t,n,r){var e=r(17),o=r(13);t.exports=function(t,n,r){if(e(n))throw TypeError("String#"+r+" doesn't accept regex!");return String(o(t))}},function(t,n,r){t.exports=!r(15)(function(){return 7!=Object.defineProperty({},"a",{get:function(){return 7}}).a})},function(t,n){var r=Math.ceil,e=Math.floor;t.exports=function(t){return isNaN(t=+t)?0:(t>0?e:r)(t)}},function(t,n,r){var e=r(23),o=Math.min;t.exports=function(t){return t>0?o(e(t),9007199254740991):0}},function(t,n,r){"use strict";var e=r(3),o=r(24),i=r(21),u="endsWith",c=""[u];e(e.P+e.F*r(14)(u),"String",{endsWith:function(t){var n=i(this,t,u),r=arguments,e=r.length>1?r[1]:void 0,f=o(n.length),s=void 0===e?f:Math.min(o(e),f),a=String(t);return c?c.call(n,a,s):n.slice(s-a.length,s)===a}})},function(t,n,r){var e=r(5),o=r(3),i=r(1).Array||Array,u={},c=function(t,n){e.each.call(t.split(","),function(t){void 0==n&&t in i?u[t]=i[t]:t in[]&&(u[t]=r(12)(Function.call,[][t],n))})};c("pop,reverse,shift,keys,values,entries",1),c("indexOf,every,some,forEach,map,filter,find,findIndex,includes",3),c("join,slice,concat,push,splice,unshift,sort,lastIndexOf,reduce,reduceRight,copyWithin,fill"),o(o.S,"Array",u)}]);
 
-function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
+/***/ },
+/* 2 */
+/***/ function(module, exports) {
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
 
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+/***/ }
+/******/ ])
+});
+;
 
-var _attrAccept = require('attr-accept');
-
-var _attrAccept2 = _interopRequireDefault(_attrAccept);
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var supportMultiple = typeof document !== 'undefined' && document && document.createElement ? 'multiple' in document.createElement('input') : true;
-
-var Dropzone = (function (_React$Component) {
-  _inherits(Dropzone, _React$Component);
-
-  function Dropzone(props, context) {
-    _classCallCheck(this, Dropzone);
-
-    _React$Component.call(this, props, context);
-    this.onClick = this.onClick.bind(this);
-    this.onDragEnter = this.onDragEnter.bind(this);
-    this.onDragLeave = this.onDragLeave.bind(this);
-    this.onDragOver = this.onDragOver.bind(this);
-    this.onDrop = this.onDrop.bind(this);
-
-    this.state = {
-      isDragActive: false
-    };
-  }
-
-  Dropzone.prototype.componentDidMount = function componentDidMount() {
-    this.enterCounter = 0;
-  };
-
-  Dropzone.prototype.onDragEnter = function onDragEnter(e) {
-    e.preventDefault();
-
-    // Count the dropzone and any children that are entered.
-    ++this.enterCounter;
-
-    // This is tricky. During the drag even the dataTransfer.files is null
-    // But Chrome implements some drag store, which is accesible via dataTransfer.items
-    var dataTransferItems = e.dataTransfer && e.dataTransfer.items ? e.dataTransfer.items : [];
-
-    // Now we need to convert the DataTransferList to Array
-    var allFilesAccepted = this.allFilesAccepted(Array.prototype.slice.call(dataTransferItems));
-
-    this.setState({
-      isDragActive: allFilesAccepted,
-      isDragReject: !allFilesAccepted
-    });
-
-    if (this.props.onDragEnter) {
-      this.props.onDragEnter.call(this, e);
-    }
-  };
-
-  Dropzone.prototype.onDragOver = function onDragOver(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    return false;
-  };
-
-  Dropzone.prototype.onDragLeave = function onDragLeave(e) {
-    e.preventDefault();
-
-    // Only deactivate once the dropzone and all children was left.
-    if (--this.enterCounter > 0) {
-      return;
-    }
-
-    this.setState({
-      isDragActive: false,
-      isDragReject: false
-    });
-
-    if (this.props.onDragLeave) {
-      this.props.onDragLeave.call(this, e);
-    }
-  };
-
-  Dropzone.prototype.onDrop = function onDrop(e) {
-    e.preventDefault();
-
-    // Reset the counter along with the drag on a drop.
-    this.enterCounter = 0;
-
-    this.setState({
-      isDragActive: false,
-      isDragReject: false
-    });
-
-    var droppedFiles = e.dataTransfer ? e.dataTransfer.files : e.target.files;
-    var max = this.props.multiple ? droppedFiles.length : 1;
-    var files = [];
-
-    for (var i = 0; i < max; i++) {
-      var file = droppedFiles[i];
-      // We might want to disable the preview creation to support big files
-      if (!this.props.disablePreview) {
-        file.preview = window.URL.createObjectURL(file);
-      }
-      files.push(file);
-    }
-
-    if (this.props.onDrop) {
-      this.props.onDrop.call(this, files, e);
-    }
-
-    if (this.allFilesAccepted(files)) {
-      if (this.props.onDropAccepted) {
-        this.props.onDropAccepted.call(this, files, e);
-      }
-    } else {
-      if (this.props.onDropRejected) {
-        this.props.onDropRejected.call(this, files, e);
-      }
-    }
-  };
-
-  Dropzone.prototype.onClick = function onClick() {
-    if (!this.props.disableClick) {
-      this.open();
-    }
-  };
-
-  Dropzone.prototype.allFilesAccepted = function allFilesAccepted(files) {
-    var _this = this;
-
-    return files.every(function (file) {
-      return _attrAccept2['default'](file, _this.props.accept);
-    });
-  };
-
-  Dropzone.prototype.open = function open() {
-    this.fileInputEl.value = null;
-    this.fileInputEl.click();
-  };
-
-  Dropzone.prototype.render = function render() {
-    var _this2 = this;
-
-    var _props = this.props;
-    var accept = _props.accept;
-    var activeClassName = _props.activeClassName;
-    var inputProps = _props.inputProps;
-    var multiple = _props.multiple;
-    var name = _props.name;
-    var rejectClassName = _props.rejectClassName;
-
-    var rest = _objectWithoutProperties(_props, ['accept', 'activeClassName', 'inputProps', 'multiple', 'name', 'rejectClassName']);
-
-    var activeStyle = // eslint-disable-line prefer-const
-    rest.activeStyle;
-    var className = rest.className;
-    var rejectStyle = rest.rejectStyle;
-    var style = rest.style;
-
-    var props = _objectWithoutProperties(rest, ['activeStyle', 'className', 'rejectStyle', 'style']);
-
-    var _state = this.state;
-    var isDragActive = _state.isDragActive;
-    var isDragReject = _state.isDragReject;
-
-    className = className || '';
-
-    if (isDragActive && activeClassName) {
-      className += ' ' + activeClassName;
-    }
-    if (isDragReject && rejectClassName) {
-      className += ' ' + rejectClassName;
-    }
-
-    if (!className && !style && !activeStyle && !rejectStyle) {
-      style = {
-        width: 200,
-        height: 200,
-        borderWidth: 2,
-        borderColor: '#666',
-        borderStyle: 'dashed',
-        borderRadius: 5
-      };
-      activeStyle = {
-        borderStyle: 'solid',
-        backgroundColor: '#eee'
-      };
-      rejectStyle = {
-        borderStyle: 'solid',
-        backgroundColor: '#ffdddd'
-      };
-    }
-
-    var appliedStyle = undefined;
-    if (activeStyle && isDragActive) {
-      appliedStyle = _extends({}, style, activeStyle);
-    } else if (rejectStyle && isDragReject) {
-      appliedStyle = _extends({}, style, rejectStyle);
-    } else {
-      appliedStyle = _extends({}, style);
-    }
-
-    var inputAttributes = {
-      accept: accept,
-      type: 'file',
-      style: { display: 'none' },
-      multiple: supportMultiple && multiple,
-      ref: function ref(el) {
-        return _this2.fileInputEl = el;
-      },
-      onChange: this.onDrop
-    };
-
-    if (name && name.length) {
-      inputAttributes.name = name;
-    }
-
-    return _react2['default'].createElement(
-      'div',
-      _extends({
-        className: className,
-        style: appliedStyle
-      }, props, /* expand user provided props first so event handlers are never overridden */{
-        onClick: this.onClick,
-        onDragEnter: this.onDragEnter,
-        onDragOver: this.onDragOver,
-        onDragLeave: this.onDragLeave,
-        onDrop: this.onDrop
-      }),
-      this.props.children,
-      _react2['default'].createElement('input', _extends({}, inputProps, /* expand user provided inputProps first so inputAttributes override them */inputAttributes))
-    );
-  };
-
-  return Dropzone;
-})(_react2['default'].Component);
-
-Dropzone.defaultProps = {
-  disablePreview: false,
-  disableClick: false,
-  multiple: true
-};
-
-Dropzone.propTypes = {
-  onDrop: _react2['default'].PropTypes.func,
-  onDropAccepted: _react2['default'].PropTypes.func,
-  onDropRejected: _react2['default'].PropTypes.func,
-  onDragEnter: _react2['default'].PropTypes.func,
-  onDragLeave: _react2['default'].PropTypes.func,
-
-  children: _react2['default'].PropTypes.node,
-  style: _react2['default'].PropTypes.object,
-  activeStyle: _react2['default'].PropTypes.object,
-  rejectStyle: _react2['default'].PropTypes.object,
-  className: _react2['default'].PropTypes.string,
-  activeClassName: _react2['default'].PropTypes.string,
-  rejectClassName: _react2['default'].PropTypes.string,
-
-  disablePreview: _react2['default'].PropTypes.bool,
-  disableClick: _react2['default'].PropTypes.bool,
-
-  inputProps: _react2['default'].PropTypes.object,
-  multiple: _react2['default'].PropTypes.bool,
-  accept: _react2['default'].PropTypes.string,
-  name: _react2['default'].PropTypes.string
-};
-
-exports['default'] = Dropzone;
-module.exports = exports['default'];
-},{"attr-accept":46,"react":"react"}],54:[function(require,module,exports){
+},{"react":"react"}],53:[function(require,module,exports){
 /**
  * Copyright 2014-2015, Facebook, Inc.
  * All rights reserved.

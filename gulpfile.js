@@ -29,10 +29,7 @@ var dependencies = [
  */
 gulp.task('vendor', function() {
   return gulp.src([
-    'bower_components/jquery/dist/jquery.js',
-    'bower_components/bootstrap/dist/js/bootstrap.js',
-    'bower_components/magnific-popup/dist/jquery.magnific-popup.js',
-    'bower_components/toastr/toastr.js',
+    'node_modules/jquery/dist/jquery.js',
     'src/assets/js/vendor/what-input.min.js',
     'src/assets/js/foundation.min.js',
     'src/assets/js/app.js'
